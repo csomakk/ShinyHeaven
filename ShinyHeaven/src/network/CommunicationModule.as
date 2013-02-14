@@ -2,6 +2,7 @@ package network
 {
     import flash.events.MouseEvent;
     import flash.events.SecurityErrorEvent;
+    import flash.system.Security;
     
     import parameters.Constants;
 
@@ -44,6 +45,7 @@ package network
         
         private function initializeService():RemoteObject 
         {
+			Security.allowDomain(Constants.PythonServerURI);
             var channel:AMFChannel = new AMFChannel("pyamf-channel", Constants.PythonServerURI);
             var channels:ChannelSet = new ChannelSet();
             channels.addChannel(channel);
