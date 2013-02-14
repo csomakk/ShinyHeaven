@@ -5,7 +5,7 @@ package data
     public class Tick
     {
         [Bindable]
-        public var timestamp : String;
+        public var timestamp : Date;
         [Bindable]
         public var open	: Number;
         [Bindable]
