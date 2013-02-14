@@ -18,10 +18,8 @@
             
             import parsley.config.Config;
             
-            
             [Inject]
             public var commModule:CommunicationModule;
-            
             
             protected function application1_creationCompleteHandler(event:FlexEvent):void
             {
