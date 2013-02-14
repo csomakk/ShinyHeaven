@@ -8,6 +8,7 @@
             
             [Inject]
             public var commModule:CommunicationModule;
+            //test Change
         ]]>
     </fx:Script>
     <s:Panel x="10" y="10" title="checkConnection">
