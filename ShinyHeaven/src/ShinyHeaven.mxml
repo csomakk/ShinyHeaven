@@ -3,7 +3,9 @@
                xmlns:s="library://ns.adobe.com/flex/spark" 
                creationComplete="application1_creationCompleteHandler(event)"
                xmlns:p="http://www.spicefactory.org/parsley"
-               xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="955" minHeight="600" xmlns:uiframe="uiframe.*">
+               xmlns:mx="library://ns.adobe.com/flex/mx"
+               minWidth="955" minHeight="600"
+               xmlns:uiframe="uiframe.*">
     <fx:Declarations>
         <p:ContextBuilder config="{Config}"/>
     </fx:Declarations>   
