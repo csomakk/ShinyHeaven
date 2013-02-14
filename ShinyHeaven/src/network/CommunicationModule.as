@@ -58,15 +58,19 @@ package network
             return remoteObject;
         }
         
+        public var echoOperation:AbstractOperation;
+        
         public function getEcho(event:MouseEvent):void
         {
-            var operation:AbstractOperation = _service.getOperation('echo');
-            operation.addEventListener(ResultEvent.RESULT, resultHandler, false, 0, true);
-            operation.send("asdf");
+            echoOperation = _service.getOperation('echo');
+            echoOperation.addEventListener(ResultEvent.RESULT, echoResultHandler);
+            echoOperation.send("asdf");
         }
         
-        protected function resultHandler(event:ResultEvent):void
+        protected function echoResultHandler(event:ResultEvent):void
         {
+            echoOperation.removeEventListener(ResultEvent.RESULT, echoResultHandler);
+            
             var ac:ArrayCollection = event.result as ArrayCollection;
             for each (var o:Tick in ac){
                 trace(o);
