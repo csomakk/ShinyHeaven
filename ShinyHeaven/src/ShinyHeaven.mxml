@@ -3,14 +3,14 @@
                xmlns:s="library://ns.adobe.com/flex/spark" 
                creationComplete="application1_creationCompleteHandler(event)"
                xmlns:p="http://www.spicefactory.org/parsley"
-               xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="955" minHeight="600" xmlns:UIFrame="UIFrame.*">
+               xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="955" minHeight="600" xmlns:uiframe="uiframe.*">
     <fx:Declarations>
         <p:ContextBuilder config="{Config}"/>
     </fx:Declarations>   
     <fx:Script>
         <![CDATA[
             
-            import UIFrame.MDI;
+            import uiframe.MDI;
             
             import mx.events.FlexEvent;
             
@@ -21,19 +21,15 @@
             
             [Inject]
             public var commModule:CommunicationModule;
-            [Inject]
-            public var ui:MDI;
+            
             
             protected function application1_creationCompleteHandler(event:FlexEvent):void
             {
                 dispatchEvent(new Event("configureView"));
             }
             
-            [Init]
-            public function onParsleyInit():void {
-              addElement(ui);
-            }
             
         ]]>
     </fx:Script>
+    <uiframe:MDI />
 </s:Application>

@@ -2,9 +2,8 @@
 <Objects xmlns="http://www.spicefactory.org/parsley"
 		 xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		 xmlns:stub="stub.*"
-		 xmlns:custom="custom.*" xmlns:network="network.*" xmlns:UIFrame="UIFrame.*">
+		 xmlns:custom="custom.*" xmlns:network="network.*" xmlns:uiframe="uiframe.*">
 	<fx:Declarations>
         <network:CommunicationModule />
-        <UIFrame:MDI />
 	</fx:Declarations>
 </Objects>

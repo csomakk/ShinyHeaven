@@ -61,7 +61,7 @@ package network
         public function getEcho(event:MouseEvent):void
         {
             var operation:AbstractOperation = _service.getOperation('echo');
-            operation.addEventListener(ResultEvent.RESULT, resultHandler);
+            operation.addEventListener(ResultEvent.RESULT, resultHandler, false, 0, true);
             operation.send("asdf");
         }
         
