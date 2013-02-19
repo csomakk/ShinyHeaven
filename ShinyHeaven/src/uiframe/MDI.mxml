@@ -18,7 +18,7 @@
         ]]>
     </fx:Script>
     <s:Panel x="10" y="10" title="checkConnection">
-        <s:Button x="10" y="10" label="doIt" click="commModule.send_data()"/>
+        <s:Button x="10" y="10" label="doIt" />
     </s:Panel>
     <s:Panel x="172" y="53" width="173" height="148" title="proof that this is a MDI">
         
