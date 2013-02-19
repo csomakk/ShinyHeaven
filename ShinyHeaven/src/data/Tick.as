@@ -1,7 +1,9 @@
 package data
 {
-   
-    [RemoteClass(alias='org.postabank.data.Tick')]
+import mx.formatters.DateFormatter;
+import mx.utils.OrderedObject;
+
+[RemoteClass(alias='org.postabank.data.Tick')]
     public class Tick
     {
         [Bindable]
@@ -17,14 +19,13 @@ package data
         [Bindable]
         public var volume : Number;
         
-        public function Tick()
-        {
-            super();
-        }
-        
         public function toString():String {
+            new OrderedObject()
             return "Tick Object: " + timestamp + open + " " + low + " " + high + " " + close + " " + volume;
         }
-        
+
+        public function get time():Number {
+            return DateFormatter.parseDateString(timestamp).time;
+        }
     }
 }
