@@ -47,7 +47,7 @@ import parameters.Constants;
             lookupRequest();
         }
 
-        private function lookupRequest() {
+        private function lookupRequest():void {
             var ro:RequestObject = new RequestObject(_clientId, 'XAUUSD', new Date(2011, 0, 1), new Date(2011, 11, 31));
             _lookupOperation.send(ro);
         }
