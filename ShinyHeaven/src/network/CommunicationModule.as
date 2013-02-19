@@ -2,82 +2,69 @@ package network
 {
     import flash.events.MouseEvent;
     import flash.events.SecurityErrorEvent;
-    
-    import parameters.Constants;
+import flash.utils.setTimeout;
+
+import parameters.Constants;
+
+    import mx.collections.ArrayCollection;
+    import mx.controls.Alert;
+    import mx.events.FlexEvent;
+    import mx.messaging.ChannelSet;
+    import mx.messaging.channels.AMFChannel;
+    import mx.rpc.AbstractOperation;
+    import mx.rpc.events.FaultEvent;
+    import mx.rpc.events.ResultEvent;
+    import mx.rpc.remoting.RemoteObject;
+
+    import data.Tick;
 
     public class CommunicationModule
     {
-        
-        import mx.collections.ArrayCollection;
-        import mx.controls.Alert;
-        import mx.events.FlexEvent;
-        import mx.messaging.ChannelSet;
-        import mx.messaging.channels.AMFChannel;
-        import mx.rpc.AbstractOperation;
-        import mx.rpc.events.FaultEvent;
-        import mx.rpc.events.ResultEvent;
-        import mx.rpc.remoting.RemoteObject;
-        
-        import data.Tick;
-        
         private var _service : RemoteObject;
-        
-        public function CommunicationModule()
-        {
-        }
-        
+        private var _loginOperation : AbstractOperation;
+        private var _lookupOperation : AbstractOperation;
+
         [Init]
-        public function initService():void 
-        {
-            _service = initializeService();
-        }
-        
-        public function send_data():void 
-        {
-            getEcho(null);
-        }
-        
-        protected function onResult(event:ResultEvent):void 
-        {
-            trace("onResult");
-        }
-        
-        private function initializeService():RemoteObject 
+        public function initializeService():void
         {
             var channel:AMFChannel = new AMFChannel("pyamf-channel", Constants.PythonServerURI);
             var channels:ChannelSet = new ChannelSet();
             channels.addChannel(channel);
-            
-            var remoteObject:RemoteObject = new RemoteObject("fx_heaven_service");
-            remoteObject.showBusyCursor = true;
-            remoteObject.channelSet = channels;
-            
-            remoteObject.addEventListener(FaultEvent.FAULT, onRemoteServiceFault);
-            remoteObject.addEventListener(SecurityErrorEvent.SECURITY_ERROR, onRemoteServiceFault);
-            
-            return remoteObject;
+
+            var _service:RemoteObject = new RemoteObject("fx_heaven_service");
+            _service.showBusyCursor = true;
+            _service.channelSet = channels;
+
+            _service.addEventListener(FaultEvent.FAULT, onRemoteServiceFault);
+            _service.addEventListener(SecurityErrorEvent.SECURITY_ERROR, onRemoteServiceSecurityError);
+
+            _loginOperation = _service.getOperation('login');
+            _loginOperation.addEventListener(ResultEvent.RESULT, loginResultHandler);
+            _loginOperation.send('');
+
+            _lookupOperation = _service.getOperation('lookup');
+            _lookupOperation.addEventListener(ResultEvent.RESULT, lookupResultHandler);
+            lookupRequest();
         }
-        
-        public var echoOperation:AbstractOperation;
-        
-        public function getEcho(event:MouseEvent):void
+
+        private function lookupRequest() {
+            var ro:RequestObject = new RequestObject(_clientId, 'XAUUSD', new Date(2011, 0, 1), new Date(2011, 11, 31));
+            _lookupOperation.send(ro);
+        }
+
+        private var _clientId:Number;
+
+        protected function loginResultHandler(event:ResultEvent):void
         {
-            echoOperation = _service.getOperation('echo');
-            echoOperation.addEventListener(ResultEvent.RESULT, echoResultHandler);
-            echoOperation.send("asdf");
+            _loginOperation.removeEventListener(ResultEvent.RESULT, loginResultHandler);
+            _clientId = event.result.client_id;
         }
-        
-        protected function echoResultHandler(event:ResultEvent):void
+
+        protected function lookupResultHandler(event:ResultEvent):void
         {
-            echoOperation.removeEventListener(ResultEvent.RESULT, echoResultHandler);
-            
-            var ac:ArrayCollection = event.result as ArrayCollection;
-            for each (var o:Tick in ac){
-                trace(o);
-            }
-            
+            trace(event.result);
         }
-        
+
         private function onRemoteServiceFault(event:FaultEvent):void
         {
             var errorMsg:String = "Service error:\n" + event.fault.faultCode;
