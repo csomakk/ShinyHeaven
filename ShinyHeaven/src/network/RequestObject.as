@@ -6,7 +6,7 @@
  * To change this template use File | Settings | File Templates.
  */
 package network {
-    public class RequestObject {
+    internal class RequestObject {
         public var clientId:uint;
         public var instrument:String;
         public var from:Date;
