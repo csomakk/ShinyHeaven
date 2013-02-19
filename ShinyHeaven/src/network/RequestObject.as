@@ -1,10 +1,3 @@
-/**
- * Created with IntelliJ IDEA.
- * User: Peter_Varga
- * Date: 2/19/13
- * Time: 5:41 PM
- * To change this template use File | Settings | File Templates.
- */
 package network {
     internal class RequestObject {
         public var clientId:uint;
