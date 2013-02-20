@@ -46,7 +46,7 @@ public class CommunicationModule
         }
 
         private function lookupRequest():void {
-            var ro:RequestObject = new RequestObject(_clientId, 'XAUUSD', new Date(2011, 0, 1), new Date(2011, 0, 4));
+            var ro:RequestObject = new RequestObject(_clientId, Constants.HARDCODED_INSTRUMENT, Constants.START_DATE, Constants.END_DATE);
             _lookupOperation.send(ro);
         }
 
