@@ -4,9 +4,9 @@ package network
 
     import flash.utils.Dictionary;
 
-import mx.collections.ArrayCollection;
-
-import mx.collections.ArrayCollection;
+	import mx.collections.ArrayCollection;
+	
+	import mx.collections.ArrayCollection;
 
     public class ChartDataProvider implements IChartDataProvider
 	{
