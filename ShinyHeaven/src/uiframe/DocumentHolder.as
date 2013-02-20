@@ -1,13 +1,13 @@
 package uiframe
 {
-	import flash.events.MouseEvent;
-	
-	import mx.controls.Button;
-	import mx.core.IVisualElement;
-	
-	import spark.components.Panel;
-	
-	public class DocumentHolder extends Panel
+import flash.events.MouseEvent;
+
+import mx.controls.Button;
+import mx.core.IVisualElement;
+
+import spark.components.Panel;
+
+public class DocumentHolder extends Panel
 	{
 		
 		private var closeBtn:Button;

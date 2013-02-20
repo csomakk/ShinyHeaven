@@ -3,6 +3,7 @@ package network
 import data.IChartDataProvider;
 
 import flash.events.SecurityErrorEvent;
+import flash.system.Security;
 
 import mx.collections.IList;
 import mx.controls.Alert;
@@ -24,6 +25,7 @@ public class CommunicationModule
         [Init]
         public function initializeService():void
         {
+            Security.allowDomain(Constants.PythonServerURI);
             var channel:AMFChannel = new AMFChannel("pyamf-channel", Constants.PythonServerURI);
             var channels:ChannelSet = new ChannelSet();
             channels.addChannel(channel);
@@ -62,6 +64,7 @@ public class CommunicationModule
 
         protected function lookupResultHandler(event:ResultEvent):void
         {
+            trace('Got # of Ticks ', event.result.length);
             chartDataProvider.data.addAll(event.result as IList);
         }
 
