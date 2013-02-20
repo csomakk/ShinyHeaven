@@ -258,6 +258,9 @@
 						
 			protected function documentMouseDown(event:MouseEvent):void
 			{
+				if(event.localY > 30){
+					return;
+				}
 				if(draggedDocument){
 					return; //if the drag ended outside browser, etc..
 				}
