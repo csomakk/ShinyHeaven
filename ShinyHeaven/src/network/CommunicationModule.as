@@ -1,7 +1,11 @@
 package network {
+    import avmplus.getQualifiedClassName;
+
     import data.IChartDataProvider;
+    import data.Tick;
 
     import flash.events.SecurityErrorEvent;
+    import flash.net.registerClassAlias;
     import flash.system.Security;
 
     import mx.collections.IList;
@@ -30,6 +34,7 @@ package network {
 
         [Init]
         public function initializeService():void {
+            registerClassAlias('org.postabank.data.Tick', Tick);
             Security.allowDomain(Constants.PythonServerURI);
             var channel:AMFChannel = new AMFChannel(AMF_CHANNEL_NAME, Constants.PythonServerURI);
             var channels:ChannelSet = new ChannelSet();
@@ -63,6 +68,7 @@ package network {
 
         protected function lookupResultHandler(event:ResultEvent):void {
             trace('Got # of Ticks ', event.result.length);
+            trace(getQualifiedClassName(event.result[0]));
             chartDataProvider.data.addAll(event.result as IList);
         }
 
