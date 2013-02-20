@@ -4,5 +4,6 @@
          xmlns:network="network.*">
     <fx:Declarations>
         <network:CommunicationModule />
+		<network:ChartDataProvider />
 	</fx:Declarations>
 </Objects>
