@@ -1,35 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
-               xmlns:s="library://ns.adobe.com/flex/spark" 
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009"
+               xmlns:s="library://ns.adobe.com/flex/spark"
                creationComplete="application1_creationCompleteHandler(event)"
                xmlns:p="http://www.spicefactory.org/parsley"
-               xmlns:mx="library://ns.adobe.com/flex/mx"
-               minWidth="955" minHeight="600"
+               width="100%" height="100%"
                xmlns:uiframe="uiframe.*">
     <fx:Declarations>
         <p:ContextBuilder config="{Config}"/>
     </fx:Declarations>   
     <fx:Script>
         <![CDATA[
-            
-            import uiframe.MDI;
-            
-            import mx.events.FlexEvent;
-            
-            import network.CommunicationModule;
-            
-            import parsley.config.Config;
-            
-            [Inject]
-            public var commModule:CommunicationModule;
-            
-            protected function application1_creationCompleteHandler(event:FlexEvent):void
-            {
-                dispatchEvent(new Event("configureView"));
-            }
-            
-            
+        import mx.events.FlexEvent;
+
+        import network.CommunicationModule;
+
+        import parsley.config.Config;
+
+        [Inject]
+        public var commModule:CommunicationModule;
+
+
+        protected function application1_creationCompleteHandler(event:FlexEvent):void {
+            dispatchEvent(new Event("configureView"));
+        }
         ]]>
     </fx:Script>
-    <uiframe:MDI />
+    <uiframe:MDI id="mdi" >
+	</uiframe:MDI>
 </s:Application>

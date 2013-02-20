@@ -5,7 +5,7 @@ package data
 	public interface IChartDataProvider
 	{
 		/**
-		 * Returns with an arraycollection of Ticks.
+		 * Returns with an {@link ArrayCollection} of {@link Tick}s.
 		 * 
 		 * @return ArrayCollection; 
 		 * 

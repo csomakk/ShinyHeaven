@@ -1,86 +1,76 @@
 package network
 {
-    import flash.events.MouseEvent;
-    import flash.events.SecurityErrorEvent;
-    
-    import parameters.Constants;
+import data.IChartDataProvider;
 
-    public class CommunicationModule
+import flash.events.SecurityErrorEvent;
+import flash.system.Security;
+
+import mx.collections.IList;
+import mx.controls.Alert;
+import mx.messaging.ChannelSet;
+import mx.messaging.channels.AMFChannel;
+import mx.rpc.AbstractOperation;
+import mx.rpc.events.FaultEvent;
+import mx.rpc.events.ResultEvent;
+import mx.rpc.remoting.RemoteObject;
+
+import parameters.Constants;
+
+public class CommunicationModule
     {
-        
-        import mx.collections.ArrayCollection;
-        import mx.controls.Alert;
-        import mx.events.FlexEvent;
-        import mx.messaging.ChannelSet;
-        import mx.messaging.channels.AMFChannel;
-        import mx.rpc.AbstractOperation;
-        import mx.rpc.events.FaultEvent;
-        import mx.rpc.events.ResultEvent;
-        import mx.rpc.remoting.RemoteObject;
-        
-        import data.Tick;
-        
         private var _service : RemoteObject;
-        
-        public function CommunicationModule()
-        {
-        }
-        
+        private var _loginOperation : AbstractOperation;
+        private var _lookupOperation : AbstractOperation;
+
         [Init]
-        public function initService():void 
+        public function initializeService():void
         {
-            _service = initializeService();
-        }
-        
-        public function send_data():void 
-        {
-            getEcho(null);
-        }
-        
-        protected function onResult(event:ResultEvent):void 
-        {
-            trace("onResult");
-        }
-        
-        private function initializeService():RemoteObject 
-        {
+            Security.allowDomain(Constants.PythonServerURI);
             var channel:AMFChannel = new AMFChannel("pyamf-channel", Constants.PythonServerURI);
             var channels:ChannelSet = new ChannelSet();
             channels.addChannel(channel);
-            
-            var remoteObject:RemoteObject = new RemoteObject("fx_heaven_service");
-            remoteObject.showBusyCursor = true;
-            remoteObject.channelSet = channels;
-            
-            remoteObject.addEventListener(FaultEvent.FAULT, onRemoteServiceFault);
-            remoteObject.addEventListener(SecurityErrorEvent.SECURITY_ERROR, onRemoteServiceFault);
-            
-            return remoteObject;
+
+            var _service:RemoteObject = new RemoteObject("fx_heaven_service");
+            _service.showBusyCursor = true;
+            _service.channelSet = channels;
+
+            _service.addEventListener(FaultEvent.FAULT, onRemoteServiceFault);
+            _service.addEventListener(SecurityErrorEvent.SECURITY_ERROR, onRemoteServiceSecurityError);
+
+            _loginOperation = _service.getOperation('login');
+            _loginOperation.addEventListener(ResultEvent.RESULT, loginResultHandler);
+            _loginOperation.send('');
+
+            _lookupOperation = _service.getOperation('lookup');
+            _lookupOperation.addEventListener(ResultEvent.RESULT, lookupResultHandler);
         }
-        
-        public var echoOperation:AbstractOperation;
-        
-        public function getEcho(event:MouseEvent):void
+
+        private function lookupRequest():void {
+            var ro:RequestObject = new RequestObject(_clientId, Constants.HARDCODED_INSTRUMENT, Constants.START_DATE, Constants.END_DATE);
+            _lookupOperation.send(ro);
+        }
+
+        private var _clientId:Number;
+
+        protected function loginResultHandler(event:ResultEvent):void
         {
-            echoOperation = _service.getOperation('echo');
-            echoOperation.addEventListener(ResultEvent.RESULT, echoResultHandler);
-            echoOperation.send("asdf");
+            _loginOperation.removeEventListener(ResultEvent.RESULT, loginResultHandler);
+            _clientId = event.result.client_id;
+            lookupRequest();
         }
-        
-        protected function echoResultHandler(event:ResultEvent):void
+
+        [Inject]
+        public var chartDataProvider:IChartDataProvider;
+
+        protected function lookupResultHandler(event:ResultEvent):void
         {
-            echoOperation.removeEventListener(ResultEvent.RESULT, echoResultHandler);
-            
-            var ac:ArrayCollection = event.result as ArrayCollection;
-            for each (var o:Tick in ac){
-                trace(o);
-            }
-            
+            trace('Got # of Ticks ', event.result.length);
+            chartDataProvider.data.addAll(event.result as IList);
         }
-        
+
         private function onRemoteServiceFault(event:FaultEvent):void
         {
-            var errorMsg:String = "Service error:\n" + event.fault.faultCode;
+            var errorMsg:String = "Service error: " + event.fault.faultCode;
             Alert.show(event.fault.faultDetail, errorMsg);	
         }
         
