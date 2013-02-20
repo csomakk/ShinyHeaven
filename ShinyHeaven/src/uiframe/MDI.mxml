@@ -407,4 +407,5 @@
         ]]>
     </fx:Script>
     <s:Label text="foo" />
+    <s:Label text="bar" />
 </s:Group>

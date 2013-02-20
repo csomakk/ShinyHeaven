@@ -65,8 +65,7 @@ package network {
         }
 
         protected function lookupResultHandler(event:ResultEvent):void {
-            trace('Got # of Ticks ', event.result.length);
-            trace(getQualifiedClassName(event.result[0]));
+            trace('Got # of ', getQualifiedClassName(event.result[0]), 's ', event.result.length);
             chartDataProvider.data.addAll(event.result as IList);
         }
 
