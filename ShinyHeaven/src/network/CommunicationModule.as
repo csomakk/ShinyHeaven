@@ -32,7 +32,6 @@ package network {
 
         [Init]
         public function initializeService():void {
-            //registerClassAlias('org.postabank.data.Tick', Tick);
             Security.allowDomain(Constants.PythonServerURI);
             var channel:AMFChannel = new AMFChannel(AMF_CHANNEL_NAME, Constants.PythonServerURI);
             var channels:ChannelSet = new ChannelSet();
