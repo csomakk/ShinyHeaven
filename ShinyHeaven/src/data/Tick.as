@@ -3,7 +3,7 @@ package data
 import mx.utils.OrderedObject;
 
 [RemoteClass(alias='org.postabank.data.Tick')]
-    public class Tick
+    public class Tick implements IHistoricalDataItem
     {
         [Bindable]
         public var timestamp : Date;
@@ -21,6 +21,13 @@ import mx.utils.OrderedObject;
         public function toString():String {
             new OrderedObject()
             return "Tick Object: " + timestamp + open + " " + low + " " + high + " " + close + " " + volume;
+        }
+
+        /**
+         * For simple charting purposes, treat the close as the principal value.
+         */
+        public function get value():Number {
+            return close;
         }
     }
 }

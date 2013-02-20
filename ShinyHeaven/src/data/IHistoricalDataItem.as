@@ -1,8 +1,8 @@
-package hu.prepx1.fxdataservice.vo
+package data
 {
 	public interface IHistoricalDataItem
 	{
 		function get value():Number;
-		function get timestamp():Number;
+		function get timestamp():Date;
 	}
 }
