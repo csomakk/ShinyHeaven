@@ -32,5 +32,8 @@
         ]]>
     </fx:Script>
     <uiframe:MDI id="mdi" >
+		<s:Label text="foo" />
+		<s:Label text="Cart Placeholder" />
+		<s:Label text="bar" />
 	</uiframe:MDI>
 </s:Application>
