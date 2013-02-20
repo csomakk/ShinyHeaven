@@ -109,7 +109,6 @@
             rearrange();
         }
 
-
         /** adds if needed, and docks or undocks element @param direction example: MDI.LEFT */
         public function dockDocument(element:IVisualElement, direction:int = 1):DocumentHolder {
             var d:DocumentHolder = dict[element];
@@ -133,7 +132,6 @@
                     dockedDocumentsArrayCollection.removeItemAt(dockedDocumentsArrayCollection.getItemIndex(d));
                 }
             }
-
 
             rearrange();
             return d;
@@ -303,7 +301,6 @@
             return NaN;
         }
 
-
         private function setMarkerToPosition(argX:Number, argY:Number):void {
             switch (getDraggedSide(argX, argY)) {
                 case LEFT:
@@ -404,10 +401,10 @@
             marker.height = argHeigth;
         }
 
-
         protected function onAddedToStage(event:Event):void {
             callLater(rearrange); //because widths are not calculated yet
         }
         ]]>
     </fx:Script>
+    <s:Label text="foo" />
 </s:Group>

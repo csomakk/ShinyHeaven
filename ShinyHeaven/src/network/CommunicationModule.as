@@ -1,88 +1,79 @@
-package network
-{
-import data.IChartDataProvider;
+package network {
+    import data.IChartDataProvider;
 
-import flash.events.SecurityErrorEvent;
-import flash.system.Security;
+    import flash.events.SecurityErrorEvent;
+    import flash.system.Security;
 
-import mx.collections.IList;
-import mx.controls.Alert;
-import mx.messaging.ChannelSet;
-import mx.messaging.channels.AMFChannel;
-import mx.rpc.AbstractOperation;
-import mx.rpc.events.FaultEvent;
-import mx.rpc.events.ResultEvent;
-import mx.rpc.remoting.RemoteObject;
+    import mx.collections.IList;
+    import mx.controls.Alert;
+    import mx.messaging.ChannelSet;
+    import mx.messaging.channels.AMFChannel;
+    import mx.rpc.AbstractOperation;
+    import mx.rpc.events.FaultEvent;
+    import mx.rpc.events.ResultEvent;
+    import mx.rpc.remoting.RemoteObject;
 
-import parameters.Constants;
+    import parameters.Constants;
 
-public class CommunicationModule
-    {
+    public class CommunicationModule {
         private static const LOGIN_SERVICE_NAME:String = "login";
         private static const LOOKUP_SERVICE_NAME:String = "lookup";
         private static const AMF_CHANNEL_NAME:String = "pyamf-channel";
         private static const AMF_SERVICE_PREFIX:String = "fx_heaven_service";
 
-        private var _service : RemoteObject;
-        private var _loginOperation : AbstractOperation;
-        private var _lookupOperation : AbstractOperation;
+        [Inject]
+        public var chartDataProvider:IChartDataProvider;
+        private var service:RemoteObject;
+        private var loginOperation:AbstractOperation;
+        private var lookupOperation:AbstractOperation;
+        private var client_id:Number;
 
         [Init]
-        public function initializeService():void
-        {
+        public function initializeService():void {
             Security.allowDomain(Constants.PythonServerURI);
             var channel:AMFChannel = new AMFChannel(AMF_CHANNEL_NAME, Constants.PythonServerURI);
             var channels:ChannelSet = new ChannelSet();
             channels.addChannel(channel);
 
-            var _service:RemoteObject = new RemoteObject(AMF_SERVICE_PREFIX);
-            _service.showBusyCursor = true;
-            _service.channelSet = channels;
+            service = new RemoteObject(AMF_SERVICE_PREFIX);
+            service.showBusyCursor = true;
+            service.channelSet = channels;
 
-            _service.addEventListener(FaultEvent.FAULT, onRemoteServiceFault);
-            _service.addEventListener(SecurityErrorEvent.SECURITY_ERROR, onRemoteServiceSecurityError);
+            service.addEventListener(FaultEvent.FAULT, onRemoteServiceFault);
+            service.addEventListener(SecurityErrorEvent.SECURITY_ERROR, onRemoteServiceSecurityError);
 
-            _loginOperation = _service.getOperation(LOGIN_SERVICE_NAME);
-            _loginOperation.addEventListener(ResultEvent.RESULT, loginResultHandler);
-            _loginOperation.send('');
+            loginOperation = service.getOperation(LOGIN_SERVICE_NAME);
+            loginOperation.addEventListener(ResultEvent.RESULT, loginResultHandler);
+            loginOperation.send('');
 
-            _lookupOperation = _service.getOperation(LOOKUP_SERVICE_NAME);
-            _lookupOperation.addEventListener(ResultEvent.RESULT, lookupResultHandler);
+            lookupOperation = service.getOperation(LOOKUP_SERVICE_NAME);
+            lookupOperation.addEventListener(ResultEvent.RESULT, lookupResultHandler);
         }
 
         private function lookupRequest():void {
-            var ro:RequestObject = new RequestObject(_clientId, Constants.HARDCODED_INSTRUMENT, Constants.START_DATE, Constants.END_DATE);
-            _lookupOperation.send(ro);
+            var ro:RequestObject = new RequestObject(client_id, Constants.HARDCODED_INSTRUMENT, Constants.START_DATE, Constants.END_DATE);
+            lookupOperation.send(ro);
         }
 
-        private var _clientId:Number;
-
-        protected function loginResultHandler(event:ResultEvent):void
-        {
-            _loginOperation.removeEventListener(ResultEvent.RESULT, loginResultHandler);
-            _clientId = event.result.client_id;
+        protected function loginResultHandler(event:ResultEvent):void {
+            loginOperation.removeEventListener(ResultEvent.RESULT, loginResultHandler);
+            client_id = event.result.client_id;
             lookupRequest();
         }
 
-        [Inject]
-        public var chartDataProvider:IChartDataProvider;
-
-        protected function lookupResultHandler(event:ResultEvent):void
-        {
+        protected function lookupResultHandler(event:ResultEvent):void {
             trace('Got # of Ticks ', event.result.length);
             chartDataProvider.data.addAll(event.result as IList);
         }
 
-        private function onRemoteServiceFault(event:FaultEvent):void
-        {
+        private function onRemoteServiceFault(event:FaultEvent):void {
             var errorMsg:String = "Service error: " + event.fault.faultCode;
-            Alert.show(event.fault.faultDetail, errorMsg);	
+            Alert.show(event.fault.faultDetail, errorMsg);
         }
-        
-        private function onRemoteServiceSecurityError(event:SecurityErrorEvent):void
-        {
+
+        private function onRemoteServiceSecurityError(event:SecurityErrorEvent):void {
             var errorMsg:String = "Service security error";
-            Alert.show(event.text, errorMsg);	
+            Alert.show(event.text, errorMsg);
         }
     }
 }
