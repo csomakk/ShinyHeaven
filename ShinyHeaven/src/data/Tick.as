@@ -1,8 +1,8 @@
 package data
 {
-    import mx.utils.OrderedObject;
+import mx.utils.OrderedObject;
 
-    [RemoteClass(alias='org.postabank.data.Tick')]
+[RemoteClass(alias='org.postabank.data.Tick')]
     public class Tick implements IHistoricalDataItem
     {
         [Bindable]
