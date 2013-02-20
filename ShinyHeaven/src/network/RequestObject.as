@@ -1,6 +1,6 @@
 package network {
     internal class RequestObject {
-        public var client_id:Number; //uint;
+        public var client_id:Number;
         public var instrument:String;
         public var from:Number;
         public var to:Number;
