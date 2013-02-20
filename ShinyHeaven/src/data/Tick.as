@@ -1,12 +1,13 @@
 package data
 {
+import mx.formatters.DateFormatter;
 import mx.utils.OrderedObject;
 
 [RemoteClass(alias='org.postabank.data.Tick')]
-    public class Tick implements IHistoricalDataItem
+    public class Tick
     {
         [Bindable]
-        public var timestamp : Date;
+        public var timestamp : String;
         [Bindable]
         public var open	: Number;
         [Bindable]
@@ -23,11 +24,8 @@ import mx.utils.OrderedObject;
             return "Tick Object: " + timestamp + open + " " + low + " " + high + " " + close + " " + volume;
         }
 
-        /**
-         * For simple charting purposes, treat the close as the principal value.
-         */
-        public function get value():Number {
-            return close;
+        public function get time():Number {
+            return DateFormatter.parseDateString(timestamp).time;
         }
     }
 }
