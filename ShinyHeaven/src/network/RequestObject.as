@@ -5,7 +5,7 @@ package network {
         public var from:Number;
         public var to:Number;
 
-        public function RequestObject(clientId:uint, instrument:String, from:Date, to:Date) {
+        public function RequestObject(clientId:Number, instrument:String, from:Date, to:Date) {
             this.client_id = clientId;
             this.instrument = instrument;
             this.from = from.time;

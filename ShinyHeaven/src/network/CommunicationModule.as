@@ -1,24 +1,21 @@
 package network
 {
-    import flash.events.MouseEvent;
-    import flash.events.SecurityErrorEvent;
-import flash.utils.setTimeout;
+import data.IChartDataProvider;
+
+import flash.events.SecurityErrorEvent;
+
+import mx.collections.IList;
+import mx.controls.Alert;
+import mx.messaging.ChannelSet;
+import mx.messaging.channels.AMFChannel;
+import mx.rpc.AbstractOperation;
+import mx.rpc.events.FaultEvent;
+import mx.rpc.events.ResultEvent;
+import mx.rpc.remoting.RemoteObject;
 
 import parameters.Constants;
 
-    import mx.collections.ArrayCollection;
-    import mx.controls.Alert;
-    import mx.events.FlexEvent;
-    import mx.messaging.ChannelSet;
-    import mx.messaging.channels.AMFChannel;
-    import mx.rpc.AbstractOperation;
-    import mx.rpc.events.FaultEvent;
-    import mx.rpc.events.ResultEvent;
-    import mx.rpc.remoting.RemoteObject;
-
-    import data.Tick;
-
-    public class CommunicationModule
+public class CommunicationModule
     {
         private var _service : RemoteObject;
         private var _loginOperation : AbstractOperation;
@@ -44,11 +41,10 @@ import parameters.Constants;
 
             _lookupOperation = _service.getOperation('lookup');
             _lookupOperation.addEventListener(ResultEvent.RESULT, lookupResultHandler);
-            lookupRequest();
         }
 
         private function lookupRequest():void {
-            var ro:RequestObject = new RequestObject(_clientId, 'XAUUSD', new Date(2011, 0, 1), new Date(2011, 11, 31));
+            var ro:RequestObject = new RequestObject(_clientId, 'XAUUSD', new Date(2011, 0, 1), new Date(2011, 0, 4));
             _lookupOperation.send(ro);
         }
 
@@ -58,11 +54,15 @@ import parameters.Constants;
         {
             _loginOperation.removeEventListener(ResultEvent.RESULT, loginResultHandler);
             _clientId = event.result.client_id;
+            lookupRequest();
         }
+
+        [Inject]
+        public var chartDataProvider:IChartDataProvider;
 
         protected function lookupResultHandler(event:ResultEvent):void
         {
-            trace(event.result);
+            chartDataProvider.data.addAll(event.result as IList);
         }
 
         private function onRemoteServiceFault(event:FaultEvent):void
