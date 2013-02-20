@@ -18,6 +18,11 @@ import parameters.Constants;
 
 public class CommunicationModule
     {
+        private static const LOGIN_SERVICE_NAME:String = "login";
+        private static const LOOKUP_SERVICE_NAME:String = "lookup";
+        private static const AMF_CHANNEL_NAME:String = "pyamf-channel";
+        private static const AMF_SERVICE_PREFIX:String = "fx_heaven_service";
+
         private var _service : RemoteObject;
         private var _loginOperation : AbstractOperation;
         private var _lookupOperation : AbstractOperation;
@@ -26,22 +31,22 @@ public class CommunicationModule
         public function initializeService():void
         {
             Security.allowDomain(Constants.PythonServerURI);
-            var channel:AMFChannel = new AMFChannel("pyamf-channel", Constants.PythonServerURI);
+            var channel:AMFChannel = new AMFChannel(AMF_CHANNEL_NAME, Constants.PythonServerURI);
             var channels:ChannelSet = new ChannelSet();
             channels.addChannel(channel);
 
-            var _service:RemoteObject = new RemoteObject("fx_heaven_service");
+            var _service:RemoteObject = new RemoteObject(AMF_SERVICE_PREFIX);
             _service.showBusyCursor = true;
             _service.channelSet = channels;
 
             _service.addEventListener(FaultEvent.FAULT, onRemoteServiceFault);
             _service.addEventListener(SecurityErrorEvent.SECURITY_ERROR, onRemoteServiceSecurityError);
 
-            _loginOperation = _service.getOperation('login');
+            _loginOperation = _service.getOperation(LOGIN_SERVICE_NAME);
             _loginOperation.addEventListener(ResultEvent.RESULT, loginResultHandler);
             _loginOperation.send('');
 
-            _lookupOperation = _service.getOperation('lookup');
+            _lookupOperation = _service.getOperation(LOOKUP_SERVICE_NAME);
             _lookupOperation.addEventListener(ResultEvent.RESULT, lookupResultHandler);
         }
 
