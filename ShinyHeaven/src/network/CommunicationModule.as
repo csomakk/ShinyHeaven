@@ -50,7 +50,7 @@ package network
             var channels:ChannelSet = new ChannelSet();
             channels.addChannel(channel);
             
-            var remoteObject:RemoteObject = new RemoteObject("myservice");  
+            var remoteObject:RemoteObject = new RemoteObject("fx_heaven_service");
             remoteObject.showBusyCursor = true;
             remoteObject.channelSet = channels;
             
