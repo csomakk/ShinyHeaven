@@ -1,15 +1,15 @@
 package network {
     internal class RequestObject {
-        public var clientId:uint;
+        public var client_id:Number; //uint;
         public var instrument:String;
-        public var from:Date;
-        public var to:Date;
+        public var from:Number;
+        public var to:Number;
 
         public function RequestObject(clientId:uint, instrument:String, from:Date, to:Date) {
-            this.clientId = clientId;
+            this.client_id = clientId;
             this.instrument = instrument;
-            this.from = from;
-            this.to = to;
+            this.from = from.time;
+            this.to = to.time;
         }
     }
 }

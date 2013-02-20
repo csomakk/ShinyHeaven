@@ -67,7 +67,7 @@ import parameters.Constants;
 
         private function onRemoteServiceFault(event:FaultEvent):void
         {
-            var errorMsg:String = "Service error:\n" + event.fault.faultCode;
+            var errorMsg:String = "Service error: " + event.fault.faultCode;
             Alert.show(event.fault.faultDetail, errorMsg);	
         }
         
