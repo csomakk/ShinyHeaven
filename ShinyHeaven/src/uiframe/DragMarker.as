@@ -1,8 +1,8 @@
 package uiframe
 {
-	import spark.core.SpriteVisualElement;
-	
-	public class DragMarker extends SpriteVisualElement
+    import spark.core.SpriteVisualElement;
+
+    public class DragMarker extends SpriteVisualElement
 	{
 		public function DragMarker()
 		{

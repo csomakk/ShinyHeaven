@@ -1,26 +1,25 @@
 package network
 {
+    import data.Tick;
+
     import flash.events.MouseEvent;
     import flash.events.SecurityErrorEvent;
     import flash.system.Security;
-    
+
+    import mx.collections.ArrayCollection;
+    import mx.controls.Alert;
+    import mx.messaging.ChannelSet;
+    import mx.messaging.channels.AMFChannel;
+    import mx.rpc.AbstractOperation;
+    import mx.rpc.events.FaultEvent;
+    import mx.rpc.events.ResultEvent;
+    import mx.rpc.remoting.RemoteObject;
+
     import parameters.Constants;
 
     public class CommunicationModule
     {
-        
-        import mx.collections.ArrayCollection;
-        import mx.controls.Alert;
-        import mx.events.FlexEvent;
-        import mx.messaging.ChannelSet;
-        import mx.messaging.channels.AMFChannel;
-        import mx.rpc.AbstractOperation;
-        import mx.rpc.events.FaultEvent;
-        import mx.rpc.events.ResultEvent;
-        import mx.rpc.remoting.RemoteObject;
-        
-        import data.Tick;
-        
+
         private var _service : RemoteObject;
         
         public function CommunicationModule()

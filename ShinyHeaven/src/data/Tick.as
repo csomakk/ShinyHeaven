@@ -1,6 +1,6 @@
 package data
 {
-import mx.utils.OrderedObject;
+    import mx.utils.OrderedObject;
 
     [RemoteClass(alias='org.postabank.data.Tick')]
     public class Tick implements IHistoricalDataItem
@@ -26,7 +26,6 @@ import mx.utils.OrderedObject;
         /**
          * For simple charting purposes, treat the close as the principal value.
          */
-        [Bindable]
         public function get value():Number {
             return close;
         }
