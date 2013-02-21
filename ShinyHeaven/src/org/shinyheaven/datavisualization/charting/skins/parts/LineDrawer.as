@@ -42,7 +42,7 @@ package org.shinyheaven.datavisualization.charting.skins.parts
 		
 		override protected function updateDisplayList(unscaledWidth:Number, unscaledHeight:Number):void
 		{
-			if (!_data) return;
+			if (!_data || _data.length < 2) return;
 			
 			g.clear();
 			g.moveTo(0, unscaledHeight*0.5);

@@ -15,7 +15,6 @@ package org.shinyheaven.service {
     import mx.rpc.events.ResultEvent;
     import mx.rpc.remoting.RemoteObject;
 
-
     public class CommunicationModule {
         private static const LOGIN_SERVICE_NAME:String = "login";
         private static const LOOKUP_SERVICE_NAME:String = "lookup";
