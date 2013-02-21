@@ -1,14 +1,19 @@
 package org.shinyheaven.datavisualization.charting.skins.parts
 {
+	import flash.display.CapsStyle;
+	import flash.display.GradientType;
 	import flash.display.Graphics;
+	import flash.display.JointStyle;
+	import flash.display.PixelSnapping;
 	import flash.geom.Point;
 	
 	import mx.collections.ArrayCollection;
 	import mx.core.UIComponent;
 	import mx.events.CollectionEvent;
 	
-	import org.shinyheaven.service.dto.IHistoricalDataItem;
-	
+	import org.osmf.layout.ScaleMode;
+	import org.shinyheaven.fxdataservice.vo.IHistoricalDataItem;
+
 	public class LineDrawer extends UIComponent
 	{
 		private var g:Graphics;
@@ -42,11 +47,14 @@ package org.shinyheaven.datavisualization.charting.skins.parts
 		
 		override protected function updateDisplayList(unscaledWidth:Number, unscaledHeight:Number):void
 		{
-			if (!_data || _data.length < 2) return;
+			if (!_data) return;
 			
 			g.clear();
 			g.moveTo(0, unscaledHeight*0.5);
-			g.lineStyle(1);
+			g.lineStyle(1, 0x454545, 1, false, ScaleMode.NONE, CapsStyle.ROUND, JointStyle.ROUND);
+			
+			g.beginFill(0x000000, .1);
+			//g.beginGradientFill(GradientType.LINEAR, [0x101010, 0xEEEEEE], [1,1], [90,90]);
 			
 			var coordinates:Vector.<Point> = getPoints(unscaledWidth, unscaledHeight, _data);
 			var moveTo:Point = coordinates.shift()
@@ -58,6 +66,13 @@ package org.shinyheaven.datavisualization.charting.skins.parts
 				point = coordinates[i];
 				g.lineTo(point.x, point.y);
 			}
+			
+			g.lineStyle();
+			g.lineTo(point.x, point.y);
+			g.lineTo(point.x, unscaledHeight);
+			g.lineTo(0, unscaledHeight);
+			
+			g.endFill();
 		}
 		
 		private function getPoints(width:Number, height:Number, data:ArrayCollection):Vector.<Point>
