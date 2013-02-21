@@ -1,7 +1,7 @@
-package network {
+package org.shinyheaven.service {
     import avmplus.getQualifiedClassName;
 
-    import data.IChartDataProvider;
+    import org.shinyheaven.service.dto.IChartDataProvider;
 
     import flash.events.SecurityErrorEvent;
     import flash.system.Security;
@@ -15,7 +15,6 @@ package network {
     import mx.rpc.events.ResultEvent;
     import mx.rpc.remoting.RemoteObject;
 
-    import parameters.Constants;
 
     public class CommunicationModule {
         private static const LOGIN_SERVICE_NAME:String = "login";

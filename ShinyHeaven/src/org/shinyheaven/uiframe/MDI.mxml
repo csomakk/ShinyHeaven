@@ -15,7 +15,7 @@
         import mx.core.UIComponent;
         import mx.events.ResizeEvent;
 
-        import network.CommunicationModule;
+        import org.shinyheaven.service.CommunicationModule;
 
         [Inject]
         public var commModule:CommunicationModule;

@@ -1,4 +1,4 @@
-package network {
+package org.shinyheaven.service {
 	internal class RequestObject {
 		public function RequestObject(clientId:Number, instrument:String, from:Date, to:Date) {
 			this.client_id = clientId;

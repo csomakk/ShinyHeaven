@@ -1,6 +1,6 @@
-package network
+package org.shinyheaven.service
 {
-    import data.IChartDataProvider;
+    import org.shinyheaven.service.dto.IChartDataProvider;
 
     import mx.collections.ArrayCollection;
 
