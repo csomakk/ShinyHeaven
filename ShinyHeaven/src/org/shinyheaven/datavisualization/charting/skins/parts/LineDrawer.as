@@ -1,10 +1,8 @@
 package org.shinyheaven.datavisualization.charting.skins.parts
 {
 	import flash.display.CapsStyle;
-	import flash.display.GradientType;
 	import flash.display.Graphics;
 	import flash.display.JointStyle;
-	import flash.display.PixelSnapping;
 	import flash.geom.Point;
 	
 	import mx.collections.ArrayCollection;
@@ -12,7 +10,7 @@ package org.shinyheaven.datavisualization.charting.skins.parts
 	import mx.events.CollectionEvent;
 	
 	import org.osmf.layout.ScaleMode;
-	import org.shinyheaven.fxdataservice.vo.IHistoricalDataItem;
+	import org.shinyheaven.service.dto.IHistoricalDataItem;
 
 	public class LineDrawer extends UIComponent
 	{
@@ -47,7 +45,7 @@ package org.shinyheaven.datavisualization.charting.skins.parts
 		
 		override protected function updateDisplayList(unscaledWidth:Number, unscaledHeight:Number):void
 		{
-			if (!_data) return;
+			if (!_data || _data.length < 2) return;
 			
 			g.clear();
 			g.moveTo(0, unscaledHeight*0.5);
@@ -83,7 +81,7 @@ package org.shinyheaven.datavisualization.charting.skins.parts
 			
 			for (var i:int = 0; i < data.length; i++) 
 			{
-				var dataItem:IHistoricalDataItem = data.getItemAt(i) as IHistoricalDataItem;
+				var dataItem:org.shinyheaven.service.dto.IHistoricalDataItem = data.getItemAt(i) as IHistoricalDataItem;
 				var unchangingRange:Number =  minVal;
 				var x:Number = xOffset * i;
 				var y:Number = height * ((dataItem.value - unchangingRange) / (maxVal - unchangingRange));

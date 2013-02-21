@@ -4,7 +4,7 @@ package org.shinyheaven.datavisualization.charting
 	import mx.collections.ArrayCollection;
 	
 	import org.shinyheaven.datavisualization.charting.vo.DataRange;
-	import org.shinyheaven.fxdataservice.vo.HistoricalDataItem;
+	import org.shinyheaven.service.dto.IHistoricalDataItem;
 	
 	public class ChartingLogic
 	{
@@ -22,7 +22,7 @@ package org.shinyheaven.datavisualization.charting
 		{
 			var range:DataRange = new DataRange();
 			
-			for each (var vo:HistoricalDataItem in instrData.source) 
+			for each (var vo:IHistoricalDataItem in instrData.source) 
 			{
 				range.min = Math.min(range.min, vo.value);
 				range.max = Math.max(range.max, vo.value);
