@@ -32,8 +32,8 @@ package network {
 
         [Init]
         public function initializeService():void {
-            Security.allowDomain(Constants.PythonServerURI);
-            var channel:AMFChannel = new AMFChannel(AMF_CHANNEL_NAME, Constants.PythonServerURI);
+            Security.allowDomain(Constants.PYTHONSERVER_URI);
+            var channel:AMFChannel = new AMFChannel(AMF_CHANNEL_NAME, Constants.PYTHONSERVER_URI);
             var channels:ChannelSet = new ChannelSet();
             channels.addChannel(channel);
 
