@@ -56,6 +56,7 @@ package org.shinyheaven.datavisualization.charting
 				_dataProvider.removeEventListener(CollectionEvent.COLLECTION_CHANGE, handleDataChanged);
 				_dataProvider = value as ArrayCollection;
 			}
+			invalidateProperties();
 		}
 		
 		protected function handleDataChanged(event:CollectionEvent):void

@@ -3,14 +3,13 @@ package org.shinyheaven.datavisualization.charting.skins.parts
 	import flash.display.CapsStyle;
 	import flash.display.Graphics;
 	import flash.display.JointStyle;
+	import flash.display.LineScaleMode;
 	import flash.geom.Point;
 	
 	import mx.charts.chartClasses.GraphicsUtilities;
 	import mx.core.UIComponent;
 	import mx.graphics.IStroke;
 	
-	import org.osmf.layout.ScaleMode;
-
 	public class LineDrawer extends UIComponent
 	{
 		private var g:Graphics;
@@ -33,7 +32,7 @@ package org.shinyheaven.datavisualization.charting.skins.parts
 			
 			g.clear();
 			
-			g.lineStyle(1, 0x454545, 1, false, ScaleMode.NONE, CapsStyle.ROUND, JointStyle.ROUND);
+			g.lineStyle(1, 0x454545, 1, false, LineScaleMode.NORMAL, CapsStyle.ROUND, JointStyle.ROUND);
 			
 			var stroke:IStroke = getStyle("lineStroke");
 			var form:String = getStyle("form");
