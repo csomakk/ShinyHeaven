@@ -29,6 +29,7 @@
         public function onInit():void 
 		{
             BindingUtils.bindProperty(lineChart, 'dataProvider', chartData, 'data');
+			BindingUtils.bindProperty(flexChart, 'dataProvider', chartData, 'data');
         }
 
         /**
@@ -42,6 +43,6 @@
         <charting:LineChartComponent id="lineChart"
                                      width="100%" height="100%"
                                      skinClass="org.shinyheaven.datavisualization.charting.skins.DefaultLineChartSkin"/>
-        <s:Label text="bar"/>
+        <charting:FlexLineChartView id="flexChart" width="100%" height="100%" />
     </uiframe:MDI>
 </s:Application>
