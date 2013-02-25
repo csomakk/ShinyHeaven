@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:Skin xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		xmlns:s="library://ns.adobe.com/flex/spark" 
-		xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:parts="org.shinyheaven.datavisualization.charting.skins.parts.*">
+		xmlns:mx="library://ns.adobe.com/flex/mx" 
+		xmlns:parts="org.shinyheaven.datavisualization.charting.skins.parts.*">
 	<!-- host component -->
 	<fx:Metadata>
 		[HostComponent("org.shinyheaven.datavisualization.charting.LineChartComponent")]
 	</fx:Metadata>
 	
 	<parts:BackgroundDrawer width="100%" height="100%" />
-	<parts:LineDrawer data="{hostComponent.dataProvider}" id="lineDrawer"
-					  minVal="{hostComponent.logic.minVal}" maxVal="{hostComponent.logic.maxVal}"
-					  width="100%" height="100%" left="0.5" right="0.5" bottom="0.5" top="0.5" />
+	<parts:LineDrawer id="lineDrawer"
+					  width="100%" height="100%" 
+					  left="0.5" right="0.5" bottom="0.5" top="0.5" />
 	
 </s:Skin>
