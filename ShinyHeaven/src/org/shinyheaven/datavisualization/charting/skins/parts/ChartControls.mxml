@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Skin xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" 
+		xmlns:mx="library://ns.adobe.com/flex/mx">
+	<!-- host component -->
+	<fx:Metadata>
+		[HostComponent("org.shinyheaven.datavisualization.charting.LineChartComponent")]
+	</fx:Metadata>
+	
+	<!-- SkinParts
+	name=lineDrawer, type=org.shinyheaven.datavisualization.charting.skins.parts.LineDrawer, required=false
+	-->
+</s:Skin>
