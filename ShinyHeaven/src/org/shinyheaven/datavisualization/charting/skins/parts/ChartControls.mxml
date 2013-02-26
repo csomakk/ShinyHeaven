@@ -68,7 +68,7 @@
 			<s:CheckBox id="isMovingAverageCB" change="{isMovingAvrg = isMovingAverageCB.selected}" />
 		</s:FormItem>
 		<s:FormItem label="Average window" enabled="{isMovingAverageCB.selected}">
-			<s:HSlider id="avrgWindowSlider" minimum="1" maximum="20" stepSize="1" changeEnd="{avrgWindow = avrgWindowSlider.value}" />
+			<s:HSlider id="avrgWindowSlider" minimum="2" maximum="40" value="20" stepSize="1" changeEnd="{avrgWindow = avrgWindowSlider.value}" />
 		</s:FormItem>
 	</s:Form>
 	
