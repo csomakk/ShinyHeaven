@@ -19,7 +19,6 @@ package org.shinyheaven.service.dto
         public var volume : Number;
         
         public function toString():String {
-            new OrderedObject()
             return "Tick Object: " + timestamp + open + " " + low + " " + high + " " + close + " " + volume;
         }
 
