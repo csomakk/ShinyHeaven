@@ -4,8 +4,11 @@ package org.shinyheaven.service {
 import flash.events.TimerEvent;
 
 import flash.utils.Timer;
+    import flash.utils.getQualifiedClassName;
 
-import org.shinyheaven.service.dto.IChartDataProvider;
+    import mx.utils.StringUtil;
+
+    import org.shinyheaven.service.dto.IChartDataProvider;
 
     import flash.events.SecurityErrorEvent;
     import flash.system.Security;
@@ -50,7 +53,7 @@ public class CommunicationModule {
             channels.addChannel(channel);
 
             service = new RemoteObject(AMF_SERVICE_PREFIX);
-            service.showBusyCursor = true;
+            service.showBusyCursor = false;
             service.channelSet = channels;
 
             service.addEventListener(FaultEvent.FAULT, onRemoteServiceFault);
@@ -87,7 +90,7 @@ public class CommunicationModule {
         }
 
         protected function lookupResultHandler(event:ResultEvent):void {
-            trace('Got # of ', getQualifiedClassName(event.result[0]), 's ', event.result.length);
+            trace(StringUtil.substitute("Got {0} of {1}s", event.result.length, flash.utils.getQualifiedClassName(event.result[0])));
             chartDataProvider.data.addAll(event.result as IList);
             startAutomaticUpdating();
         }
