@@ -8,15 +8,14 @@ package org.shinyheaven.datavisualization.charting
 	import org.shinyheaven.datavisualization.charting.skins.parts.ChartControls;
 	import org.shinyheaven.datavisualization.charting.skins.parts.LineDrawer;
 	
-	[SkinStates("normal")]
-	
 	public class LineChartComponent extends SkinnableComponent
 	{
 		
-		[SkinPart]
+		[SkinPart(required="true")]
 		public var lineDrawer:LineDrawer;
-		[SkinPart]
-		public var controls:ChartControls;
+		[SkinPart(required="true")]
+		public var controls:ChartControls; 
+		// moving average: Boolean controls.isMovingAvrg, int controls.avrgWindow
 		
 		[Bindable]
 		public var logic:ChartingLogic = new ChartingLogic();
