@@ -1,4 +1,4 @@
-package data
+package org.shinyheaven.service.dto
 {
 	import mx.collections.ArrayCollection;
 

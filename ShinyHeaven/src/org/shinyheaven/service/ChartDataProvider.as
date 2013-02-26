@@ -1,12 +1,12 @@
-package network
+package org.shinyheaven.service
 {
-    import data.IChartDataProvider;
+    import org.shinyheaven.service.dto.IChartDataProvider;
 
     import mx.collections.ArrayCollection;
 
     public class ChartDataProvider implements IChartDataProvider
 	{
-        private static var _data:ArrayCollection = new ArrayCollection();
+        private static const _data:ArrayCollection = new ArrayCollection();
 
 	    public function get data():ArrayCollection {
             return _data;

@@ -3,32 +3,46 @@
                xmlns:s="library://ns.adobe.com/flex/spark"
                xmlns:p="http://www.spicefactory.org/parsley"
                width="100%" height="100%"
-               xmlns:uiframe="uiframe.*">
+               xmlns:uiframe="org.shinyheaven.uiframe.*" xmlns:charting="org.shinyheaven.datavisualization.charting.*">
     <fx:Declarations>
         <p:ContextBuilder config="{Config}"/>
-		<p:Configure />
-    </fx:Declarations>   
+        <p:Configure/>
+    </fx:Declarations>
     <fx:Script>
         <![CDATA[
-        import data.Tick;
-        
-        import network.CommunicationModule;
-        
-        import parsley.config.Config;
+        import mx.binding.utils.BindingUtils;
+
+        import org.shinyheaven.service.dto.IChartDataProvider;
+        import org.shinyheaven.service.dto.Tick;
+
+        import org.shinyheaven.service.CommunicationModule;
+
 
         [Inject]
         public var commModule:CommunicationModule;
+
+        [Inject]
+        [Bindable]
+        public var chartData:IChartDataProvider;
+
+        [Init]
+        public function onInit():void 
+		{
+            BindingUtils.bindProperty(lineChart, 'dataProvider', chartData, 'data');
+			BindingUtils.bindProperty(flexChart, 'dataProvider', chartData, 'data');
+        }
 
         /**
          * This is for making Flash recognise the [RemoteClass] metadata on these classes.
          */
         private var dummies:Array = [Tick];
-
         ]]>
     </fx:Script>
-    <uiframe:MDI id="mdi" >
-		<s:Label text="foo" />
-		<s:Label text="Cart Placeholder" />
-		<s:Label text="bar" />
-	</uiframe:MDI>
+    <uiframe:MDI id="mdi">
+        <s:Label text="foo"/>
+        <charting:LineChartComponent id="lineChart"
+                                     width="100%" height="100%"
+                                     skinClass="org.shinyheaven.datavisualization.charting.skins.DefaultLineChartSkin"/>
+        <charting:FlexLineChartView id="flexChart" width="100%" height="100%" />
+    </uiframe:MDI>
 </s:Application>
