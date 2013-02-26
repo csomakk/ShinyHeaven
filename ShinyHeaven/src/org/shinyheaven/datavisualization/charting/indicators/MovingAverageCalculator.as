@@ -23,12 +23,10 @@ public class MovingAverageCalculator {
                 // average indicators starts at the window,
                 // data is unavailable before that point
                 if (i <= window - 1) {
-                    var clonedTick:Tick = ObjectUtil.clone(data.getItemAt(i)) as Tick;
-                    clonedTick.open = NaN;
-                    clonedTick.high = NaN;
-                    clonedTick.low = NaN;
-                    clonedTick.close = NaN;
-                    result.addItem(clonedTick);
+                    if(data.length>=window) {
+                        var clonedTick:Tick = ObjectUtil.clone(data.getItemAt(window-1)) as Tick;
+                        result.addItem(clonedTick);
+                    }
                 } else {
                     var sum:Number = 0.0;
                     for (var j:int = i; j > i - window; j--) {
