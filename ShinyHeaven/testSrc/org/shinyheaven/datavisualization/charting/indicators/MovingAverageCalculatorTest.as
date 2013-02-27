@@ -31,10 +31,6 @@ import org.shinyheaven.service.dto.Tick;
                 ticks.addItem(tick);
             }
             var ma20:ArrayCollection = MovingAverageCalculator.calculate(ticks, 20);
-            // first 20 elements must be NAN
-            for (var i = 0; i <= 19; ++i) {
-                assertThat(isNaN((ma20.getItemAt(i) as Tick).value));
-            }
             // other must be non nan
             for (var i = 20; i <= 100; ++i) {
                 assertThat((ma20.getItemAt(i) as Tick).value > 0);
@@ -52,10 +48,6 @@ import org.shinyheaven.service.dto.Tick;
                 ticks.addItem(tick);
             }
             var ma20:ArrayCollection = MovingAverageCalculator.calculate(ticks, 20);
-            // first 20 elements must be NAN
-            for (var i = 0; i <= 19; ++i) {
-                assertThat(isNaN((ma20.getItemAt(i) as Tick).value));
-            }
             // other must be non nan
             for (var i = 20; i <= 100; ++i) {
                 assertThat((ma20.getItemAt(i) as Tick).value == 10);
