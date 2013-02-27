@@ -3,6 +3,7 @@ package org.shinyheaven.news
 	public class NewsItem
 	{
 		
+		[Bindable]
 		private var _text:String;
 		private var _isBreaking:Boolean;
 		
