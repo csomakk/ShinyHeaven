@@ -18,9 +18,9 @@ package org.shinyheaven.service {
     import org.shinyheaven.news.NewsDataProvider;
     import org.shinyheaven.news.NewsItem;
     import org.shinyheaven.service.dto.IChartDataProvider;
-    import org.shinyheaven.service.dto.Tick;
+    import org.shinyheaven.service.dto.OHLCUpdate;
 
-public class CommunicationModule {
+    public class CommunicationModule {
 
         private static const LOGIN_SERVICE_NAME:String = "login";
         private static const LOOKUP_SERVICE_NAME:String = "lookup";
@@ -81,7 +81,7 @@ public class CommunicationModule {
 		}
 		
         private function updateResultHandler(event:ResultEvent):void {
-            var tick:Tick = event.result as Tick;
+            var tick:OHLCUpdate = event.result as OHLCUpdate;
             if(!tick)
                 throw new Error('updateResultHandler received no "Tick" in ResultEvent.');
             trace("Tick received:", tick);

@@ -1,12 +1,8 @@
 package org.shinyheaven.service.dto
 {
-    import mx.utils.OrderedObject;
-
     [RemoteClass(alias='org.postabank.data.Tick')]
-    public class Tick implements IHistoricalDataItem
+    public class OHLCUpdate extends AbstractHistoricalDataItem implements IHistoricalDataItem
     {
-        [Bindable]
-        public var timestamp : Date;
         [Bindable]
         public var open	: Number;
         [Bindable]
@@ -17,7 +13,7 @@ package org.shinyheaven.service.dto
         public var close : Number;
         [Bindable]
         public var volume : Number;
-        
+
         public function toString():String {
             return "Tick Object: " + timestamp + open + " " + low + " " + high + " " + close + " " + volume;
         }
@@ -25,7 +21,7 @@ package org.shinyheaven.service.dto
         /**
          * Currently, it returns the Typical Price.
          */
-        public function get value():Number {
+        override public function get value():Number {
             return typicalPrice;
         }
 

@@ -5,7 +5,7 @@ package org.shinyheaven.service.dto
 	public interface IChartDataProvider
 	{
 		/**
-		 * Returns with an {@link ArrayCollection} of {@link Tick}s.
+		 * Returns with an {@link ArrayCollection} of {@link OHLCUpdate}s.
 		 * 
 		 * @return ArrayCollection; 
 		 * 

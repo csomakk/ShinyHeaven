@@ -16,10 +16,10 @@
 			import org.shinyheaven.news.NewsDisplay;
 			import org.shinyheaven.service.CommunicationModule;
 			import org.shinyheaven.service.dto.IChartDataProvider;
-			import org.shinyheaven.service.dto.Tick;
+            import org.shinyheaven.service.dto.OHLCUpdate;
 
 
-        [Inject]
+            [Inject]
         public var commModule:CommunicationModule;
 
         [Inject]
@@ -41,7 +41,7 @@
         /**
          * This is for making Flash recognise the [RemoteClass] metadata on these classes.
          */
-        private var dummies:Array = [Tick];
+        private var dummies:Array = [OHLCUpdate];
         ]]>
     </fx:Script>
     <uiframe:MDI id="mdi">
