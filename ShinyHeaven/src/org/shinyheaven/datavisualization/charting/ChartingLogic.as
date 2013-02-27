@@ -25,8 +25,8 @@ package org.shinyheaven.datavisualization.charting
 			
 			for each (var vo:IHistoricalDataItem in instrData.source) 
 			{
-				range.min = Math.min(range.min, vo.value);
-				range.max = Math.max(range.max, vo.value);
+				range.min = Math.min(range.min, vo.typicalPrice);
+				range.max = Math.max(range.max, vo.typicalPrice);
 			}
 			
 			range.first = Number(instrData.getItemAt(0).timestamp);

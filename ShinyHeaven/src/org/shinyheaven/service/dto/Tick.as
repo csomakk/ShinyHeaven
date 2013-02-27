@@ -23,10 +23,10 @@ package org.shinyheaven.service.dto
         }
 
         /**
-         * For simple charting purposes, treat the close as the principal value.
+         * (L+H+C) / 3
          */
-        public function get value():Number {
-            return close;
+        public function get typicalPrice():Number {
+            return (high + low + close) / 3;
         }
     }
 }

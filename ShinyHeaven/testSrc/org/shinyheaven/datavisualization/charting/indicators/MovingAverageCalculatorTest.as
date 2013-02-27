@@ -33,7 +33,7 @@ import org.shinyheaven.service.dto.Tick;
             var ma20:ArrayCollection = MovingAverageCalculator.calculate(ticks, 20);
             // other must be non nan
             for (var i = 20; i <= 100; ++i) {
-                assertThat((ma20.getItemAt(i) as Tick).value > 0);
+                assertThat((ma20.getItemAt(i) as Tick).typicalPrice > 0);
             }
             trace('testCalculate done...');
         }
@@ -50,7 +50,7 @@ import org.shinyheaven.service.dto.Tick;
             var ma20:ArrayCollection = MovingAverageCalculator.calculate(ticks, 20);
             // other must be non nan
             for (var i = 20; i <= 100; ++i) {
-                assertThat((ma20.getItemAt(i) as Tick).value == 10);
+                assertThat((ma20.getItemAt(i) as Tick).typicalPrice == 10);
             }
             trace('testCalculate done...');
         }
