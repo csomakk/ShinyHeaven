@@ -15,6 +15,9 @@ package org.shinyheaven.datavisualization.charting.skins.parts
 		private var g:Graphics;
 		private var _data:Array;
 		
+		[Inspectable]
+		public var isFill:Boolean = false;
+		
 		public function LineDrawer()
 		{
 			g = graphics;
@@ -37,7 +40,7 @@ package org.shinyheaven.datavisualization.charting.skins.parts
 			var stroke:IStroke = getStyle("lineStroke");
 			var form:String = getStyle("form");
 			
-			g.beginFill(0x000000, .1);
+			if (isFill) g.beginFill(0x000000, .1);
 			
 			GraphicsUtilities.drawPolyLine(g, _data, 0, _data.length, "x","y", stroke, form);
 			
@@ -45,7 +48,7 @@ package org.shinyheaven.datavisualization.charting.skins.parts
 			g.lineTo((_data[_data.length-1] as Point).x, unscaledHeight);
 			g.lineTo(0, unscaledHeight);
 			
-			g.endFill();
+			if (isFill) g.endFill();
 		}
 		
 		

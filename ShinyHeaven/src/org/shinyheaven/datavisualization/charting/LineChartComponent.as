@@ -14,6 +14,8 @@ package org.shinyheaven.datavisualization.charting
 		[SkinPart(required="true")]
 		public var lineDrawer:LineDrawer;
 		[SkinPart(required="true")]
+		public var averageDrawer:LineDrawer;
+		[SkinPart(required="true")]
 		public var controls:ChartControls; 
 		// moving average: Boolean controls.isMovingAvrg, int controls.avrgWindow
 		
@@ -22,8 +24,8 @@ package org.shinyheaven.datavisualization.charting
 				
 		public var _dataProvider:ArrayCollection = new ArrayCollection();
 		
-		[Bindable]
-		public var drawingCoordinates:Array = [];
+		private var valueCoordinates:Array = [];
+		private var averageCoordinates:Array = [];
 		
 		public function LineChartComponent()
 		{
@@ -67,11 +69,11 @@ package org.shinyheaven.datavisualization.charting
 			invalidateProperties();
 		}
 		
-		private function getDrawingCoordinates():Array
+		private function getDrawingCoordinates(data:Array):Array
 		{
 			return DataToCoordinates.sampleDataAndGetPoints(
 				lineDrawer.width, lineDrawer.height, 
-				dataProvider.source, logic.minVal, logic.maxVal
+				data, logic.minVal, logic.maxVal
 			);
 		}
 		
@@ -89,8 +91,11 @@ package org.shinyheaven.datavisualization.charting
 		
 		private function updateChart():void
 		{
-			drawingCoordinates = getDrawingCoordinates();
-			lineDrawer.data = drawingCoordinates;			
+			valueCoordinates = getDrawingCoordinates(_dataProvider.source);
+			lineDrawer.data = valueCoordinates;
+			
+			averageCoordinates = getDrawingCoordinates(logic.getMovingAverage(_dataProvider, controls.avrgWindow));
+			averageDrawer.data = averageCoordinates;
 		}
 		
 		private function passDataToLogic(data:ArrayCollection):void

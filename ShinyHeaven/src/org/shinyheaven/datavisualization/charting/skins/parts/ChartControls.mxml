@@ -11,8 +11,8 @@
 	</s:states>
 	
 	<fx:Declarations>
-		<fx:Boolean id="isMovingAvrg" />
-		<fx:int id="avrgWindow" />
+		<fx:Boolean id="isMovingAvrg">false</fx:Boolean>
+		<fx:int id="avrgWindow">20</fx:int>
 	</fx:Declarations>
 	
 	<s:rollOver>
@@ -27,9 +27,9 @@
 	</s:rollOut>
 	
 	<s:transitions>
-		<s:Transition fromState="opened" toState="colsed">
+		<s:Transition fromState="opened" toState="closed">
 			<s:Sequence>
-				<!--<s:Fade duration="200" target="{averageForm}" />-->
+				<s:Fade duration="200" target="{averageForm}" />
 				<s:RemoveAction target="{averageForm}" />
 				<s:Resize duration="200" target="{this}"/>
 			</s:Sequence>
@@ -71,8 +71,6 @@
 			<s:HSlider id="avrgWindowSlider" minimum="2" maximum="40" value="20" stepSize="1" changeEnd="{avrgWindow = avrgWindowSlider.value}" />
 		</s:FormItem>
 	</s:Form>
-	
-	<s:Label id="arrowLabel" x="{width/2 - arrowLabel.width/2}" y="{height-20}" width="30" height="20" />
 	
 	<s:filters>
 		<s:DropShadowFilter alpha=".4" distance="4" angle="90" blurX="0" blurY="6" />
