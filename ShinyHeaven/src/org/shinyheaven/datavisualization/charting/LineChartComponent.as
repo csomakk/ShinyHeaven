@@ -94,8 +94,11 @@ package org.shinyheaven.datavisualization.charting
 			valueCoordinates = getDrawingCoordinates(_dataProvider.source);
 			lineDrawer.data = valueCoordinates;
 			
-			averageCoordinates = getDrawingCoordinates(logic.getMovingAverage(_dataProvider, controls.avrgWindow));
-			averageDrawer.data = averageCoordinates;
+			if (controls.isMovingAvrg)
+			{
+				averageCoordinates = getDrawingCoordinates(logic.getMovingAverage(_dataProvider, controls.avrgWindow));
+				averageDrawer.data = averageCoordinates;
+			}
 		}
 		
 		private function passDataToLogic(data:ArrayCollection):void
