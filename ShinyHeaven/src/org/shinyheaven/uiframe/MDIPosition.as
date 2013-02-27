@@ -6,10 +6,6 @@
  */
 package org.shinyheaven.uiframe {
     import mx.utils.StringUtil;
-    import mx.utils.StringUtil;
-
-    import org.spicefactory.lib.collection.List;
-    import org.spicefactory.lib.collection.MultiMap;
 
     public class MDIPosition {
         public var alignParent:MDIAlignParent;
@@ -34,7 +30,6 @@ package org.shinyheaven.uiframe {
             var result:Vector.<MDIPosition> = new Vector.<MDIPosition>();
             for each (var e:String in input.split(/\s*,\s*/).map(function(f:String, ... rest):String { return StringUtil.trim(f); })) {
                 result.push(new MDIPosition(e));
-                trace(StringUtil.substitute("e: <{0}>", e));
             }
             return result;
         }
