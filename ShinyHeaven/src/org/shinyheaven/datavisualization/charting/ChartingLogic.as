@@ -3,6 +3,7 @@ package org.shinyheaven.datavisualization.charting
 	
 	import mx.collections.ArrayCollection;
 	
+	import org.shinyheaven.datavisualization.charting.indicators.MovingAverageCalculator;
 	import org.shinyheaven.datavisualization.charting.vo.DataRange;
 	import org.shinyheaven.service.dto.IHistoricalDataItem;
 	
@@ -51,6 +52,11 @@ package org.shinyheaven.datavisualization.charting
 			{
 				setDataRange(getDataRange(data));
 			}
+		}
+		
+		public function getMovingAverage(data:ArrayCollection, window:int):Array
+		{
+			return MovingAverageCalculator.calculate(data, window).source;
 		}
 	}
 }
