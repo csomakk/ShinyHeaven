@@ -32,9 +32,7 @@ package org.shinyheaven.uiframe {
          */
         public static function parseList(input:String):Vector.<MDIPosition> {
             var result:Vector.<MDIPosition> = new Vector.<MDIPosition>();
-            for each (var e:String in input.split(/\s*,\s*/).map(function(f:String, index:int, arr:Array):String {
-                return StringUtil.trim(f);
-            })) {
+            for each (var e:String in input.split(/\s*,\s*/).map(function(f:String, ... rest):String { return StringUtil.trim(f); })) {
                 result.push(new MDIPosition(e));
                 trace(StringUtil.substitute("e: <{0}>", e));
             }
