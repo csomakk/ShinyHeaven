@@ -2,8 +2,8 @@
 <s:Application xmlns:fx="http://ns.adobe.com/mxml/2009"
                xmlns:s="library://ns.adobe.com/flex/spark"
                xmlns:p="http://www.spicefactory.org/parsley"
-               width="100%" height="100%"
-               xmlns:uiframe="org.shinyheaven.uiframe.*" xmlns:charting="org.shinyheaven.datavisualization.charting.*">
+               xmlns:uiframe="org.shinyheaven.uiframe.*"
+               xmlns:charting="org.shinyheaven.datavisualization.charting.*">
     <fx:Declarations>
         <p:ContextBuilder config="{Config}"/>
         <p:Configure/>

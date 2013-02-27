@@ -155,7 +155,7 @@
 				}
 				
 				remainingLeft = 0;
-				remainingRight = parent.width - (right as Number) - x ;;
+				remainingRight = parent.width - (right as Number) - x ;
 				remainingTop = 0;
 				trace("MDI:rearrange:height", height)
 				remainingBottom = parent.height - (bottom as Number) - y ;
