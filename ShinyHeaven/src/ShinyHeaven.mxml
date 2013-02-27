@@ -38,7 +38,7 @@
         private var dummies:Array = [Tick];
         ]]>
     </fx:Script>
-    <uiframe:MDI id="mdi">
+    <uiframe:MDI id="mdi" positions="left 20%, bottom 20%, rest: topright">
         <s:Label text="foo"/>
         <charting:LineChartComponent id="lineChart"
                                      width="100%" height="100%"
