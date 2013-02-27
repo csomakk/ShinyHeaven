@@ -6,7 +6,7 @@ import org.flexunit.assertThat;
 import org.flexunit.asserts.assertEquals;
     import org.shinyheaven.service.dto.IHistoricalDataItem;
 
-    import org.shinyheaven.service.dto.Tick;
+    import org.shinyheaven.service.dto.OHLCUpdate;
 
     public class MovingAverageCalculatorTest {
         public function MovingAverageCalculatorTest() {
@@ -26,7 +26,7 @@ import org.flexunit.asserts.assertEquals;
         public function testCalculate():void {
             var ticks:ArrayCollection = new ArrayCollection();
             for (var i:int = 0; i <= 100; ++i) {
-                var tick:Tick = new Tick();
+                var tick:OHLCUpdate = new OHLCUpdate();
                 tick.close = 10 + i;
                 tick.high = 12 + i;
                 tick.low = 15 + i;
@@ -45,7 +45,7 @@ import org.flexunit.asserts.assertEquals;
         public function testCalculateConstant():void {
             var ticks:ArrayCollection = new ArrayCollection();
             for (var i:int = 0; i <= 100; ++i) {
-                var tick:Tick = new Tick();
+                var tick:OHLCUpdate = new OHLCUpdate();
                 tick.close = 10;
                 tick.high = 10;
                 tick.low = 10;

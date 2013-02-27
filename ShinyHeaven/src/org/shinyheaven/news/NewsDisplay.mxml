@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark"
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="100%" height="100%">
+	<fx:Script>
+		<![CDATA[
+			import mx.collections.ArrayCollection;
+			import mx.events.FlexEvent;
+			
+			[Bindable]
+			public var dataProvider:ArrayCollection;
+			
+			
+			
+		]]>
+	</fx:Script>
+	<s:List left="10" right="10" top="78" bottom="10" dataProvider="{dataProvider}"
+			itemRenderer="org.shinyheaven.news.NewsDisplayItemRenderer"/>
+	<s:TextArea left="10" right="10" top="10" height="60" 
+				text="{(dataProvider.getItemAt(0) as NewsItem).timeAndText}"
+				textAlign="left" color="{(dataProvider.getItemAt(0) as NewsItem).isBreaking ? 0xff0000 : 0x000000}" 
+				verticalAlign="middle"/>
+</s:Group>

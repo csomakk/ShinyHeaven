@@ -10,6 +10,11 @@ package org.shinyheaven.datavisualization.charting.skins.parts
 	import mx.core.UIComponent;
 	import mx.graphics.IStroke;
 	
+	[Style(name="fillAlpha", type="Number", format="Number", inherit="yes")]
+	[Style(name="fillColor", type="uint", format="Color", inherit="yes")]
+	[Style(name="lineColor", type="uint", format="Color", inherit="yes")]
+	[Style(name="lineForm", type="String", format="String", enumeration="strait, curve", inherit="yes")]
+	
 	public class LineDrawer extends UIComponent
 	{
 		private var g:Graphics;
@@ -17,6 +22,45 @@ package org.shinyheaven.datavisualization.charting.skins.parts
 		
 		[Inspectable]
 		public var isFill:Boolean = false;
+		
+
+		[Inspectable(category="Styles")]
+		public function get fillAlpha():Number
+		{
+			return getStyle('fillAlpha') as Number;
+		}
+		public function set fillAlpha(value:Number):void
+		{
+			setStyle('fillAlpha', value);
+		}
+		[Inspectable(category="Styles")]
+		public function get fillColor():uint
+		{
+			return getStyle('fillColor') as uint;
+		}
+		public function set fillColor(value:uint):void
+		{
+			setStyle('fillColor', value);
+		}
+		[Inspectable(category="Styles")]
+		public function get lineForm():String
+		{
+			return getStyle('form') as String;
+		}
+		public function set lineForm(value:String):void
+		{
+			setStyle('form', value);
+		}
+		[Inspectable(category="Styles")]
+		public function get lineColor():uint
+		{
+			return getStyle('lineColor') as uint;
+		}
+		public function set lineColor(value:uint):void
+		{
+			setStyle('lineColor', value);
+		}
+
 		
 		public function LineDrawer()
 		{
@@ -34,23 +78,21 @@ package org.shinyheaven.datavisualization.charting.skins.parts
 			if (!_data || _data.length < 2) return;
 			
 			g.clear();
+			g.lineStyle(1, getStyle('lineColor'), 1, false, LineScaleMode.NORMAL, CapsStyle.ROUND, JointStyle.ROUND);
+						
+			if (isFill) g.beginFill(getStyle("fillColor"), getStyle("fillAlpha"));
 			
-			g.lineStyle(1, 0x454545, 1, false, LineScaleMode.NORMAL, CapsStyle.ROUND, JointStyle.ROUND);
+			GraphicsUtilities.drawPolyLine(g, _data, 0, _data.length, "x","y", null, getStyle("lineForm"));
 			
-			var stroke:IStroke = getStyle("lineStroke");
-			var form:String = getStyle("form");
-			
-			if (isFill) g.beginFill(0x000000, .1);
-			
-			GraphicsUtilities.drawPolyLine(g, _data, 0, _data.length, "x","y", stroke, form);
-			
-			g.lineStyle();
-			g.lineTo((_data[_data.length-1] as Point).x, unscaledHeight);
-			g.lineTo(0, unscaledHeight);
-			
-			if (isFill) g.endFill();
+			if (isFill)
+			{
+				g.lineStyle();
+				g.lineTo((_data[_data.length-1] as Point).x, unscaledHeight);
+				g.lineTo(0, unscaledHeight);
+				
+				g.endFill();
+			}
 		}
-		
 		
 	}
 }

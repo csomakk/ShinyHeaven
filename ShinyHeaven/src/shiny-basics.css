@@ -2,7 +2,9 @@
 @namespace s "library://ns.adobe.com/flex/spark";
 @namespace mx "library://ns.adobe.com/flex/mx";
 
-s|Form
+@namespace parts "org.shinyheaven.datavisualization.charting.skins.parts.*";
+
+parts|LineDrawer
 {
 
 }

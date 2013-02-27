@@ -3,10 +3,10 @@ package org.shinyheaven.datavisualization.charting.indicators {
     import mx.collections.ArrayCollection;
     import mx.utils.ObjectUtil;
 
-    import org.shinyheaven.service.dto.ChartPoint;
+    import org.shinyheaven.service.dto.HistoricalDataItem;
     import org.shinyheaven.service.dto.IHistoricalDataItem;
 
-    import org.shinyheaven.service.dto.Tick;
+    import org.shinyheaven.service.dto.OHLCUpdate;
 
     public class MovingAverageCalculator {
 
@@ -26,17 +26,17 @@ package org.shinyheaven.datavisualization.charting.indicators {
             for (var i:int = 0, l:int = data.length; i < l; i++) {
                 if (i <= window - 1) {
                     if (data.length >= window) {
-                        var originalTick:IHistoricalDataItem = ObjectUtil.clone(data.getItemAt(window - 1)) as Tick;
-                        var clonedTick:IHistoricalDataItem = new ChartPoint(originalTick.value, originalTick.timestamp);
+                        var originalTick:IHistoricalDataItem = ObjectUtil.clone(data.getItemAt(window - 1)) as OHLCUpdate;
+                        var clonedTick:IHistoricalDataItem = new HistoricalDataItem(originalTick.value, originalTick.timestamp);
                         sum += clonedTick.value / window;
                         result.addItem(clonedTick);
                     }
                 } else {
-                    var thisTick:IHistoricalDataItem = (data.getItemAt(i) as Tick);
-                    var averageTick:ChartPoint = new ChartPoint(sum, thisTick.timestamp);
+                    var thisTick:IHistoricalDataItem = (data.getItemAt(i) as OHLCUpdate);
+                    var averageTick:HistoricalDataItem = new HistoricalDataItem(sum, thisTick.timestamp);
                     result.addItem(averageTick);
                     sum += thisTick.value / window;
-                    sum -= (data.getItemAt(i - window) as Tick).value / window;
+                    sum -= (data.getItemAt(i - window) as OHLCUpdate).value / window;
                 }
             }
 
