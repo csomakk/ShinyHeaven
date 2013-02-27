@@ -3,6 +3,9 @@ package org.shinyheaven.datavisualization.charting.indicators {
     import mx.collections.ArrayCollection;
     import mx.utils.ObjectUtil;
 
+    import org.shinyheaven.service.dto.ChartPoint;
+    import org.shinyheaven.service.dto.IHistoricalDataItem;
+
     import org.shinyheaven.service.dto.Tick;
 
     public class MovingAverageCalculator {
@@ -23,18 +26,17 @@ package org.shinyheaven.datavisualization.charting.indicators {
             for (var i:int = 0, l:int = data.length; i < l; i++) {
                 if (i <= window - 1) {
                     if (data.length >= window) {
-                        var clonedTick:Tick = ObjectUtil.clone(data.getItemAt(window - 1)) as Tick;
-                        sum += clonedTick.close / window;
+                        var originalTick:IHistoricalDataItem = ObjectUtil.clone(data.getItemAt(window - 1)) as Tick;
+                        var clonedTick:IHistoricalDataItem = new ChartPoint(originalTick.value, originalTick.timestamp);
+                        sum += clonedTick.value / window;
                         result.addItem(clonedTick);
                     }
                 } else {
-                    var thisTick:Tick = (data.getItemAt(i) as Tick);
-                    var averageTick:Tick = new Tick();
-                    averageTick.close = sum;
-                    averageTick.timestamp = thisTick.timestamp;
+                    var thisTick:IHistoricalDataItem = (data.getItemAt(i) as Tick);
+                    var averageTick:ChartPoint = new ChartPoint(sum, thisTick.timestamp);
                     result.addItem(averageTick);
-                    sum += thisTick.close / window;
-                    sum -= (data.getItemAt(i - window) as Tick).close / window;
+                    sum += thisTick.value / window;
+                    sum -= (data.getItemAt(i - window) as Tick).value / window;
                 }
             }
 
