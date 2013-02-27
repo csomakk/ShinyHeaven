@@ -29,7 +29,6 @@ package org.shinyheaven.uiframe {
          * This can parse MDI child position descriptions, in the following format:
          * @param input for example "left 20%, bottom 25%, rest: topright"
          * @return a {@link Vector} containing the parsed {@link MDIPosition}s
-         * // TODO rename this method
          */
         public static function parseList(input:String):Vector.<MDIPosition> {
             var result:Vector.<MDIPosition> = new Vector.<MDIPosition>();
