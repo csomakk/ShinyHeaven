@@ -23,9 +23,13 @@ package org.shinyheaven.service.dto
         }
 
         /**
-         * (L+H+C) / 3
+         * Currently, it returns the Typical Price.
          */
-        public function get typicalPrice():Number {
+        public function get value():Number {
+            return typicalPrice;
+        }
+
+        public final function get typicalPrice():Number {
             return (high + low + close) / 3;
         }
     }
