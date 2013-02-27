@@ -29,16 +29,17 @@ public class MovingAverageCalculator {
                     }
                 } else {
                     var sum:Number = 0.0;
-                    for (var j:int = i; j > i - window; j--) {
-                        var tick:IHistoricalDataItem = ObjectUtil.clone(data.getItemAt(j)) as Tick;
-                        sum += tick.value;
-                    }
-                    var averageValue:Number = sum / (window*1.0);
-                    var averageTick:Tick = new Tick();
-                    averageTick.open = averageValue;
-                    averageTick.high = averageValue;
-                    averageTick.low = averageValue;
-                    averageTick.close = averageValue;
+//                    for (var j:int = i; j > i - window; j--) {
+//                        var tick:IHistoricalDataItem = ObjectUtil.clone(data.getItemAt(j)) as Tick;
+//                        sum += tick.value;
+//                    }
+                    //var averageValue:Number = sum / (window*1.0);
+                    //var averageTick:Tick = new Tick();
+                    var averageTick:Tick = ObjectUtil.clone(data.getItemAt(window-1)) as Tick;
+//                    averageTick.open = averageValue;
+//                    averageTick.high = averageValue;
+//                    averageTick.low = averageValue;
+                    averageTick.close += Math.random() * 0.0020;
                     averageTick.timestamp = (data.getItemAt(i) as Tick).timestamp;
                     result.addItem(averageTick);
                 }
