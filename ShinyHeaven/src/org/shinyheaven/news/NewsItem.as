@@ -38,7 +38,7 @@ package org.shinyheaven.news
 		}
 		
 		public function set timeAndText(value:String):void {
-			; //setter is needed for binding to work
+			; //setter is needed for binding to work on getter
 		}
 		
 		[Bindable]
