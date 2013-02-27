@@ -1,18 +1,10 @@
 package org.shinyheaven.service {
-    import avmplus.getQualifiedClassName;
-
-import flash.events.TimerEvent;
-
-import flash.utils.Timer;
-    import flash.utils.getQualifiedClassName;
-
-    import mx.utils.StringUtil;
-
-    import org.shinyheaven.service.dto.IChartDataProvider;
-
     import flash.events.SecurityErrorEvent;
+    import flash.events.TimerEvent;
     import flash.system.Security;
-
+    import flash.utils.Timer;
+    import flash.utils.getQualifiedClassName;
+    
     import mx.collections.IList;
     import mx.controls.Alert;
     import mx.messaging.ChannelSet;
@@ -21,25 +13,33 @@ import flash.utils.Timer;
     import mx.rpc.events.FaultEvent;
     import mx.rpc.events.ResultEvent;
     import mx.rpc.remoting.RemoteObject;
-
-import org.shinyheaven.service.dto.Tick;
+    import mx.utils.StringUtil;
+    
+    import org.shinyheaven.news.NewsDataProvider;
+    import org.shinyheaven.news.NewsItem;
+    import org.shinyheaven.service.dto.IChartDataProvider;
+    import org.shinyheaven.service.dto.Tick;
 
 public class CommunicationModule {
 
         private static const LOGIN_SERVICE_NAME:String = "login";
         private static const LOOKUP_SERVICE_NAME:String = "lookup";
         private static const UPDATE_SERVICE_NAME:String = "quotes";
+		private static const GET_NEWS_SERVICE_NAME:String = "news";
 
         private static const AMF_CHANNEL_NAME:String = "pyamf-channel";
         private static const AMF_SERVICE_PREFIX:String = "fx_heaven_service";
 
         [Inject]
         public var chartDataProvider:IChartDataProvider;
+		[Inject]
+		public var newsDataProvider:NewsDataProvider;
         private var service:RemoteObject;
 
         private var loginOperation:AbstractOperation;
         private var lookupOperation:AbstractOperation;
         private var updateOperation:AbstractOperation;
+		private var getNewsOperation:AbstractOperation;
 
         private var client_id:Number;
 
@@ -68,8 +68,18 @@ public class CommunicationModule {
 
             updateOperation = service.getOperation(UPDATE_SERVICE_NAME);
             updateOperation.addEventListener(ResultEvent.RESULT, updateResultHandler);
+			
+			getNewsOperation = service.getOperation(GET_NEWS_SERVICE_NAME);
+			getNewsOperation.addEventListener(ResultEvent.RESULT, getNewsResultHandler);
         }
-
+		
+		protected function getNewsResultHandler(event:ResultEvent):void
+		{
+			if(event.result != ""){
+				newsDataProvider.addNewsItem(new NewsItem(event.result as String));
+			}
+		}
+		
         private function updateResultHandler(event:ResultEvent):void {
             var tick:Tick = event.result as Tick;
             if(!tick)
@@ -77,6 +87,10 @@ public class CommunicationModule {
             trace("Tick received:", tick);
             chartDataProvider.data.addItem(tick);
         }
+		
+		public function getNews():void {
+			getNewsOperation.send('');		
+		}
 
         private function lookupRequest():void {
             var ro:RequestObject = new RequestObject(client_id, Constants.HARDCODED_INSTRUMENT, Constants.START_DATE, Constants.END_DATE);
@@ -102,8 +116,13 @@ public class CommunicationModule {
         }
 
         private function onAutomaticUpdate(event:TimerEvent):void {
-            updateOperation.send('');
+            getUpdates();
+			getNews();
         }
+		
+		private function getUpdates():void {
+			updateOperation.send('');
+		}
 
         private function onRemoteServiceFault(event:FaultEvent):void {
             var errorMsg:String = "Service error: " + event.fault.faultCode;
