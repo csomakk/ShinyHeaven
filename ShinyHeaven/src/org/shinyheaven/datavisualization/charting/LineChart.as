@@ -7,6 +7,7 @@ package org.shinyheaven.datavisualization.charting
 	
 	import org.shinyheaven.datavisualization.charting.events.UserControlEvent;
 	import org.shinyheaven.datavisualization.charting.skins.parts.LineDrawer;
+	import org.shinyheaven.datavisualization.charting.calculations.DataToCoordinates;
 	
 	public class LineChart extends SkinnableComponent
 	{
@@ -16,7 +17,7 @@ package org.shinyheaven.datavisualization.charting
 		[SkinPart(required="true")]
 		public var averageDrawer:LineDrawer;
 		[SkinPart(required="true")]
-		public var controls:LineChartUIControls; 
+		public var controls:LineChartUIControls;
 		
 		[Bindable]
 		public var logic:ChartingLogic = new ChartingLogic();
@@ -25,6 +26,8 @@ package org.shinyheaven.datavisualization.charting
 		
 		private var valueCoordinates:Array = [];
 		private var averageCoordinates:Array = [];
+		
+		private var initAmountOfData:int;
 		
 		public function LineChart()
 		{
