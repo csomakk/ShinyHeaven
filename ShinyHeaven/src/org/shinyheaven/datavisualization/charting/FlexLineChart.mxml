@@ -2,20 +2,22 @@
 <mx:LineChart xmlns:fx="http://ns.adobe.com/mxml/2009" 
 			  xmlns:s="library://ns.adobe.com/flex/spark" 
 			  xmlns:mx="library://ns.adobe.com/flex/mx"
-			  xmlns:parsley="http://www.spicefactory.org/parsley">
+			  xmlns:parsley="http://www.spicefactory.org/parsley" xmlns:vo="org.shinyheaven.datavisualization.charting.vo.*">
 	
 	<fx:Declarations>
 		<parsley:Configure />
 		<mx:SolidColorStroke id = "s3" color="green" weight="1"/>
+		<vo:DataRange id="rangeToRender" />
 	</fx:Declarations>
 	
 	<fx:Script>
 		<![CDATA[
+			import org.shinyheaven.datavisualization.charting.calculations.DataRangeCalculator;
 			import mx.collections.ArrayCollection;
 			import mx.events.CollectionEvent;
 			
 			[Bindable]
-			public var logic:ChartingLogic = new ChartingLogic();
+			public var logic:DataRangeCalculator = new DataRangeCalculator();
 			
 			override public function set dataProvider(value:Object):void
 			{
@@ -25,14 +27,12 @@
 					super.dataProvider.removeEventListener(CollectionEvent.COLLECTION_CHANGE, handleDataChanged);
 					super.dataProvider = value as ArrayCollection;
 					super.dataProvider.addEventListener(CollectionEvent.COLLECTION_CHANGE, handleDataChanged);
-					passDataToLogic(value as ArrayCollection);
 				}
 				else if (value !== null)
 				{
 					// dataprovider init
 					super.dataProvider = value as ArrayCollection;
 					super.dataProvider.addEventListener(CollectionEvent.COLLECTION_CHANGE, handleDataChanged);
-					passDataToLogic(value as ArrayCollection);
 				}
 				else
 				{
@@ -45,15 +45,7 @@
 
 			protected function handleDataChanged(event:CollectionEvent):void
 			{
-				passDataToLogic(event.target as ArrayCollection);
-			}
-			
-			private function passDataToLogic(data:ArrayCollection):void
-			{
-				if (logic)
-				{
-					logic.data = data;
-				}
+				rangeToRender = new DataRangeCalculator().getDataRange((dataProvider as ArrayCollection).toArray());
 			}
 			
 		]]>
@@ -64,7 +56,7 @@
 	</mx:horizontalAxis>
 	
 	<mx:verticalAxis>
-		<mx:LinearAxis id="vertAxis" maximum="{logic.maxVal}" minimum="{logic.minVal}" />
+		<mx:LinearAxis id="vertAxis" maximum="{rangeToRender.maxVal}" minimum="{rangeToRender.minVal}" />
 	</mx:verticalAxis>
 	
 	<mx:seriesFilters>

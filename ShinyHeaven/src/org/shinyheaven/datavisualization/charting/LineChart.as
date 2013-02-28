@@ -5,9 +5,12 @@ package org.shinyheaven.datavisualization.charting
 	
 	import spark.components.supportClasses.SkinnableComponent;
 	
+	import org.shinyheaven.datavisualization.charting.calculations.DataToCoordinates;
+	import org.shinyheaven.datavisualization.charting.calculations.indicators.MovingAverageCalculator;
 	import org.shinyheaven.datavisualization.charting.events.UserControlEvent;
 	import org.shinyheaven.datavisualization.charting.skins.parts.LineDrawer;
-	import org.shinyheaven.datavisualization.charting.calculations.DataToCoordinates;
+	import org.shinyheaven.datavisualization.charting.vo.DataRange;
+	import org.shinyheaven.datavisualization.charting.calculations.DataRangeCalculator;
 	
 	public class LineChart extends SkinnableComponent
 	{
@@ -18,9 +21,6 @@ package org.shinyheaven.datavisualization.charting
 		public var averageDrawer:LineDrawer;
 		[SkinPart(required="true")]
 		public var controls:LineChartUIControls;
-		
-		[Bindable]
-		public var logic:ChartingLogic = new ChartingLogic();
 				
 		public var _dataProvider:ArrayCollection = new ArrayCollection();
 		
@@ -28,6 +28,8 @@ package org.shinyheaven.datavisualization.charting
 		private var averageCoordinates:Array = [];
 		
 		private var initAmountOfData:int;
+		
+		private var rangeForRendering:DataRange;
 		
 		public function LineChart()
 		{
@@ -45,43 +47,68 @@ package org.shinyheaven.datavisualization.charting
 			{
 				// SWAP DATA
 				_dataProvider.removeEventListener(CollectionEvent.COLLECTION_CHANGE, handleDataChanged);
-				_dataProvider = value as ArrayCollection;
+				_dataProvider = value;
 				_dataProvider.addEventListener(CollectionEvent.COLLECTION_CHANGE, handleDataChanged);
-				passDataToLogic(value as ArrayCollection);
 			}
 			else if (value !== null)
 			{
 				// INIT DATA
-				_dataProvider = value as ArrayCollection;
+				_dataProvider = value;
 				_dataProvider.addEventListener(CollectionEvent.COLLECTION_CHANGE, handleDataChanged);
-				passDataToLogic(value as ArrayCollection);
 			}
 			else
 			{
 				// NULL DATA
 				_dataProvider.removeEventListener(CollectionEvent.COLLECTION_CHANGE, handleDataChanged);
-				_dataProvider = value as ArrayCollection;
+				_dataProvider = value;
 			}
+
 			invalidateProperties();
+		}
+		
+		private function getInitAmountOFData():int
+		{
+			var result:int;
+			if (initAmountOfData < 1)
+			{
+				result = _dataProvider.length;
+			}
+			else
+			{
+				result = initAmountOfData;
+			}
+			return result;
 		}
 		
 		protected function handleDataChanged(event:CollectionEvent):void
 		{
-			passDataToLogic(event.target as ArrayCollection);
 			invalidateProperties();
 		}
 		
 		private function getDrawingCoordinates(data:Array):Array
 		{
-			return DataToCoordinates.sampleDataAndGetPoints(
-				lineDrawer.width, lineDrawer.height, 
-				data, logic.minVal, logic.maxVal
-			);
+			var result:Array;
+			if (lineDrawer && rangeForRendering)
+			{
+				result = DataToCoordinates.sampleDataAndGetPoints(
+					lineDrawer.width, lineDrawer.height, 
+					data, rangeForRendering.minVal, rangeForRendering.maxVal
+				);
+			}
+			return result;
 		}
 		
 		override protected function commitProperties():void
 		{
 			super.commitProperties();
+			
+			initAmountOfData = getInitAmountOFData();
+			
+			rangeForRendering = new DataRangeCalculator().getDataRange(
+				getDataToVisualize(_dataProvider.toArray(), initAmountOfData)
+				);
+			
+			
 			updateMainVolumeDrawer();
 			updateMovingAverageDrawer();
 		}
@@ -95,7 +122,9 @@ package org.shinyheaven.datavisualization.charting
 		
 		private function updateMainVolumeDrawer():void
 		{
-			valueCoordinates = getDrawingCoordinates(_dataProvider.source);
+			valueCoordinates = getDrawingCoordinates(
+				getDataToVisualize(_dataProvider.toArray(), initAmountOfData)
+			);
 			lineDrawer.data = valueCoordinates;
 		}
 		
@@ -103,7 +132,10 @@ package org.shinyheaven.datavisualization.charting
 		{
 			if (controls.isMovingAvrgEnabled)
 			{
-				averageCoordinates = getDrawingCoordinates(logic.getMovingAverage(_dataProvider, controls.avrgWindow));
+				averageCoordinates = getDrawingCoordinates(
+					MovingAverageCalculator.calculate(
+						getDataToVisualize(_dataProvider.toArray(), initAmountOfData), 
+						controls.avrgWindow));
 				averageDrawer.data = averageCoordinates;
 				averageDrawer.visible = true;
 			}
@@ -113,11 +145,15 @@ package org.shinyheaven.datavisualization.charting
 			}
 		}
 		
-		private function passDataToLogic(data:ArrayCollection):void
+		private function getDataToVisualize(data:Array, amount:int):Array
 		{
-			logic.data = data;
+			
+			var dbgData01:Array = _dataProvider.toArray().slice(data.length-amount, data.length-1);
+			trace('amount: ' + _dataProvider.length + ' / ' + amount);
+			var dbgData02:Array = _dataProvider.source;
+			return dbgData01;
 		}
-
+		
 		protected function handleMovingAverageUserControlEvent(event:UserControlEvent):void
 		{
 			updateMovingAverageDrawer();

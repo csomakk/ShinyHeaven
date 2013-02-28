@@ -8,6 +8,8 @@ package org.shinyheaven.datavisualization.charting.calculations
 	{
 		public static function sampleDataAndGetPoints(width:Number, height:Number, data:Array, minVal:Number, maxVal:Number):Array
 		{
+			if (data == null) return [];
+			
 			var result:Array = [];
 			
 			var xOffset:Number = width / (data.length-1);

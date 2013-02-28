@@ -5,23 +5,23 @@ package org.shinyheaven.datavisualization.charting.vo
 		/**
 		 * Highest value in a historical data stream 
 		 */
-		public var max:Number = Number.MIN_VALUE;
+		[Bindable]
+		public var maxVal:Number = Number.MIN_VALUE;
 		/**
 		 * Lowest value in a historical data stream 
 		 */
-		public var min:Number = Number.MAX_VALUE;
+		[Bindable]
+		public var minVal:Number = Number.MAX_VALUE;
 		/**
 		 * Timestamp's of first item in a historical data stream
 		 */
-		public var first:Number;
+		[Bindable]
+		public var firstDate:Date = new Date();
 		/**
 		 * Timestamp's of last item in a historical data stream
 		 */
-		public var last:Number;
+		[Bindable]
+		public var lastDate:Date = new Date();
 		
-		public function toString():String
-		{
-			return "DataRange first:" + first + ", last:" + last + ", min:" + min + ", max:" + max; 
-		}
 	}
 }
