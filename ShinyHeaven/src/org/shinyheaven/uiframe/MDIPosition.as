@@ -33,5 +33,13 @@ package org.shinyheaven.uiframe {
             }
             return result;
         }
+
+        public function get direction():int {
+            if (alignParent.isTop()) return MDI.TOP;
+            if (alignParent.isBottom()) return MDI.BOTTOM;
+            if (alignParent.isRight()) return MDI.RIGHT;
+            if (alignParent.isLeft()) return MDI.LEFT;
+            return MDI.UNDOCKED;
+        }
     }
 }

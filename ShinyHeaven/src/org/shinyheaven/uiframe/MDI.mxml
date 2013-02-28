@@ -90,6 +90,8 @@
             _positions = MDIPosition.parseList(value);
         }
 
+        private var elementPosition:int = 0;
+
         public function addDocument(element:IVisualElement):DocumentHolder {
             var d:DocumentHolder = new DocumentHolder();
             d.element = element;
@@ -97,7 +99,16 @@
             addElement(d);
             d.addEventListener(MouseEvent.MOUSE_DOWN, documentMouseDown);
             dict[element] = d;
+            if (_positions.length > elementPosition) {
+                var pos:MDIPosition = _positions[elementPosition];
+                dockDocument(element, pos.direction);
+                if (pos.direction == TOP || pos.direction == BOTTOM) d.percentHeight = pos.weight;
+                if (pos.direction == LEFT || pos.direction == RIGHT) d.percentWidth = pos.weight;
+            } else {
+                // TODO do for 'rest:'
+            }
             rearrange();
+            elementPosition++;
             return d;
         }
 
