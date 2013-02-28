@@ -2,15 +2,16 @@
 <s:Skin xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		xmlns:s="library://ns.adobe.com/flex/spark" 
 		xmlns:mx="library://ns.adobe.com/flex/mx" 
-		xmlns:parts="org.shinyheaven.datavisualization.charting.skins.parts.*">
+		xmlns:parts="org.shinyheaven.datavisualization.charting.skins.parts.*" 
+		xmlns:charting="org.shinyheaven.datavisualization.charting.*">
 	<!-- host component -->
 	<fx:Metadata>
-		[HostComponent("org.shinyheaven.datavisualization.charting.LineChartComponent")]
+		[HostComponent("org.shinyheaven.datavisualization.charting.LineChart")]
 	</fx:Metadata>
 	
 	<parts:BackgroundDrawer width="100%" height="100%" />
 	
-	<parts:LineDrawer id="averageDrawer" visible="{controls.isMovingAvrg}"
+	<parts:LineDrawer id="averageDrawer"
 					  width="100%" height="100%" lineColor="#F53682"
 					  left="0.5" right="0.5" bottom="0.5" top="0.5" />
 	<parts:LineDrawer id="lineDrawer" isFill="true"
@@ -18,6 +19,6 @@
 					  fillAlpha=".1" fillColor="#144D70"
 					  left="0.5" right="0.5" bottom="0.5" top="0.5" />
 	
-	<parts:ChartControls id="controls" width="100%" top="0" left="0" />
+	<charting:LineChartUIControls id="controls" width="100%" top="0" left="0" />
 	
 </s:Skin>

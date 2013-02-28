@@ -5,10 +5,10 @@ package org.shinyheaven.datavisualization.charting
 	
 	import spark.components.supportClasses.SkinnableComponent;
 	
-	import org.shinyheaven.datavisualization.charting.skins.parts.ChartControls;
+	import org.shinyheaven.datavisualization.charting.events.UserControlEvent;
 	import org.shinyheaven.datavisualization.charting.skins.parts.LineDrawer;
 	
-	public class LineChartComponent extends SkinnableComponent
+	public class LineChart extends SkinnableComponent
 	{
 		
 		[SkinPart(required="true")]
@@ -16,8 +16,7 @@ package org.shinyheaven.datavisualization.charting
 		[SkinPart(required="true")]
 		public var averageDrawer:LineDrawer;
 		[SkinPart(required="true")]
-		public var controls:ChartControls; 
-		// moving average: Boolean controls.isMovingAvrg, int controls.avrgWindow
+		public var controls:LineChartUIControls; 
 		
 		[Bindable]
 		public var logic:ChartingLogic = new ChartingLogic();
@@ -27,7 +26,7 @@ package org.shinyheaven.datavisualization.charting
 		private var valueCoordinates:Array = [];
 		private var averageCoordinates:Array = [];
 		
-		public function LineChartComponent()
+		public function LineChart()
 		{
 			super();
 		}
@@ -80,24 +79,34 @@ package org.shinyheaven.datavisualization.charting
 		override protected function commitProperties():void
 		{
 			super.commitProperties();
-			updateChart();
+			updateMainVolumeDrawer();
+			updateMovingAverageDrawer();
 		}
 		
 		override protected function updateDisplayList(unscaledWidth:Number, unscaledHeight:Number):void
 		{
 			super.updateDisplayList(unscaledWidth, unscaledHeight);
-			updateChart();
+			updateMainVolumeDrawer();
+			updateMovingAverageDrawer();
 		}
 		
-		private function updateChart():void
+		private function updateMainVolumeDrawer():void
 		{
 			valueCoordinates = getDrawingCoordinates(_dataProvider.source);
 			lineDrawer.data = valueCoordinates;
-			
-			if (controls.isMovingAvrg)
+		}
+		
+		private function updateMovingAverageDrawer():void
+		{
+			if (controls.isMovingAvrgEnabled)
 			{
 				averageCoordinates = getDrawingCoordinates(logic.getMovingAverage(_dataProvider, controls.avrgWindow));
 				averageDrawer.data = averageCoordinates;
+				averageDrawer.visible = true;
+			}
+			else
+			{
+				averageDrawer.visible = false;
 			}
 		}
 		
@@ -105,5 +114,38 @@ package org.shinyheaven.datavisualization.charting
 		{
 			logic.data = data;
 		}
+
+		protected function handleMovingAverageUserControlEvent(event:UserControlEvent):void
+		{
+			updateMovingAverageDrawer();
+		}
+		
+		override protected function partAdded(partName:String, instance:Object):void
+		{
+			super.partAdded(partName, instance);
+			switch(instance)
+			{
+				case controls:
+				{
+					controls.addEventListener(UserControlEvent.MOVING_AVERAGE_CHANGED, handleMovingAverageUserControlEvent);
+					break;
+				}
+			}
+		}
+		
+		override protected function partRemoved(partName:String, instance:Object):void
+		{
+			super.partRemoved(partName, instance);
+			
+			switch(instance)
+			{
+				case controls:
+				{
+					controls.removeEventListener(UserControlEvent.MOVING_AVERAGE_CHANGED, handleMovingAverageUserControlEvent);
+					break;
+				}
+			}
+		}
+		
 	}
 }
