@@ -1,4 +1,4 @@
-package org.shinyheaven.datavisualization.charting
+package org.shinyheaven.datavisualization.charting.calculations
 {
 	import flash.geom.Point;
 	

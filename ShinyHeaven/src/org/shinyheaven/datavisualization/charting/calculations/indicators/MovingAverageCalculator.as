@@ -1,4 +1,4 @@
-package org.shinyheaven.datavisualization.charting.indicators {
+package org.shinyheaven.datavisualization.charting.calculations.indicators {
 
     import mx.collections.ArrayCollection;
     import mx.utils.ObjectUtil;
