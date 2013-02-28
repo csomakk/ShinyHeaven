@@ -15,6 +15,7 @@ package org.shinyheaven.service {
     import mx.rpc.remoting.RemoteObject;
     import mx.utils.StringUtil;
     
+    import org.osmf.logging.Logger;
     import org.shinyheaven.news.NewsDataProvider;
     import org.shinyheaven.news.NewsItem;
     import org.shinyheaven.service.dto.IChartDataProvider;
@@ -84,7 +85,7 @@ package org.shinyheaven.service {
             var tick:OHLCUpdate = event.result as OHLCUpdate;
             if(!tick)
                 throw new Error('updateResultHandler received no "Tick" in ResultEvent.');
-            trace("Tick received:", tick);
+            ShinyHeaven.logger.info("Tick received:", tick);
             chartDataProvider.data.addItem(tick);
         }
 		
