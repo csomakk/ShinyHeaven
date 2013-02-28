@@ -27,13 +27,13 @@ package org.shinyheaven.datavisualization.charting.calculations.indicators {
                 if (i <= window - 1) {
                     if (data.length >= window) {
                         var originalTick:IHistoricalDataItem = ObjectUtil.clone(data.getItemAt(window - 1)) as OHLCUpdate;
-                        var clonedTick:IHistoricalDataItem = new HistoricalDataItem(originalTick.value, originalTick.timestamp);
+                        var clonedTick:MovingAverageDataItem = new MovingAverageDataItem(originalTick.value, originalTick.timestamp);
                         sum += clonedTick.value / window;
                         result.addItem(clonedTick);
                     }
                 } else {
                     var thisTick:IHistoricalDataItem = (data.getItemAt(i) as OHLCUpdate);
-                    var averageTick:HistoricalDataItem = new HistoricalDataItem(sum, thisTick.timestamp);
+                    var averageTick:MovingAverageDataItem = new MovingAverageDataItem(sum, thisTick.timestamp);
                     result.addItem(averageTick);
                     sum += thisTick.value / window;
                     sum -= (data.getItemAt(i - window) as OHLCUpdate).value / window;
