@@ -54,6 +54,8 @@
 				
 				logTarget.filters=["com.shinyheaven.*"];
 				
+				//log
+				
 				logTarget.level = LogEventLevel.ERROR;
 				
 				logTarget.includeDate = true;
