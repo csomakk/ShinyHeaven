@@ -11,7 +11,7 @@ package org.shinyheaven.news
 		}
 		
 		public function addNewsItem(newsItem:NewsItem):void {
-			data.addItem(newsItem);
+			data.addItemAt(newsItem, 0);
 		}
 	}
 }

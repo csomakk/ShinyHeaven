@@ -14,6 +14,10 @@
 			
 		]]>
 	</fx:Script>
-	<s:List left="10" right="10" top="58" bottom="10" dataProvider="{dataProvider}"
+	<s:List left="10" right="10" top="78" bottom="10" dataProvider="{dataProvider}"
 			itemRenderer="org.shinyheaven.news.NewsDisplayItemRenderer"/>
+	<s:TextArea left="10" right="10" top="10" height="60" 
+				text="{(dataProvider.getItemAt(0) as NewsItem).timeAndText}"
+				textAlign="left" color="{(dataProvider.getItemAt(0) as NewsItem).isBreaking ? 0xff0000 : 0x000000}" 
+				verticalAlign="middle"/>
 </s:Group>
