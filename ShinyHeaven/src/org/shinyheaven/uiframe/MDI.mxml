@@ -97,7 +97,7 @@
          */
         public function set positions(value:String):void {
             _positions = MDIPosition.parseList(value);
-            trace(StringUtil.substitute("positions: {0}", _positions));
+            ShinyHeaven.logger.error("positions: {0}", _positions);
         }
 
         private var elementPosition:int = 0;
