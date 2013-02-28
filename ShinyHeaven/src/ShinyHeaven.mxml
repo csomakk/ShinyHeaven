@@ -44,7 +44,7 @@
         private var dummies:Array = [OHLCUpdate];
         ]]>
     </fx:Script>
-    <uiframe:MDI id="mdi" positions="left 20%, bottom 20%, rest: topright">
+    <uiframe:MDI id="mdi" positions="left 20%, 2x bottom, rest: topright 10%">
         <s:Label text="foo"/>
 		<news:NewsDisplay id="newsDisplay" />
         <charting:LineChart id="lineChart"
