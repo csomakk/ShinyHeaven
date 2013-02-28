@@ -17,7 +17,7 @@ package org.shinyheaven.uiframe {
         public function MDIPosition(input:String) {
             if (REST_RE.test(input)) rest = true;
             var trimmed:Array = input.replace(REST_RE, "").split(/\s+/);
-            alignParent = MDIAlignParent.parse(trimmed[0]);
+            if (trimmed.length > 0) alignParent = MDIAlignParent.parse(trimmed[0]);
             if (trimmed.length > 1) weight = uint(trimmed[1].replace(/\s*%$/, ""));
         }
 
