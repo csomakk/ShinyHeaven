@@ -5,8 +5,7 @@
                xmlns:uiframe="org.shinyheaven.uiframe.*"
                xmlns:charting="org.shinyheaven.datavisualization.charting.*" 
 			   xmlns:news="org.shinyheaven.news.*"
-			   initialize="application1_initializeHandler(event)"
-			   
+			   preinitialize="application1_initializeHandler(event)"
 			   >
     <fx:Declarations>
         <p:ContextBuilder config="{Config}"/>
