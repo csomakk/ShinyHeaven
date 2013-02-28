@@ -3,7 +3,11 @@
                xmlns:s="library://ns.adobe.com/flex/spark"
                xmlns:p="http://www.spicefactory.org/parsley"
                xmlns:uiframe="org.shinyheaven.uiframe.*"
-               xmlns:charting="org.shinyheaven.datavisualization.charting.*" xmlns:news="org.shinyheaven.news.*">
+               xmlns:charting="org.shinyheaven.datavisualization.charting.*" 
+			   xmlns:news="org.shinyheaven.news.*"
+			   initialize="application1_initializeHandler(event)"
+			   
+			   >
     <fx:Declarations>
         <p:ContextBuilder config="{Config}"/>
         <p:Configure/>
@@ -11,6 +15,7 @@
     <fx:Script>
         <![CDATA[
 			import mx.binding.utils.BindingUtils;
+			import mx.events.FlexEvent;
 			import mx.logging.ILogger;
 			import mx.logging.Log;
 			import mx.logging.LogEventLevel;
@@ -34,16 +39,21 @@
 			[Inject]
 			[Bindable]
 			public var newsData:INewsDataProvider;
-	
+			
+			/**
+			 * This is for making Flash recognise the [RemoteClass] metadata on these classes.
+			 */
+			private var dummies:Array = [OHLCUpdate];
+			
+			
 	        [Init]
 	        public function onInit():void 
 			{
-				configureLogger();
 				addBindings();
 	        }
 			
 			public function addBindings():void{
-				logger.info("ShinyHeaven.onInit: binding {0} suff", dummies.length)
+				logger.error("ShinyHeaven.onInit: binding {0} suff", dummies.length)
 				BindingUtils.bindProperty(lineChart, 'dataProvider', chartData, 'data');
 				BindingUtils.bindProperty(flexChart, 'dataProvider', chartData, 'data');
 				BindingUtils.bindProperty(newsDisplay, 'dataProvider', newsData, 'data');
@@ -56,7 +66,7 @@
 				
 				//log
 				
-				logTarget.level = LogEventLevel.ERROR;
+				logTarget.level = LogEventLevel.INFO;
 				
 				logTarget.includeDate = true;
 				logTarget.includeTime = true;
@@ -66,13 +76,12 @@
 				Log.addTarget(logTarget);
 			}
 			
-	
-	        /**
-	         * This is for making Flash recognise the [RemoteClass] metadata on these classes.
-	         */
-	        private var dummies:Array = [OHLCUpdate];
+			protected function application1_initializeHandler(event:FlexEvent):void
+			{
+				configureLogger();
+			}
 			
-        ]]>
+		]]>
     </fx:Script>
     <uiframe:MDI id="mdi" positions="left 20%, 3x bottom 30%">
 		<news:NewsDisplay id="newsDisplay" />
