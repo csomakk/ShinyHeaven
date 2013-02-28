@@ -74,8 +74,7 @@
 			
         ]]>
     </fx:Script>
-    <uiframe:MDI id="mdi" positions="left 20%, bottom 20%, rest: topright">
-        <s:Label text="foo"/>
+    <uiframe:MDI id="mdi" positions="left 20%, 3x bottom 30%">
 		<news:NewsDisplay id="newsDisplay" />
         <charting:LineChart id="lineChart"
                                      width="100%" height="100%"

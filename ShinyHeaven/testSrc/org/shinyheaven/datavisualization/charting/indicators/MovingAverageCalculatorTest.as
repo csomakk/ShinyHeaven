@@ -4,6 +4,7 @@ import mx.collections.ArrayCollection;
 import org.flexunit.assertThat;
 
 import org.flexunit.asserts.assertEquals;
+    import org.shinyheaven.datavisualization.charting.calculations.indicators.MovingAverageCalculator;
     import org.shinyheaven.service.dto.IHistoricalDataItem;
 
     import org.shinyheaven.service.dto.OHLCUpdate;

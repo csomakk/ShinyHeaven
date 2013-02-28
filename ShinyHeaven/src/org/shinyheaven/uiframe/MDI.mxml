@@ -14,6 +14,7 @@
         import mx.core.IVisualElement;
         import mx.core.UIComponent;
         import mx.events.ResizeEvent;
+        import mx.utils.StringUtil;
 
         import org.shinyheaven.service.CommunicationModule;
 
@@ -86,8 +87,17 @@
 
         private var _positions:Vector.<MDIPosition>;
 
+        /** Set positions of children. The syntax (in EBNF) is the following:
+         *  <positions>     ::= [<modifier>] <alignment> [<percentage>]
+         *  <modifier>      ::= <multiplier> | <rest>
+         *  <multiplier>    ::= <number>"x"
+         *  <rest>          ::= "rest:"
+         *  <alignment>     ::= "top" | "right" | "bottom" | "left"
+         *  <percentage>    ::= <number>"%"
+         */
         public function set positions(value:String):void {
             _positions = MDIPosition.parseList(value);
+            trace(StringUtil.substitute("positions: {0}", _positions));
         }
 
         private var elementPosition:int = 0;
@@ -99,14 +109,11 @@
             addElement(d);
             d.addEventListener(MouseEvent.MOUSE_DOWN, documentMouseDown);
             dict[element] = d;
-            if (_positions.length > elementPosition) {
-                var pos:MDIPosition = _positions[elementPosition];
-                dockDocument(element, pos.direction);
-                if (pos.direction == TOP || pos.direction == BOTTOM) d.percentHeight = pos.weight;
-                if (pos.direction == LEFT || pos.direction == RIGHT) d.percentWidth = pos.weight;
-            } else {
-                // TODO do for 'rest:'
-            }
+            var pos:MDIPosition = (_positions.length > elementPosition)? _positions[elementPosition] : MDIPosition.getRest(_positions);
+            dockDocument(element, pos.direction);
+            //d[([TOP, BOTTOM].indexOf(pos.direction) != -1)? 'percentHeight' : 'percentWidth'] = pos.weight;
+            if (pos.direction == TOP || pos.direction == BOTTOM) d.percentHeight = pos.weight;
+            if (pos.direction == LEFT || pos.direction == RIGHT) d.percentWidth = pos.weight;
             rearrange();
             elementPosition++;
             return d;
