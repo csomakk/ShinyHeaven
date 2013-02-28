@@ -51,5 +51,11 @@ package org.shinyheaven.news
 		{
 			return _isBreaking;
 		}
+		
+		[Bindable]
+		public function set isBreaking(value:Boolean):void
+		{
+			_isBreaking = value;
+		}
 	}
 }
