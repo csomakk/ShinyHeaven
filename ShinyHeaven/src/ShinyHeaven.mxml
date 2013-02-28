@@ -47,9 +47,9 @@
     <uiframe:MDI id="mdi">
         <s:Label text="foo"/>
 		<news:NewsDisplay id="newsDisplay" />
-        <charting:LineChartComponent id="lineChart"
+        <charting:LineChart id="lineChart"
                                      width="100%" height="100%"
                                      skinClass="org.shinyheaven.datavisualization.charting.skins.DefaultLineChartSkin"/>
-        <charting:FlexLineChartView id="flexChart" width="100%" height="100%" />
+        <charting:FlexLineChart id="flexChart" width="100%" height="100%" />
     </uiframe:MDI>
 </s:Application>

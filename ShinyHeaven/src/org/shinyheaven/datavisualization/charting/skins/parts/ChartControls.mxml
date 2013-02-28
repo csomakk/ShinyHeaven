@@ -4,16 +4,15 @@
 		xmlns:mx="library://ns.adobe.com/flex/mx"
 		height.closed="16"
 		width.closed="100%" width.opened="100%">
-		
+	
+	<fx:Metadata>
+		[HostComponent("org.shinyheaven.datavisualization.charting.LineChartUIControls")]
+	</fx:Metadata>
+	
 	<s:states>
 		<s:State name="closed" />
 		<s:State name="opened" />
 	</s:states>
-	
-	<fx:Declarations>
-		<fx:Boolean id="isMovingAvrg">false</fx:Boolean>
-		<fx:int id="avrgWindow">20</fx:int>
-	</fx:Declarations>
 	
 	<s:rollOver>
 		<![CDATA[
@@ -65,10 +64,10 @@
 		</s:layout>
 		<s:FormHeading label="Moving average" />
 		<s:FormItem label="Show moving average">
-			<s:CheckBox id="isMovingAverageCB" change="{isMovingAvrg = isMovingAverageCB.selected}" />
+			<s:CheckBox id="isMovingAverageCheckBox" />
 		</s:FormItem>
-		<s:FormItem label="Average window" enabled="{isMovingAverageCB.selected}">
-			<s:HSlider id="avrgWindowSlider" minimum="2" maximum="40" value="20" stepSize="1" changeEnd="{avrgWindow = avrgWindowSlider.value}" />
+		<s:FormItem label="Average window" enabled="{isMovingAverageCheckBox.selected}">
+			<s:HSlider id="movingAvrgWindow" minimum="2" maximum="40" value="20" stepSize="1" />
 		</s:FormItem>
 	</s:Form>
 	
