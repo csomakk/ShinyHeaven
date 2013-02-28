@@ -15,7 +15,6 @@ package org.shinyheaven.uiframe {
         [Test]
         public function testParseList():void {
             var result:Vector.<MDIPosition> = MDIPosition.parseList(" \ttop  50%   ,   2x right 75 %\t,  rest :botTOMlEft");
-            new Array([1,2,3]).forEach(function(e:int,... rest):void {trace(e)}); // TODO remove
             assertEquals(result.length, 4);
             assertTrue(result[0].alignParent.isTop());
             assertEquals(result[0].weight, 50);
