@@ -1,4 +1,4 @@
-package org.shinyheaven.datavisualization.charting.indicators {
+package org.shinyheaven.datavisualization.charting.vo {
     import org.shinyheaven.service.dto.HistoricalDataItem;
 
     /**
