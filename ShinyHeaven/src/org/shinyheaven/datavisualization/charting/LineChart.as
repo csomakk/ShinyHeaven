@@ -108,7 +108,6 @@ package org.shinyheaven.datavisualization.charting
 				getDataToVisualize(_dataProvider.toArray(), initAmountOfData)
 				);
 			
-			
 			updateMainVolumeDrawer();
 			updateMovingAverageDrawer();
 		}
@@ -147,11 +146,7 @@ package org.shinyheaven.datavisualization.charting
 		
 		private function getDataToVisualize(data:Array, amount:int):Array
 		{
-			
-			var dbgData01:Array = _dataProvider.toArray().slice(data.length-amount, data.length-1);
-			trace('amount: ' + _dataProvider.length + ' / ' + amount);
-			var dbgData02:Array = _dataProvider.source;
-			return dbgData01;
+			return data.slice(data.length-amount, data.length-1);
 		}
 		
 		protected function handleMovingAverageUserControlEvent(event:UserControlEvent):void
