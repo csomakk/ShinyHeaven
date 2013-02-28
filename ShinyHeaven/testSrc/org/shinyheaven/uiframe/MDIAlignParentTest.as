@@ -5,10 +5,7 @@
  * Time: 3:15 PM
  */
 package org.shinyheaven.uiframe {
-    import mx.utils.StringUtil;
-
     import org.flexunit.asserts.assertFalse;
-
     import org.flexunit.asserts.assertTrue;
 
     public class MDIAlignParentTest {

@@ -23,8 +23,8 @@ package org.shinyheaven.uiframe {
         }
 
         /**
-         * This can parse MDI child position descriptions, in the following format:
-         * @param input for example "left 20%, 3x bottom, rest: topright 10%"
+         * This parses MDI child position descriptions.
+         * @param input String
          * @return a {@link Vector} containing the parsed {@link MDIPosition}s
          */
         public static function parseList(input:String):Vector.<MDIPosition> {
@@ -48,30 +48,8 @@ package org.shinyheaven.uiframe {
             return MDI.UNDOCKED;
         }
 
-        internal function get directionAsString():String {
-            switch (direction) {
-                case MDI.TOP: {
-                    return "TOP";
-                    break;
-                }
-                case MDI.BOTTOM: {
-                    return "BOTTOM";
-                    break;
-                }
-                case MDI.RIGHT: {
-                    return "RIGHT";
-                    break;
-                }
-                case MDI.LEFT: {
-                    return "LEFT";
-                    break;
-                }
-            }
-            return "";
-        }
-
         public function toString():String {
-            return StringUtil.substitute("<MDIPosition alignParent={0} weight={1} rest={2}/>", directionAsString, weight, rest);
+            return StringUtil.substitute("<MDIPosition alignParent={0} weight={1} rest={2}/>", alignParent.toString(), weight, rest);
         }
 
         public static function getRest(_positions:Vector.<MDIPosition>):MDIPosition {

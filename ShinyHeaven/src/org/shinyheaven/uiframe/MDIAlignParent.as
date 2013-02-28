@@ -55,7 +55,12 @@ package org.shinyheaven.uiframe {
         }
 
         public function toString():String {
-            return StringUtil.substitute("top:{0} right:{1} bottom:{2} left:{3}", _top, _right, _bottom, _left);
+            var result:String = "";
+            if (_top)       result += "top";
+            if (_bottom)    result += "bottom";
+            if (_right)     result += "right";
+            if (_left)      result += "left";
+            return result;
         }
     }
 }

@@ -5,8 +5,6 @@
  * Time: 3:13 PM
  */
 package org.shinyheaven.uiframe {
-    import mx.utils.StringUtil;
-
     import org.flexunit.asserts.assertEquals;
     import org.flexunit.asserts.assertFalse;
     import org.flexunit.asserts.assertTrue;
