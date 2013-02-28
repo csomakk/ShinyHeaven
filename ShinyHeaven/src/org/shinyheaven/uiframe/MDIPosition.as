@@ -73,5 +73,10 @@ package org.shinyheaven.uiframe {
         public function toString():String {
             return StringUtil.substitute("<MDIPosition alignParent={0} weight={1} rest={2}/>", directionAsString, weight, rest);
         }
+
+        public static function getRest(_positions:Vector.<MDIPosition>):MDIPosition {
+            for each (var e:MDIPosition in _positions) if (e.rest) return e;
+            return new MDIPosition("rest: top");
+        }
     }
 }

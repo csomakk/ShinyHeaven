@@ -101,14 +101,10 @@
             addElement(d);
             d.addEventListener(MouseEvent.MOUSE_DOWN, documentMouseDown);
             dict[element] = d;
-            if (_positions.length > elementPosition) {
-                var pos:MDIPosition = _positions[elementPosition];
-                dockDocument(element, pos.direction);
-                if (pos.direction == TOP || pos.direction == BOTTOM) d.percentHeight = pos.weight;
-                if (pos.direction == LEFT || pos.direction == RIGHT) d.percentWidth = pos.weight;
-            } else {
-                // TODO do for 'rest:'
-            }
+            var pos:MDIPosition = (_positions.length > elementPosition)? _positions[elementPosition] : MDIPosition.getRest(_positions);
+            dockDocument(element, pos.direction);
+            if (pos.direction == TOP || pos.direction == BOTTOM) d.percentHeight = pos.weight;
+            if (pos.direction == LEFT || pos.direction == RIGHT) d.percentWidth = pos.weight;
             rearrange();
             elementPosition++;
             return d;
