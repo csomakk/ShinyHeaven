@@ -88,12 +88,12 @@
         private var _positions:Vector.<MDIPosition>;
 
         /** Set positions of children. The syntax (in EBNF) is the following:
-         *  <positions> ::= [<modifier>] <alignment> [<percentage>]
-         *  <modifier> ::= <multiplier> | <rest>
-         *  <multiplier> ::= <number>"x"
-         *  <rest> ::= "rest:"
-         *  <alignment> ::= "top" | "right" | "bottom" | "left"
-         *  <percentage> ::= <number>"%"
+         *  <positions>     ::= [<modifier>] <alignment> [<percentage>]
+         *  <modifier>      ::= <multiplier> | <rest>
+         *  <multiplier>    ::= <number>"x"
+         *  <rest>          ::= "rest:"
+         *  <alignment>     ::= "top" | "right" | "bottom" | "left"
+         *  <percentage>    ::= <number>"%"
          */
         public function set positions(value:String):void {
             _positions = MDIPosition.parseList(value);
