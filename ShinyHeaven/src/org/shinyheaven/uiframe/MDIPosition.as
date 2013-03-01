@@ -61,7 +61,7 @@ package org.shinyheaven.uiframe {
 
         public static function getRest(_positions:Vector.<MDIPosition>):MDIPosition {
             for each (var e:MDIPosition in _positions) if (e.rest) return e;
-            return new MDIPosition("rest: top");
+            return new MDIPosition("rest: undocked");
         }
     }
 }

@@ -93,7 +93,7 @@
          *  modifier      ::= multiplier | rest
          *  multiplier    ::= number"x"
          *  rest          ::= "rest:"
-         *  alignment     ::= "top" | "right" | "bottom" | "left"
+         *  alignment     ::= "top" | "right" | "bottom" | "left" | "undocked"
          *  percentage    ::= number"%"
          * </PRE>
          */
@@ -113,7 +113,6 @@
             dict[element] = d;
             var pos:MDIPosition = (_positions.length > elementPosition)? _positions[elementPosition] : MDIPosition.getRest(_positions);
             dockDocument(element, pos.direction);
-            //d[([TOP, BOTTOM].indexOf(pos.direction) != -1)? 'percentHeight' : 'percentWidth'] = pos.weight;
             if (pos.direction == TOP || pos.direction == BOTTOM) d.percentHeight = pos.weight;
             if (pos.direction == LEFT || pos.direction == RIGHT) d.percentWidth = pos.weight;
             rearrange();

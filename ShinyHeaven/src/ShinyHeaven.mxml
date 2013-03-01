@@ -82,7 +82,7 @@
 			
 		]]>
     </fx:Script>
-    <uiframe:MDI id="mdi" positions="left 20%, 3x bottom 30%">
+    <uiframe:MDI id="mdi" positions="left 20%, 1x bottom 20%">
 		<news:NewsDisplay id="newsDisplay" />
         <charting:LineChart id="lineChart"
                                      width="100%" height="100%"
