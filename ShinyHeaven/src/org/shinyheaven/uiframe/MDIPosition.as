@@ -12,12 +12,12 @@ package org.shinyheaven.uiframe {
         public var weight:uint = 100;
         public var rest:Boolean = false;
 
-        private static const REST_RE:RegExp = /^rest\s*:\s*/i;
-        private static const XTIMES_RE:RegExp = /^(\d+)x\s+/i;
+        private static const REST_REGEXP:RegExp = /^rest\s*:\s*/i;
+        private static const XTIMES_REGEXP:RegExp = /^(\d+)x\s+/i;
 
         public function MDIPosition(input:String) {
-            if (REST_RE.test(input)) rest = true;
-            var trimmed:Array = input.replace(REST_RE, "").split(/\s+/);
+            if (REST_REGEXP.test(input)) rest = true;
+            var trimmed:Array = input.replace(REST_REGEXP, "").split(/\s+/);
             if (trimmed.length > 0) alignParent = MDIAlignParent.parse(trimmed[0]);
             if (trimmed.length > 1) weight = uint(trimmed[1].replace(/\s*%$/, ""));
         }
@@ -29,22 +29,29 @@ package org.shinyheaven.uiframe {
          */
         public static function parseList(input:String):Vector.<MDIPosition> {
             var result:Vector.<MDIPosition> = new Vector.<MDIPosition>();
-            for each (var e:String in input.split(/\s*,\s*/).map(function(f:String, ... rest):String { return StringUtil.trim(f); })) {
-                var h:uint = 1;
-                if (XTIMES_RE.test(e)) h = uint(e.match(XTIMES_RE)[1]);
-                var g:String = e.replace(XTIMES_RE, "");
-                for (var i:uint = 0; i < h; i++) {
-                    result.push(new MDIPosition(g));
+            var repeatCount:uint;
+
+            for each (var e:String in input.split(/\s*,\s*/).map(function(f:String, ... _):String { return StringUtil.trim(f); })) {
+                if (XTIMES_REGEXP.test(e)) {
+                    repeatCount = uint(e.match(XTIMES_REGEXP)[1]);
+                } else {
+                    repeatCount = 1;
+                }
+
+                var expression:String = e.replace(XTIMES_REGEXP, "");
+
+                for (var i:uint = 0; i < repeatCount; i++) {
+                    result.push(new MDIPosition(expression));
                 }
             }
             return result;
         }
 
         public function get direction():int {
-            if (alignParent.isTop()) return MDI.TOP;
+            if (alignParent.isTop())    return MDI.TOP;
             if (alignParent.isBottom()) return MDI.BOTTOM;
-            if (alignParent.isRight()) return MDI.RIGHT;
-            if (alignParent.isLeft()) return MDI.LEFT;
+            if (alignParent.isRight())  return MDI.RIGHT;
+            if (alignParent.isLeft())   return MDI.LEFT;
             return MDI.UNDOCKED;
         }
 
