@@ -3,18 +3,18 @@
 		xmlns:s="library://ns.adobe.com/flex/spark" 
 		xmlns:mx="library://ns.adobe.com/flex/mx" 
 		xmlns:parts="org.shinyheaven.datavisualization.charting.skins.parts.*" 
-		xmlns:charting="org.shinyheaven.datavisualization.charting.*">
+		xmlns:charting="org.shinyheaven.datavisualization.charting.*" xmlns:skins="org.shinyheaven.datavisualization.charting.skins.*" xmlns:drawers="org.shinyheaven.datavisualization.charting.drawers.*">
 	<!-- host component -->
 	<fx:Metadata>
 		[HostComponent("org.shinyheaven.datavisualization.charting.LineChart")]
 	</fx:Metadata>
 	
-	<parts:BackgroundDrawer width="100%" height="100%" />
+	<skins:BackgroundDrawer width="100%" height="100%" />
 	
-	<parts:LineDrawer id="averageDrawer"
+	<drawers:LineDrawer id="averageDrawer"
 					  width="100%" height="100%" lineColor="#F53682"
 					  left="0.5" right="0.5" bottom="0.5" top="0.5" />
-	<parts:LineDrawer id="lineDrawer" isFill="true"
+	<drawers:LineDrawer id="lineDrawer" isFill="true"
 					  width="100%" height="100%" lineColor="#454545"
 					  fillAlpha=".1" fillColor="#144D70"
 					  left="0.5" right="0.5" bottom="0.5" top="0.5" />

@@ -1,4 +1,4 @@
-package org.shinyheaven.datavisualization.charting.skins.parts
+package org.shinyheaven.datavisualization.charting.drawers
 {
 	import flash.display.CapsStyle;
 	import flash.display.Graphics;

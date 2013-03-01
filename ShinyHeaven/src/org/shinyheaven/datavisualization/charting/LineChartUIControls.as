@@ -7,7 +7,7 @@ package org.shinyheaven.datavisualization.charting
 	import spark.components.supportClasses.SkinnableComponent;
 	
 	import org.shinyheaven.datavisualization.charting.events.UserControlEvent;
-	import org.shinyheaven.datavisualization.charting.skins.parts.ChartControls;
+	import org.shinyheaven.datavisualization.charting.skins.ChartControls;
 	
 	public class LineChartUIControls extends SkinnableComponent
 	{

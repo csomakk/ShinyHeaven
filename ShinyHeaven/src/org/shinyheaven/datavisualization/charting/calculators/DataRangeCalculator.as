@@ -1,4 +1,4 @@
-package org.shinyheaven.datavisualization.charting.calculations
+package org.shinyheaven.datavisualization.charting.calculators
 {
 	
 	import org.shinyheaven.datavisualization.charting.vo.DataRange;

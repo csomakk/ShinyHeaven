@@ -3,8 +3,9 @@
 @namespace mx "library://ns.adobe.com/flex/mx";
 
 @namespace parts "org.shinyheaven.datavisualization.charting.skins.parts.*";
+@namespace drawers "org.shinyheaven.datavisualization.charting.drawers.*";
 
-parts|LineDrawer
+drawers|LineDrawer
 {
 
 }

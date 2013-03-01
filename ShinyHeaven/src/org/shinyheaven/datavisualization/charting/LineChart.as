@@ -5,12 +5,12 @@ package org.shinyheaven.datavisualization.charting
 	
 	import spark.components.supportClasses.SkinnableComponent;
 	
-	import org.shinyheaven.datavisualization.charting.calculations.DataToCoordinates;
-	import org.shinyheaven.datavisualization.charting.calculations.indicators.MovingAverageCalculator;
+	import org.shinyheaven.datavisualization.charting.calculators.DataToCoordinates;
+	import org.shinyheaven.datavisualization.charting.calculators.indicators.MovingAverageCalculator;
 	import org.shinyheaven.datavisualization.charting.events.UserControlEvent;
-	import org.shinyheaven.datavisualization.charting.skins.parts.LineDrawer;
+	import org.shinyheaven.datavisualization.charting.drawers.LineDrawer;
 	import org.shinyheaven.datavisualization.charting.vo.DataRange;
-	import org.shinyheaven.datavisualization.charting.calculations.DataRangeCalculator;
+	import org.shinyheaven.datavisualization.charting.calculators.DataRangeCalculator;
 	
 	public class LineChart extends SkinnableComponent
 	{

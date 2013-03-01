@@ -12,7 +12,7 @@
 	
 	<fx:Script>
 		<![CDATA[
-			import org.shinyheaven.datavisualization.charting.calculations.DataRangeCalculator;
+			import org.shinyheaven.datavisualization.charting.calculators.DataRangeCalculator;
 			import mx.collections.ArrayCollection;
 			import mx.events.CollectionEvent;
 			
