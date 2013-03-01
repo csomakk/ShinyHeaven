@@ -15,10 +15,10 @@ package org.shinyheaven.uiframe {
 
         public static function parse(input:String):MDIAlignParent {
             var result:MDIAlignParent = new MDIAlignParent();
-            if (/^top/i.test(input)) result._top = true;
+            if (/^top/i.test(input))    result._top = true;
             if (/^bottom/i.test(input)) result._bottom = true;
-            if (/right$/i.test(input)) result._right = true;
-            if (/left$/i.test(input)) result._left = true;
+            if (/right$/i.test(input))  result._right = true;
+            if (/left$/i.test(input))   result._left = true;
             return result;
         }
 
@@ -54,13 +54,17 @@ package org.shinyheaven.uiframe {
             return _top && _left;
         }
 
+        public function isUndocked():Boolean {
+            return !_top && !_right && !_bottom && !_left;
+        }
+
         public function toString():String {
             var result:String = "";
             if (_top)       result += "top";
             if (_bottom)    result += "bottom";
             if (_right)     result += "right";
             if (_left)      result += "left";
-            return result;
+            return (result == "")? "undocked" : result;
         }
     }
 }
