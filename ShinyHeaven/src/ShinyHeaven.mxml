@@ -84,9 +84,9 @@
     </fx:Script>
     <uiframe:MDI id="mdi" positions="left 20%, 1x bottom 20%">
 		<news:NewsDisplay id="newsDisplay" />
+        <charting:FlexLineChart id="flexChart" width="100%" height="100%" />
         <charting:LineChart id="lineChart"
                                      width="100%" height="100%"
                                      skinClass="org.shinyheaven.datavisualization.charting.skins.DefaultLineChartSkin"/>
-        <charting:FlexLineChart id="flexChart" width="100%" height="100%" />
     </uiframe:MDI>
 </s:Application>
