@@ -6,7 +6,5 @@
  */
 package org.shinyheaven.uiframe.controlbar {
     public class AddDocumentMsg {
-        public function AddDocumentMsg() {
-        }
     }
 }

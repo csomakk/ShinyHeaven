@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:Application xmlns:fx="http://ns.adobe.com/mxml/2009"
                xmlns:s="library://ns.adobe.com/flex/spark"
-               xmlns:p="http://www.spicefactory.org/parsley"
+               xmlns:parsley="http://www.spicefactory.org/parsley"
                xmlns:uiframe="org.shinyheaven.uiframe.*"
                xmlns:charting="org.shinyheaven.datavisualization.charting.*" 
 			   xmlns:news="org.shinyheaven.news.*"
@@ -9,8 +9,11 @@
 			   preinitialize="application1_initializeHandler(event)"
 			   >
     <fx:Declarations>
-        <p:ContextBuilder config="{Config}"/>
-        <p:Configure/>
+        <parsley:ContextBuilder>
+            <parsley:ViewSettings autowireComponents="true" />
+            <parsley:FlexConfig type="{Config}" />
+        </parsley:ContextBuilder>
+        <parsley:Configure />
     </fx:Declarations>
     <fx:Script>
         <![CDATA[
@@ -78,7 +81,7 @@
         ]]>
     </fx:Script>
     <s:controlBarContent>
-        <uiframe-controlbar:AddButton />
+        <uiframe-controlbar:AddDocumentButton />
     </s:controlBarContent>
     <uiframe:MDI id="mdi" positions="left 20%, 1x bottom 20%">
 		<news:NewsDisplay id="newsDisplay" />

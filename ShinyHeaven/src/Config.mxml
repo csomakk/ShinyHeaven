@@ -3,13 +3,17 @@
          xmlns:fx="http://ns.adobe.com/mxml/2009"
          xmlns:service="org.shinyheaven.service.*" 
 		 xmlns:news="org.shinyheaven.news.*"
-         xmlns:documentmanager="org.shinyheaven.documentmanager.*"
          xmlns:adddocument="org.shinyheaven.uiframe.adddocument.*">
     <fx:Declarations>
         <service:CommunicationModule/>
         <service:ChartDataProvider/>
 		<news:NewsDataProvider />
-        <documentmanager:DocumentManager />
         <adddocument:AddDocumentPopup />
+        <View type="{AddDocumentButton}" />
+        <Object type="{DocumentManager}" />
     </fx:Declarations>
+    <fx:Script><![CDATA[
+        import org.shinyheaven.documentmanager.DocumentManager;
+        import org.shinyheaven.uiframe.controlbar.AddDocumentButton;
+        ]]></fx:Script>
 </Objects>
