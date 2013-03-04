@@ -16,7 +16,7 @@ package org.shinyheaven.datavisualization.charting
 	{
 		
 		[SkinPart(required="true")]
-		public var lineDrawer:LineDrawer;
+		public var valueDrawer:LineDrawer;
 		[SkinPart(required="true")]
 		public var averageDrawer:LineDrawer;
 		[SkinPart(required="true")]
@@ -88,10 +88,10 @@ package org.shinyheaven.datavisualization.charting
 		private function getDrawingCoordinates(data:Array):Array
 		{
 			var result:Array;
-			if (lineDrawer && rangeForRendering)
+			if (valueDrawer && rangeForRendering)
 			{
 				result = DataToCoordinates.sampleDataAndGetPoints(
-					lineDrawer.width, lineDrawer.height, 
+					valueDrawer.width, valueDrawer.height, 
 					data, rangeForRendering.minVal, rangeForRendering.maxVal
 				);
 			}
@@ -124,7 +124,7 @@ package org.shinyheaven.datavisualization.charting
 			valueCoordinates = getDrawingCoordinates(
 				getDataToVisualize(_dataProvider.toArray(), initAmountOfData)
 			);
-			lineDrawer.data = valueCoordinates;
+			valueDrawer.data = valueCoordinates;
 		}
 		
 		private function updateMovingAverageDrawer():void
