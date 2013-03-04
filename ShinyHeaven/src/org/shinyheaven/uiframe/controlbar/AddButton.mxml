@@ -2,6 +2,7 @@
 <s:Button xmlns:fx="http://ns.adobe.com/mxml/2009"
           xmlns:s="library://ns.adobe.com/flex/spark"
           xmlns:parsley="http://www.spicefactory.org/parsley"
+          chromeColor="yellow"
           label="+"
           click="onClick(event)">
     <fx:Script><![CDATA[

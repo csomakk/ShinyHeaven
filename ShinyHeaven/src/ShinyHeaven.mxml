@@ -50,7 +50,6 @@
         }
 
         public function addBindings():void {
-            logger.error("ShinyHeaven.onInit: binding {0} suff", dummies.length)
             BindingUtils.bindProperty(lineChart, 'dataProvider', chartData, 'data');
             BindingUtils.bindProperty(flexChart, 'dataProvider', chartData, 'data');
             BindingUtils.bindProperty(newsDisplay, 'dataProvider', newsData, 'data');
@@ -79,7 +78,7 @@
         ]]>
     </fx:Script>
     <s:controlBarContent>
-        <uiframe-controlbar:AddButton id="addButton" />
+        <uiframe-controlbar:AddButton />
     </s:controlBarContent>
     <uiframe:MDI id="mdi" positions="left 20%, 1x bottom 20%">
 		<news:NewsDisplay id="newsDisplay" />

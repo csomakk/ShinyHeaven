@@ -5,14 +5,25 @@
                title="Add a New View"
                close="onClose(event)">
     <fx:Script><![CDATA[
+        import org.spicefactory.parsley.core.context.Context;
+
         [MessageDispatcher]
         public var dispatcher:Function;
+
+        [Inject]
+        public var context:Context;
+
+        [Init]
+        public function init():void {
+            context.viewManager.addViewRoot(this);
+        }
 
         protected function onClose(event:Event):void {
             dispatcher(new AddDocumentPopupClosed(this));
         }
-    ]]></fx:Script>
+        ]]></fx:Script>
     <fx:Declarations>
         <parsley:Configure />
+        <!-- parsley:Configure / -->
     </fx:Declarations>
 </s:TitleWindow>

@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009"
+         xmlns:s="library://ns.adobe.com/flex/spark"
+         addedToStage="Configure.view(this).execute();">
+    <s:VGroup paddingTop="8"
+              paddingRight="8"
+              paddingBottom="8"
+              paddingLeft="8"
+              gap="8">
+        <s:ComboBox prompt="Select an Instrument">
+            <s:dataProvider>
+                <s:ArrayCollection>
+                    <fx:String>XAUUSD</fx:String>
+                    <fx:String>XAGUSD</fx:String>
+                    <fx:String>EURUSD</fx:String>
+                </s:ArrayCollection>
+            </s:dataProvider>
+        </s:ComboBox>
+        <s:Button label="Next..." right="0" click="onClick(event)"/>
+    </s:VGroup>
+    <fx:Script><![CDATA[
+        import org.spicefactory.parsley.view.Configure;
+
+        [MessageDispatcher]
+        public var dispatcher:Function;
+
+        protected function onClick(event:MouseEvent):void {
+            trace("Bashó" + dispatcher);
+        }
+        ]]></fx:Script>
+    <fx:Declarations>
+        <!-- parsley:Configure / -->
+    </fx:Declarations>
+</s:Group>

@@ -5,11 +5,15 @@
  * Time: 2:01 PM
  */
 package org.shinyheaven.documentmanager {
+    import flash.display.DisplayObject;
+
+    import mx.core.FlexGlobals;
     import mx.managers.PopUpManager;
 
     import org.shinyheaven.uiframe.adddocument.AddDocumentPopup;
     import org.shinyheaven.uiframe.adddocument.AddDocumentPopupClosed;
     import org.shinyheaven.uiframe.controlbar.AddDocumentMsg;
+    import org.shinyheaven.uiframe.instrumentselector.InstrumentSelector;
 
     /**
      * Singleton.
@@ -20,7 +24,9 @@ package org.shinyheaven.documentmanager {
 
         [MessageHandler]
         public function onAddDocument(message:AddDocumentMsg):void {
-            PopUpManager.addPopUp(addDocumentPopup, message.container, true);
+            addDocumentPopup.removeAllElements();
+            addDocumentPopup.addElement(new InstrumentSelector());
+            PopUpManager.addPopUp(addDocumentPopup, FlexGlobals.topLevelApplication as DisplayObject, true);
             //context.viewManager.addViewRoot(popup as DisplayObject);
             PopUpManager.centerPopUp(addDocumentPopup);
         }
