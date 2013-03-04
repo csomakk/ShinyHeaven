@@ -5,12 +5,12 @@ package org.shinyheaven.datavisualization.charting
 	
 	import spark.components.supportClasses.SkinnableComponent;
 	
+	import org.shinyheaven.datavisualization.charting.calculators.DataRangeCalculator;
 	import org.shinyheaven.datavisualization.charting.calculators.DataToCoordinates;
 	import org.shinyheaven.datavisualization.charting.calculators.indicators.MovingAverageCalculator;
-	import org.shinyheaven.datavisualization.charting.events.UserControlEvent;
 	import org.shinyheaven.datavisualization.charting.drawers.LineDrawer;
+	import org.shinyheaven.datavisualization.charting.events.UserControlEvent;
 	import org.shinyheaven.datavisualization.charting.vo.DataRange;
-	import org.shinyheaven.datavisualization.charting.calculators.DataRangeCalculator;
 	
 	public class LineChart extends SkinnableComponent
 	{
@@ -27,6 +27,7 @@ package org.shinyheaven.datavisualization.charting
 		private var valueCoordinates:Array = [];
 		private var averageCoordinates:Array = [];
 		
+		private var initAmountOfDataEnabled:Boolean = false;
 		private var initAmountOfData:int;
 		
 		private var rangeForRendering:DataRange;
@@ -43,25 +44,9 @@ package org.shinyheaven.datavisualization.charting
 		}
 		public function set dataProvider(value:ArrayCollection):void
 		{
-			if (_dataProvider !== null && value !== null)
-			{
-				// SWAP DATA
-				_dataProvider.removeEventListener(CollectionEvent.COLLECTION_CHANGE, handleDataChanged);
-				_dataProvider = value;
-				_dataProvider.addEventListener(CollectionEvent.COLLECTION_CHANGE, handleDataChanged);
-			}
-			else if (value !== null)
-			{
-				// INIT DATA
-				_dataProvider = value;
-				_dataProvider.addEventListener(CollectionEvent.COLLECTION_CHANGE, handleDataChanged);
-			}
-			else
-			{
-				// NULL DATA
-				_dataProvider.removeEventListener(CollectionEvent.COLLECTION_CHANGE, handleDataChanged);
-				_dataProvider = value;
-			}
+			_dataProvider.removeEventListener(CollectionEvent.COLLECTION_CHANGE, handleDataChanged);
+			_dataProvider = value;
+			_dataProvider.addEventListener(CollectionEvent.COLLECTION_CHANGE, handleDataChanged);
 
 			invalidateProperties();
 		}
@@ -69,7 +54,7 @@ package org.shinyheaven.datavisualization.charting
 		private function getInitAmountOFData():int
 		{
 			var result:int;
-			if (initAmountOfData < 1)
+			if (initAmountOfData < 1 || !initAmountOfDataEnabled)
 			{
 				result = _dataProvider.length;
 			}
