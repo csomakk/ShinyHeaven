@@ -9,13 +9,13 @@
 	<fx:Script>
 		<![CDATA[
         import com.flashdynamix.motion.TweensyZero;
-
+        
         import mx.collections.ArrayCollection;
         import mx.core.IVisualElement;
         import mx.core.UIComponent;
         import mx.events.ResizeEvent;
         import mx.utils.StringUtil;
-
+        
         import org.shinyheaven.service.CommunicationModule;
 
         [Inject]
@@ -119,6 +119,11 @@
             elementPosition++;
             return d;
         }
+			
+		public function addCloseListener(element:IVisualElement, callback:Function):void {
+			var d:DocumentHolder = dict[element];
+			d.closeCallbackFunctions.push(callback);
+		}
 
         public function removeDocument(element:IVisualElement):void {
             var d:DocumentHolder = dict[element];
@@ -131,6 +136,11 @@
             }
             removeElement(d);
             dict[element] = null;
+			
+			for each(var f:Function in d.closeCallbackFunctions){
+				f.call();
+			}
+			
             rearrange();
         }
 
