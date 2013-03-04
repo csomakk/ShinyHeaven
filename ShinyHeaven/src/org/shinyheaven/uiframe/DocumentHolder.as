@@ -21,6 +21,8 @@ package org.shinyheaven.uiframe
 		
 		private var originalRightBottom:Point;
 		
+		public var closeCallbackFunctions:Vector.<Function>= new Vector.<Function>();
+		
 		public function DocumentHolder()
 		{
 			super();
