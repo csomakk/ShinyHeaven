@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<s:Button xmlns:fx="http://ns.adobe.com/mxml/2009"
+          xmlns:s="library://ns.adobe.com/flex/spark"
+          label="+"
+          click="onClick(event)">
+    <fx:Script><![CDATA[
+        [Inject]
+        [MessageDispatcher]
+        public var dispatcher:Function;
+
+        protected function onClick(event:MouseEvent):void {
+            dispatcher(new AddDocumentMsg());
+        }
+    ]]></fx:Script>
+</s:Button>
