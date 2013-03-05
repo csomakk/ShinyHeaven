@@ -9,10 +9,10 @@ package org.shinyheaven.service
 			
 		}
 		
-		private static var prevStockPrice:Number;
-		private static var prevStockDelta:Number;
+		private var prevStockPrice:Number;
+		private var prevStockDelta:Number;
 		
-		public static function getNextStockPrice():Number {
+		public function getNextStockPrice():Number {
 			if(isNaN(prevStockPrice)){
 				prevStockPrice = Math.random()*5000;
 				prevStockDelta = (Math.random() - 0.5) * prevStockPrice / 100
@@ -23,7 +23,7 @@ package org.shinyheaven.service
 			return prevStockPrice;
 		}
 		
-		public static function getPreviousStockPrice():Number {
+		public function getPreviousStockPrice():Number {
 			return prevStockPrice;
 		}
 		

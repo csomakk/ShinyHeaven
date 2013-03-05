@@ -36,12 +36,13 @@ package org.shinyheaven.service {
 		
 		private static const MOCKED_MODE:Boolean = true;
 		
-		[Inject]
-		public var chartDataProvider:IChartDataProvider;
+	
 		[Inject]
 		public var newsDataProvider:NewsDataProvider;
 		[Inject]
 		public var availableInstruments:AvailableInstrumentsDataProvider;
+		[Inject]
+		public var instrumentManager:InstrumentManager;
 		
 		private var service:RemoteObject;
 		
@@ -110,6 +111,7 @@ package org.shinyheaven.service {
 			} else {
 				//TODO
 			}
+			
 		}
 		
 		protected function getNewsResultHandler(event:ResultEvent):void
@@ -125,24 +127,36 @@ package org.shinyheaven.service {
 			}
 		}
 		
-		private function updateResultHandler(event:ResultEvent):void {
+		
+		
+		private function updateResultHandlerMock(idOfInstrument:String):void {
 			var tick:OHLCUpdate
+			var instrument:Instrument = instrumentManager.getInstrument(idOfInstrument);
 			if(MOCKED_MODE) {
 				tick = new OHLCUpdate();
-				tick.open = MockHelper.getPreviousStockPrice();
-				tick.close = MockHelper.getNextStockPrice();
-				tick.high = MockHelper.getNextStockPrice()+(Math.random()*0.1-0.05);
-				tick.low =  MockHelper.getNextStockPrice()+(Math.random()*0.1-0.05);
+				tick.open = instrument.mockHelper.getPreviousStockPrice();
+				tick.close = instrument.mockHelper.getNextStockPrice();
+				tick.high = instrument.mockHelper.getNextStockPrice()+(Math.random()*0.1-0.05);
+				tick.low =  instrument.mockHelper.getNextStockPrice()+(Math.random()*0.1-0.05);
 				var date:Date = new Date();
 				date.time = new Date(2010,05,05,10,10).time + getTimer() + 1000;  				
 				tick.timestamp = date;
 			} else {
-				tick = event.result as OHLCUpdate;
+				throw new Error("mocked function call when mock is off")
 			}
 			if(!tick)
 				throw new Error('updateResultHandler received no "Tick" in ResultEvent.');
+			ShinyHeaven.logger.info("Tick mock received:", tick);
+			instrument.chartDataProvider.data.addItem(tick);
+		}
+		
+		private function updateResultHandler(event:ResultEvent):void {
+			var tick:OHLCUpdate = event.result as OHLCUpdate;
+			
+			if(!tick)
+				throw new Error('updateResultHandler received no "Tick" in ResultEvent.');
 			ShinyHeaven.logger.info("Tick received:", tick);
-			chartDataProvider.data.addItem(tick);
+			instrumentManager.getInstrument(Constants.HARDCODED_INSTRUMENT).chartDataProvider.data.addItem(tick);
 		}
 		
 		public function getNews():void {
@@ -152,11 +166,15 @@ package org.shinyheaven.service {
 			getNewsOperation.send('');		
 		}
 		
-		private function lookupRequest():void {
-			var ro:RequestObject = new RequestObject(client_id, Constants.HARDCODED_INSTRUMENT, Constants.START_DATE, Constants.END_DATE);
+		public function lookupRequest(instrumentId:String):void {
+			
+			//TODO: translate comment below
+			//instrumentManager.addNewInstrument(Constants.HARDCODED_INSTRUMENT); ez elvileg már nem kell az instrumentmanager miatt
+			
+			var ro:RequestObject = new RequestObject(client_id, instrumentId, Constants.START_DATE, Constants.END_DATE);
 			lookupOperation.send(ro);
 			if(MOCKED_MODE){
-				lookupResultHandler(null);
+				lookupResultHandlerMock(ro.instrument);
 			}
 		}
 		
@@ -167,27 +185,36 @@ package org.shinyheaven.service {
 			} else {
 				client_id = event.result.client_id;
 			}
-			lookupRequest();
+			
 			getAvailableInstruments();
 		}
 		
-		protected function lookupResultHandler(event:ResultEvent):void {
+		protected function lookupResultHandlerMock(idOfInstrument:String):void {
 			
 			if(MOCKED_MODE){
+				
+				var instrument:Instrument = instrumentManager.getInstrument(idOfInstrument);
+				
 				var a:ArrayList = new ArrayList();
 				for(var i:int = 0; i<1000; i++){
 					var time: Number = new Date(2010,05,05,10,1).time + getTimer() + i
 					var date: Date = new Date()
 					date.time = time;
-					a.addItem(new HistoricalDataItem(MockHelper.getNextStockPrice() , date ));
+					a.addItem(new HistoricalDataItem(instrument.mockHelper.getNextStockPrice() , date ));
 				}
 				
-				event = new ResultEvent("");
-				chartDataProvider.data.addAll(a);
+				instrument.chartDataProvider.data.addAll(a);
 			} else {
-				trace(StringUtil.substitute("Got {0} of {1}s", event.result.length, flash.utils.getQualifiedClassName(event.result[0])));
-				chartDataProvider.data.addAll(event.result as IList);
+				throw new Error("mock function in not mocked mode")
 			}
+			
+			startAutomaticUpdating();
+		}
+		
+		protected function lookupResultHandler(event:ResultEvent):void {
+			
+			trace(StringUtil.substitute("Got {0} of {1}s", event.result.length, flash.utils.getQualifiedClassName(event.result[0])));
+			instrumentManager.getInstrument(Constants.HARDCODED_INSTRUMENT).chartDataProvider.data.addAll(event.result as IList);
 			
 			startAutomaticUpdating();
 		}
@@ -205,7 +232,10 @@ package org.shinyheaven.service {
 		
 		private function getUpdates():void {
 			if(MOCKED_MODE){
-				updateResultHandler(null);
+				var names:Vector.<String> = instrumentManager.getInstrumentNames();
+				for each(var b:String in names){
+					updateResultHandlerMock(b);
+				}
 			}
 			updateOperation.send('');
 		}

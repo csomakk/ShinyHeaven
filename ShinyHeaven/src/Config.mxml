@@ -5,12 +5,12 @@
 		 xmlns:news="org.shinyheaven.news.*" xmlns:adddocument="org.shinyheaven.uiframe.adddocument.*">
 	<fx:Declarations>
 		<service:CommunicationModule/>
-		<service:ChartDataProvider/>
 		<news:NewsDataProvider />
 		<View type="{AddDocumentButton}" />
 		<Object type="{DocumentManager}" />
 		<service:AvailableInstrumentsDataProvider />
 		<adddocument:AddDocumentDialog />
+		<service:InstrumentManager />
 	</fx:Declarations>
 	<fx:Script><![CDATA[
 		import org.shinyheaven.documentmanager.DocumentManager;

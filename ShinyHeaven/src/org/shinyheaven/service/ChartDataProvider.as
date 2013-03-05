@@ -6,7 +6,7 @@ package org.shinyheaven.service
 
     public class ChartDataProvider implements IChartDataProvider
 	{
-        private static const _data:ArrayCollection = new ArrayCollection();
+        private const _data:ArrayCollection = new ArrayCollection();
 
 	    public function get data():ArrayCollection {
             return _data;
