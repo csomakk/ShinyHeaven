@@ -3,10 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="d01c1d8e-5ae3-4094-bcc9-4fa22890df36" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ShinyHeaven/src/org/shinyheaven/uiframe/controlbar/AddDocumentButtonSkin.mxml" afterPath="$PROJECT_DIR$/ShinyHeaven/src/org/shinyheaven/uiframe/controlbar/AddDocumentButtonSkin.mxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ShinyHeaven/src/org/shinyheaven/uiframe/adddocument/AddDocumentDialog.as" afterPath="$PROJECT_DIR$/ShinyHeaven/src/org/shinyheaven/uiframe/adddocument/AddDocumentDialog.as" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ShinyHeaven/src/org/shinyheaven/uiframe/adddocument/AddDocumentDialogSkin.mxml" afterPath="$PROJECT_DIR$/ShinyHeaven/src/org/shinyheaven/uiframe/adddocument/AddDocumentDialogSkin.mxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ShinyHeaven/src/org/shinyheaven/documentmanager/DocumentManager.as" afterPath="$PROJECT_DIR$/ShinyHeaven/src/org/shinyheaven/documentmanager/DocumentManager.as" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ShinyHeaven/src/org/shinyheaven/service/MockHelper.as" afterPath="$PROJECT_DIR$/ShinyHeaven/src/org/shinyheaven/service/MockHelper.as" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ShinyHeaven.iws" afterPath="$PROJECT_DIR$/ShinyHeaven.iws" />
     </list>
     <ignored path="ShinyHeaven.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -1208,14 +1205,14 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.3290735" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2188889" sideWeight="0.7859425" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="true" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.32676348" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="true" internal_type="SLIDING" type="SLIDING" visible="true" weight="0.32676348" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32800853" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="true" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.3290735" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19555797" sideWeight="0.5446058" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19555797" sideWeight="0.44813278" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19555797" sideWeight="0.44813278" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
