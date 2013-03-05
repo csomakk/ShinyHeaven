@@ -19,6 +19,10 @@ package org.shinyheaven.service.dto {
         override public function get value():Number {
             return _value;
         }
+		
+		override public function clone():IHistoricalDataItem{
+			return new HistoricalDataItem(_value, timestamp);
+		}
 
     }
 

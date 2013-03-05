@@ -85,12 +85,14 @@ package org.shinyheaven.service {
 		
 		protected function getNewsResultHandler(event:ResultEvent):void
 		{
+			var result:String;
 			if(MOCKED_MODE) {
-				newsDataProvider.addNewsItem(new NewsItem((Math.random()*26+10).toString(36)));
+				result = MockHelper.generateNews();
 			} else {
-				if(event.result != ""){
-					newsDataProvider.addNewsItem(new NewsItem(event.result as String));
-				}
+				result = event.result as String;
+			}
+			if(result != ""){
+				newsDataProvider.addNewsItem(new NewsItem(result));
 			}
 		}
 		
@@ -98,10 +100,10 @@ package org.shinyheaven.service {
 			var tick:OHLCUpdate
 			if(MOCKED_MODE) {
 				tick = new OHLCUpdate();
-				tick.close = 2135 + (Math.random() - 0.5) * 200;
-				tick.high = 2135 + (Math.random() - 0.5) * 200;
-				tick.low = 2135 + (Math.random() - 0.5) * 200;
-				tick.open = 2135 + (Math.random() - 0.5) * 200;
+				tick.open = MockHelper.getPreviousStockPrice();
+				tick.close = MockHelper.getNextStockPrice();
+				tick.high = MockHelper.getNextStockPrice()+(Math.random()*0.1-0.05);
+				tick.low =  MockHelper.getNextStockPrice()+(Math.random()*0.1-0.05);
 				var date:Date = new Date();
 				date.time = new Date(2010,05,05,10,10).time + getTimer() + 1000;  				
 				tick.timestamp = date;
@@ -147,7 +149,7 @@ package org.shinyheaven.service {
 					var time: Number = new Date(2010,05,05,10,1).time + getTimer() + i
 					var date: Date = new Date()
 					date.time = time;
-					a.addItem(new HistoricalDataItem(2116 + (Math.random() - 0.5) * 200 , date ));
+					a.addItem(new HistoricalDataItem(MockHelper.getNextStockPrice() , date ));
 				}
 				
 				event = new ResultEvent("");

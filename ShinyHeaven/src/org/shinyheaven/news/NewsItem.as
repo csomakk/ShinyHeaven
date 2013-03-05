@@ -8,7 +8,7 @@ package org.shinyheaven.news
 		private var _isBreaking:Boolean;
 		private var _date:Date;
 		
-		private static var BREAKING_FLAG:String = "BREAKING!  ";
+		public static var BREAKING_FLAG:String = "BREAKING!  ";
 		
 		public function NewsItem(newsMessage:String)
 		{

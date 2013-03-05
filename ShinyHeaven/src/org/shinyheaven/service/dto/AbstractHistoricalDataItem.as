@@ -7,6 +7,11 @@ package org.shinyheaven.service.dto {
         public function get value():Number {
             throw new Error('Abstract method.');
         }
+		
+		public function clone():IHistoricalDataItem{
+			throw new Error('Abstract method.');
+		}
+		
 
         [Bindable]
         public var timestamp:Date;
