@@ -4,17 +4,16 @@
     <fx:Metadata>
         [HostComponent("org.shinyheaven.uiframe.adddocument.AddDocumentDialog")]
     </fx:Metadata>
-    <fx:Style source="AddDocumentDialog.css" />
     <s:states>
         <s:State name="instrument" />
         <s:State name="variant" />
     </s:states>
-    <s:TitleWindow title="Add View">
-        <s:VGroup includeIn="instrument" styleName="padded">
+    <s:TitleWindow id="popupWindow" title="Add View">
+        <s:VGroup includeIn="instrument" paddingTop="8" paddingRight="8" paddingBottom="8" paddingLeft="8" gap="8">
             <s:ComboBox id="comboBox" prompt="Instrument" />
             <s:Button id="nextButton" label="⇒" chromeColor="0x9acd32" />
         </s:VGroup>
-        <s:VGroup includeIn="variant" styleName="padded">
+        <s:VGroup includeIn="variant" paddingTop="8" paddingRight="8" paddingBottom="8" paddingLeft="8" gap="8">
             <s:ButtonBar id="styleButtonBar" />
             <s:Button id="finishButton" label="OK" chromeColor="0xff8c00" />
         </s:VGroup>

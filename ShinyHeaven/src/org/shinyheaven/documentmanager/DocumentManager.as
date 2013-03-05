@@ -20,7 +20,6 @@ package org.shinyheaven.documentmanager {
 		
 		[MessageHandler]
         public function onAddDocument(message:AddDocumentMsg):void {
-            addDocumentDialog.skin.setCurrentState("instrument", false);
             PopUpManager.addPopUp(addDocumentDialog, FlexGlobals.topLevelApplication as DisplayObject, true);
             PopUpManager.centerPopUp(addDocumentDialog);
         }
@@ -28,7 +27,6 @@ package org.shinyheaven.documentmanager {
         [MessageHandler]
         public function onAddDocumentPopupClosed(message:AddDocumentPopupClosed):void {
             PopUpManager.removePopUp(message.popup);
-            //context.viewManager.removeViewRoot(message.popup);
         }
     }
 }

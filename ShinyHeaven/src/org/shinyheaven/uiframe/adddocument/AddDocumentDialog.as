@@ -5,6 +5,7 @@
  * Time: 7:30 PM
  */
 package org.shinyheaven.uiframe.adddocument {
+    import flash.events.Event;
     import flash.events.MouseEvent;
 
     import org.shinyheaven.service.AvailableInstrumentsDataProvider;
@@ -12,11 +13,14 @@ package org.shinyheaven.uiframe.adddocument {
     import spark.components.Button;
     import spark.components.ButtonBar;
     import spark.components.ComboBox;
+    import spark.components.TitleWindow;
     import spark.components.supportClasses.SkinnableComponent;
 
     [SkinState("instrument")]
     [SkinState("variant")]
     public class AddDocumentDialog extends SkinnableComponent {
+        [SkinPart(required=true)]
+        public var popupWindow:TitleWindow;
         [SkinPart(required=true)]
         public var comboBox:ComboBox;
         [SkinPart(required=true)]
@@ -40,6 +44,10 @@ package org.shinyheaven.uiframe.adddocument {
         override protected function partAdded(partName:String, instance:Object):void {
             super.partAdded(partName, instance);
             switch (instance) {
+                case popupWindow: {
+                    popupWindow.addEventListener(Event.CLOSE, onCloseWindow);
+                    break;
+                }
                 case nextButton: {
                     nextButton.addEventListener(MouseEvent.CLICK, onNextClick);
                     break;
@@ -55,8 +63,14 @@ package org.shinyheaven.uiframe.adddocument {
             }
         }
 
+        protected function onCloseWindow(event:Event):void {
+            dispatcher(new AddDocumentPopupClosed(this));
+        }
+
+        private var selectedInstrument:String;
+
         protected function onNextClick(event:MouseEvent):void {
-            trace("hej da", dispatcher);
+            selectedInstrument = comboBox.selectedItem as String;
             skin.setCurrentState("variant");
         }
 
