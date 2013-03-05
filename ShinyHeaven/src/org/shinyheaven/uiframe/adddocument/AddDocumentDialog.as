@@ -17,10 +17,12 @@ package org.shinyheaven.uiframe.adddocument {
         public var comboBox:ComboBox;
         [SkinPart(required=true)]
         public var nextButton:Button;
+        /*
         [SkinPart(required=true)]
         public var styleButtonBar:ButtonBar;
         [SkinPart(required=true)]
         public var finishButton:Button;
+        */
 
         [MessageDispatcher]
         public var dispatcher:Function;

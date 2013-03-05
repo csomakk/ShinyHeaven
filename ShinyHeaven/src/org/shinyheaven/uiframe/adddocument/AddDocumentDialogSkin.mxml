@@ -1,6 +1,9 @@
 <?xml version="1.0"?>
 <s:Skin xmlns:fx="http://ns.adobe.com/mxml/2009"
         xmlns:s="library://ns.adobe.com/flex/spark">
+    <fx:Metadata>
+        [HostComponent("org.shinyheaven.uiframe.adddocument.AddDocumentDialog")]
+    </fx:Metadata>
     <!-- s:states>
         <s:State name="page2" />
     </s:states -->
@@ -19,7 +22,7 @@
                     </s:ArrayCollection>
                 </s:dataProvider>
             </s:ComboBox>
-            <s:Button id="nextButton" label="->" chromeColor="0x9acd32"/>
+            <s:Button id="nextButton" label="⇒" chromeColor="0x9acd32"/>
         </s:VGroup>
     </s:TitleWindow>
 </s:Skin>
