@@ -3,7 +3,8 @@
 		xmlns:s="library://ns.adobe.com/flex/spark" 
 		xmlns:mx="library://ns.adobe.com/flex/mx"
 		height.closed="16"
-		width.closed="100%" width.opened="100%">
+		width.closed="100%" width.opened="100%"
+		initialize="setEventListeners(event)">
 	
 	<fx:Metadata>
 		[HostComponent("org.shinyheaven.datavisualization.charting.LineChartUIControls")]
@@ -14,16 +15,49 @@
 		<s:State name="opened" />
 	</s:states>
 	
-	<s:rollOver>
+	<fx:Script>
 		<![CDATA[
-			currentState = "opened";
+			import mx.events.FlexEvent;
+			
+			private static const STATE_OPENED:String = "opened";
+			private static const STATE_CLOSED:String = "closed";
+			
+			private var closeTimer:Timer = new Timer(300, 1);
+			
+			private function handleStateChangeWithTimer(event:MouseEvent):void
+			{
+				switch(event.type)
+				{
+					case MouseEvent.ROLL_OUT:
+					{
+						closeTimer.start();
+						break;
+					}
+						
+					default:
+					{
+						closeTimer.stop();
+						currentState = STATE_OPENED;
+						break;
+					}
+				}
+			}
+			
+			protected function setEventListeners(event:FlexEvent):void
+			{
+				addEventListener(MouseEvent.ROLL_OVER, handleStateChangeWithTimer);
+				addEventListener(MouseEvent.ROLL_OUT, handleStateChangeWithTimer);
+				closeTimer.addEventListener(TimerEvent.TIMER, handleCloseOnTime);
+			}
+			
+			protected function handleCloseOnTime(event:Event):void
+			{
+				currentState = STATE_CLOSED;
+			}
+			
 		]]>
-	</s:rollOver>
-	<s:rollOut>
-		<![CDATA[
-			currentState = "closed";
-		]]>
-	</s:rollOut>
+	</fx:Script>
+	
 	
 	<s:transitions>
 		<s:Transition fromState="opened" toState="closed">
