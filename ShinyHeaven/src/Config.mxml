@@ -11,5 +11,6 @@
 		<news:NewsDataProvider />
         <documentmanager:DocumentManager />
         <adddocument:AddDocumentPopup />
+		<service:AvailableInstrumentsDataProvider />
     </fx:Declarations>
 </Objects>
