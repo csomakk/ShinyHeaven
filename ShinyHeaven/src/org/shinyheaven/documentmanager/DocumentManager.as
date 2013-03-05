@@ -33,7 +33,7 @@ package org.shinyheaven.documentmanager {
 
         [MessageHandler]
         public function onAddDocumentFinished(message:AddDocumentFinishedMsg):void {
-            ShinyHeaven.logger.info("addDocumentFinished", message.selectedInstrument, message.selectedVariant);
+            ShinyHeaven.logger.info("addDocumentFinished instrument={0} viewVariant={1}", message.selectedInstrument, message.selectedVariant);
         }
     }
 }
