@@ -20,7 +20,7 @@ package org.shinyheaven.documentmanager {
 		
 		[MessageHandler]
         public function onAddDocument(message:AddDocumentMsg):void {
-            addDocumentDialog.setCurrentState("instrument", false);
+            addDocumentDialog.skin.setCurrentState("instrument", false);
             PopUpManager.addPopUp(addDocumentDialog, FlexGlobals.topLevelApplication as DisplayObject, true);
             PopUpManager.centerPopUp(addDocumentDialog);
         }

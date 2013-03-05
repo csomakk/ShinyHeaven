@@ -57,7 +57,7 @@ package org.shinyheaven.uiframe.adddocument {
 
         protected function onNextClick(event:MouseEvent):void {
             trace("hej da", dispatcher);
-            setCurrentState("variant");
+            skin.setCurrentState("variant");
         }
 
         protected function onFinishClick(event:MouseEvent):void {
