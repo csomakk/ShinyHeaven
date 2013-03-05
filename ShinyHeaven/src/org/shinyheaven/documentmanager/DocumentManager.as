@@ -6,26 +6,23 @@
  */
 package org.shinyheaven.documentmanager {
     import flash.display.DisplayObject;
-    
+
     import mx.core.FlexGlobals;
-    import mx.core.IFlexDisplayObject;
     import mx.managers.PopUpManager;
-    
+
     import org.shinyheaven.uiframe.adddocument.AddDocumentDialog;
     import org.shinyheaven.uiframe.adddocument.AddDocumentPopupClosed;
     import org.shinyheaven.uiframe.controlbar.AddDocumentMsg;
 
     public class DocumentManager {
-        
 		[Inject]
 		public var addDocumentDialog:AddDocumentDialog;
 		
 		[MessageHandler]
         public function onAddDocument(message:AddDocumentMsg):void {
-            
+            addDocumentDialog.skin.setCurrentState("instrument", false);
             PopUpManager.addPopUp(addDocumentDialog, FlexGlobals.topLevelApplication as DisplayObject, true);
             PopUpManager.centerPopUp(addDocumentDialog);
-            //context.viewManager.addViewRoot(popup as DisplayObject);
         }
 
         [MessageHandler]

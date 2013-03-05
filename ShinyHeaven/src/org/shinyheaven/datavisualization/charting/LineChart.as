@@ -27,7 +27,7 @@ package org.shinyheaven.datavisualization.charting
 		private var valueCoordinates:Array = [];
 		private var averageCoordinates:Array = [];
 		
-		private var initAmountOfDataEnabled:Boolean = false;
+		private var initAmountOfDataEnabled:Boolean = true;
 		private var initAmountOfData:int;
 		
 		private var rangeForRendering:DataRange;

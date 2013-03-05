@@ -1,4 +1,2 @@
-/bin-debug
-*.ipr
+bin-debug
 *.iml
-*.iws

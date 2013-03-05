@@ -111,7 +111,10 @@ package org.shinyheaven.service {
 			} else {
 				//TODO
 			}
+<<<<<<< HEAD
 			
+=======
+>>>>>>> branch 'master' of https://github.com/csomakk/ShinyHeaven.git
 		}
 		
 		protected function getNewsResultHandler(event:ResultEvent):void

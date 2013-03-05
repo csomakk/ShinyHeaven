@@ -8,7 +8,6 @@ package org.shinyheaven.datavisualization.charting.drawers
 	
 	import mx.charts.chartClasses.GraphicsUtilities;
 	import mx.core.UIComponent;
-	import mx.graphics.IStroke;
 	
 	[Style(name="fillAlpha", type="Number", format="Number", inherit="yes")]
 	[Style(name="fillColor", type="uint", format="Color", inherit="yes")]

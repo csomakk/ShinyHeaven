@@ -2,19 +2,19 @@
 <Objects xmlns="http://www.spicefactory.org/parsley"
 		 xmlns:fx="http://ns.adobe.com/mxml/2009"
 		 xmlns:service="org.shinyheaven.service.*" 
-		 xmlns:news="org.shinyheaven.news.*" xmlns:adddocument="org.shinyheaven.uiframe.adddocument.*">
+		 xmlns:news="org.shinyheaven.news.*"
+         xmlns:adddocument="org.shinyheaven.uiframe.adddocument.*"
+         xmlns:documentmanager="org.shinyheaven.documentmanager.*">
 	<fx:Declarations>
 		<service:CommunicationModule/>
 		<news:NewsDataProvider />
 		<View type="{AddDocumentButton}" />
-		<Object type="{DocumentManager}" />
+        <documentmanager:DocumentManager />
 		<service:AvailableInstrumentsDataProvider />
 		<adddocument:AddDocumentDialog />
 		<service:InstrumentManager />
 	</fx:Declarations>
 	<fx:Script><![CDATA[
-		import org.shinyheaven.documentmanager.DocumentManager;
-		import org.shinyheaven.uiframe.adddocument.AddDocumentDialog;
-		import org.shinyheaven.uiframe.controlbar.AddDocumentButton;
-	]]></fx:Script>
+        import org.shinyheaven.uiframe.controlbar.AddDocumentButton;
+        ]]></fx:Script>
 </Objects>

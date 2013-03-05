@@ -6,25 +6,26 @@
  */
 package org.shinyheaven.uiframe.adddocument {
     import flash.events.MouseEvent;
-    
+
     import org.shinyheaven.service.AvailableInstrumentsDataProvider;
-    
+
     import spark.components.Button;
+    import spark.components.ButtonBar;
     import spark.components.ComboBox;
     import spark.components.supportClasses.SkinnableComponent;
 
+    [SkinState("instrument")]
+    [SkinState("variant")]
     public class AddDocumentDialog extends SkinnableComponent {
         [SkinPart(required=true)]
         public var comboBox:ComboBox;
         [SkinPart(required=true)]
         public var nextButton:Button;
-        /*
         [SkinPart(required=true)]
         public var styleButtonBar:ButtonBar;
         [SkinPart(required=true)]
         public var finishButton:Button;
-        */
-		
+
 		[Inject]
 		public var arrayOfInstruments:AvailableInstrumentsDataProvider;
 
@@ -47,11 +48,20 @@ package org.shinyheaven.uiframe.adddocument {
 					comboBox.dataProvider = arrayOfInstruments;
 					break;
 				}
+                case finishButton: {
+                    finishButton.addEventListener(MouseEvent.CLICK, onFinishClick);
+                    break;
+                }
             }
         }
 
         protected function onNextClick(event:MouseEvent):void {
             trace("hej da", dispatcher);
+            skin.setCurrentState("variant");
+        }
+
+        protected function onFinishClick(event:MouseEvent):void {
+            trace("hej san", dispatcher);
         }
     }
 }
