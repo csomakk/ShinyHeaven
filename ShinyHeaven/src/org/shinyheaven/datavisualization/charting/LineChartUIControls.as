@@ -12,10 +12,10 @@ package org.shinyheaven.datavisualization.charting
 	public class LineChartUIControls extends SkinnableComponent
 	{
 		
-		[SkinPart(required="true", type="CheckBox")]
+		[SkinPart(required="true")]
 		public var isMovingAverageCheckBox:CheckBox;
 		
-		[SkinPart(required="true", type="HSlider")]
+		[SkinPart(required="true")]
 		public var movingAvrgWindow:HSlider;
 		
 		public function LineChartUIControls()
