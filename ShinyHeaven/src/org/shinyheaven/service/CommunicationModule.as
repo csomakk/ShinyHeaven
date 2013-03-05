@@ -100,7 +100,7 @@ package org.shinyheaven.service {
 		protected function getAvailableInstrumentResult(event:ResultEvent):void
 		{
 			if(MOCKED_MODE) {
-				availableInstruments = new AvailableInstrumentsDataProvider();
+				availableInstruments.removeAll();
 				availableInstruments.addItem(Constants.HARDCODED_INSTRUMENT);
 				availableInstruments.addItem("EURUSD");
 				availableInstruments.addItem("XAUUSD");
@@ -168,6 +168,7 @@ package org.shinyheaven.service {
 				client_id = event.result.client_id;
 			}
 			lookupRequest();
+			getAvailableInstruments();
 		}
 		
 		protected function lookupResultHandler(event:ResultEvent):void {

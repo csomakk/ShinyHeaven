@@ -6,7 +6,9 @@
  */
 package org.shinyheaven.uiframe.adddocument {
     import flash.events.MouseEvent;
-
+    
+    import org.shinyheaven.service.AvailableInstrumentsDataProvider;
+    
     import spark.components.Button;
     import spark.components.ComboBox;
     import spark.components.supportClasses.SkinnableComponent;
@@ -22,6 +24,9 @@ package org.shinyheaven.uiframe.adddocument {
         [SkinPart(required=true)]
         public var finishButton:Button;
         */
+		
+		[Inject]
+		public var arrayOfInstruments:AvailableInstrumentsDataProvider;
 
         [MessageDispatcher]
         public var dispatcher:Function;
@@ -38,6 +43,10 @@ package org.shinyheaven.uiframe.adddocument {
                     nextButton.addEventListener(MouseEvent.CLICK, onNextClick);
                     break;
                 }
+				case comboBox: {
+					comboBox.dataProvider = arrayOfInstruments;
+					break;
+				}
             }
         }
 
