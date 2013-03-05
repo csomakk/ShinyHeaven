@@ -2,12 +2,10 @@ package org.shinyheaven.service {
 	import flash.events.SecurityErrorEvent;
 	import flash.events.TimerEvent;
 	import flash.system.Security;
-	import flash.ui.Keyboard;
 	import flash.utils.Timer;
 	import flash.utils.getQualifiedClassName;
 	import flash.utils.getTimer;
 	
-	import mx.collections.ArrayCollection;
 	import mx.collections.ArrayList;
 	import mx.collections.IList;
 	import mx.controls.Alert;
@@ -102,7 +100,7 @@ package org.shinyheaven.service {
 		protected function getAvailableInstrumentResult(event:ResultEvent):void
 		{
 			if(MOCKED_MODE) {
-				availableInstruments = new AvailableInstrumentsDataProvider();
+				availableInstruments.removeAll();
 				availableInstruments.addItem(Constants.HARDCODED_INSTRUMENT);
 				availableInstruments.addItem("EURUSD");
 				availableInstruments.addItem("XAUUSD");
@@ -170,6 +168,7 @@ package org.shinyheaven.service {
 				client_id = event.result.client_id;
 			}
 			lookupRequest();
+			getAvailableInstruments();
 		}
 		
 		protected function lookupResultHandler(event:ResultEvent):void {
