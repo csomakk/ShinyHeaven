@@ -1,6 +1,6 @@
 @namespace s "library://ns.adobe.com/flex/spark";
 
-s|VGroup.padded {
+.padded {
     peddingTop: 8;
     peddingRight: 8;
     peddingBottom: 8;
