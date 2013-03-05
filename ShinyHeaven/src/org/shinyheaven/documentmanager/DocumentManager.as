@@ -15,12 +15,7 @@ package org.shinyheaven.documentmanager {
     import org.shinyheaven.uiframe.adddocument.AddDocumentPopupClosed;
     import org.shinyheaven.uiframe.controlbar.AddDocumentMsg;
 
-    import spark.components.Button;
-
     public class DocumentManager {
-        //[Inject]
-        //public var addDocumentPopup:AddDocumentPopup;
-
         [MessageHandler]
         public function onAddDocument(message:AddDocumentMsg):void {
             var popup:IFlexDisplayObject;

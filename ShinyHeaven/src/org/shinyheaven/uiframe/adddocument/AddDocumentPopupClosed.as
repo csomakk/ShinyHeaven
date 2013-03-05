@@ -5,14 +5,16 @@
  * Time: 2:42 PM
  */
 package org.shinyheaven.uiframe.adddocument {
-    public class AddDocumentPopupClosed {
-        private var _popup:AddDocumentPopup;
+    import mx.core.IFlexDisplayObject;
 
-        public function AddDocumentPopupClosed(popup:AddDocumentPopup) {
+    public class AddDocumentPopupClosed {
+        private var _popup:IFlexDisplayObject;
+
+        public function AddDocumentPopupClosed(popup:IFlexDisplayObject) {
             _popup = popup;
         }
 
-        public function get popup():AddDocumentPopup {
+        public function get popup():IFlexDisplayObject {
             return _popup;
         }
     }

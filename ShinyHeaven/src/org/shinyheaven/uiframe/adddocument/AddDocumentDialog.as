@@ -8,7 +8,6 @@ package org.shinyheaven.uiframe.adddocument {
     import flash.events.MouseEvent;
 
     import spark.components.Button;
-    import spark.components.ButtonBar;
     import spark.components.ComboBox;
     import spark.components.supportClasses.SkinnableComponent;
 
@@ -30,12 +29,10 @@ package org.shinyheaven.uiframe.adddocument {
         public function AddDocumentDialog() {
             super();
             setStyle("skinClass", AddDocumentDialogSkin);
-            trace("bar");
         }
 
         override protected function partAdded(partName:String, instance:Object):void {
             super.partAdded(partName, instance);
-            trace("baz", instance);
             switch (instance) {
                 case nextButton: {
                     nextButton.addEventListener(MouseEvent.CLICK, onNextClick);

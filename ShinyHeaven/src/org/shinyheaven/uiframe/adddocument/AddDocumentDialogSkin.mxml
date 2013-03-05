@@ -13,7 +13,7 @@
                   paddingBottom="8"
                   paddingLeft="8"
                   gap="8">
-            <s:ComboBox id="comboBox" prompt="Select an Instrument">
+            <s:ComboBox id="comboBox" prompt="Instrument">
                 <s:dataProvider>
                     <s:ArrayCollection>
                         <fx:String>XAUUSD</fx:String>
