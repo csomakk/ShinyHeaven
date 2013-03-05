@@ -14,7 +14,6 @@
         import mx.core.IVisualElement;
         import mx.core.UIComponent;
         import mx.events.ResizeEvent;
-        import mx.utils.StringUtil;
         
         import org.shinyheaven.service.CommunicationModule;
 
@@ -115,7 +114,7 @@
             dockDocument(element, pos.direction);
             if (pos.direction == TOP || pos.direction == BOTTOM) d.percentHeight = pos.weight;
             if (pos.direction == LEFT || pos.direction == RIGHT) d.percentWidth = pos.weight;
-            rearrange();
+			arrangeUnDocked();
             elementPosition++;
             return d;
         }
@@ -141,7 +140,7 @@
 				f.call();
 			}
 			
-            rearrange();
+			arrangeUnDocked();
         }
 
         /** adds if needed, and docks or undocks element @param direction example: MDI.LEFT */
@@ -168,7 +167,7 @@
                 }
             }
 
-            rearrange();
+			arrangeUnDocked();
             return d;
         }
 
@@ -219,7 +218,7 @@
                         dx = remainingRight - d.width;
                         dy = remainingTop;
                         d.height = remainingHeigth
-                        remainingRight = d.x;
+                        remainingRight = dx;
                         break;
                     case TOP:
                         dx = remainingLeft;
@@ -231,7 +230,7 @@
                         dx = remainingLeft;
                         dy = remainingBottom - d.height;
                         d.width = remainingWidth;
-                        remainingBottom -= d.height
+                        remainingBottom = dy;		
                         break;
                     default:
                         ;
@@ -243,7 +242,8 @@
                         remainingLeft -= REMAINING_MINIMUM_SIZE;
                     }
                     if (d.dockedDirection == RIGHT) {
-                        remainingRight -= REMAINING_MINIMUM_SIZE;
+						dx += REMAINING_MINIMUM_SIZE;
+						remainingRight = dx;
                     }
                 }
 
@@ -253,7 +253,9 @@
                         remainingTop -= REMAINING_MINIMUM_SIZE;
                     }
                     if (d.dockedDirection == BOTTOM) {
-                        remainingBottom -= REMAINING_MINIMUM_SIZE;
+                        dy += REMAINING_MINIMUM_SIZE;
+						remainingBottom = dy;
+						
                     }
                 }
 
@@ -280,7 +282,7 @@
         }
 
         protected function MDI_resizeHandler(event:Event):void {
-            rearrange();
+			arrangeUnDocked();
         }
 
         protected function bringToFront(a:IVisualElement):void {
@@ -448,8 +450,10 @@
         }
 
         protected function onAddedToStage(event:Event):void {
-            callLater(rearrange); //because widths are not calculated yet
+            callLater(arrangeUnDocked); //because widths are not calculated yet
         }
+			
+			
         ]]>
 	</fx:Script>
 </s:Group>
