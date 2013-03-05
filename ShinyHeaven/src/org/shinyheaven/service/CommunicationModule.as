@@ -7,6 +7,7 @@ package org.shinyheaven.service {
 	import flash.utils.getQualifiedClassName;
 	import flash.utils.getTimer;
 	
+	import mx.collections.ArrayCollection;
 	import mx.collections.ArrayList;
 	import mx.collections.IList;
 	import mx.controls.Alert;
@@ -29,6 +30,7 @@ package org.shinyheaven.service {
 		private static const LOGIN_SERVICE_NAME:String = "login";
 		private static const LOOKUP_SERVICE_NAME:String = "lookup";
 		private static const UPDATE_SERVICE_NAME:String = "quotes";
+		private static const GET_AVAILABLE_INSTRUMENTS:String = "getinstruments";
 		private static const GET_NEWS_SERVICE_NAME:String = "news";
 		
 		private static const AMF_CHANNEL_NAME:String = "pyamf-channel";
@@ -40,12 +42,16 @@ package org.shinyheaven.service {
 		public var chartDataProvider:IChartDataProvider;
 		[Inject]
 		public var newsDataProvider:NewsDataProvider;
+		[Inject]
+		public var availableInstruments:AvailableInstrumentsDataProvider;
+		
 		private var service:RemoteObject;
 		
 		private var loginOperation:AbstractOperation;
 		private var lookupOperation:AbstractOperation;
 		private var updateOperation:AbstractOperation;
 		private var getNewsOperation:AbstractOperation;
+		private var getAvailableInstrumentsOperation:AbstractOperation;
 		
 		private var client_id:Number;
 		
@@ -78,8 +84,33 @@ package org.shinyheaven.service {
 			getNewsOperation = service.getOperation(GET_NEWS_SERVICE_NAME);
 			getNewsOperation.addEventListener(ResultEvent.RESULT, getNewsResultHandler);
 			
+			getAvailableInstrumentsOperation = service.getOperation(GET_AVAILABLE_INSTRUMENTS);
+			getAvailableInstrumentsOperation.addEventListener(ResultEvent.RESULT, getAvailableInstrumentResult);
+			
 			if(MOCKED_MODE) {
 				loginResultHandler(null);
+			}
+		}
+		
+		public function getAvailableInstruments():void {
+			getAvailableInstrumentsOperation.send('');
+			if(MOCKED_MODE){
+				getAvailableInstrumentResult(null);
+			}
+		}
+		
+		protected function getAvailableInstrumentResult(event:ResultEvent):void
+		{
+			if(MOCKED_MODE) {
+				availableInstruments = new AvailableInstrumentsDataProvider();
+				availableInstruments.addItem(Constants.HARDCODED_INSTRUMENT);
+				availableInstruments.addItem("EURUSD");
+				availableInstruments.addItem("XAUUSD");
+				availableInstruments.addItem("GBPUSD");
+				availableInstruments.addItem("JPYUSD");
+				availableInstruments.addItem("CHFUSD");
+			} else {
+				//TODO
 			}
 		}
 		

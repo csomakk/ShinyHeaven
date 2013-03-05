@@ -186,16 +186,19 @@
                 return;
             }
 
-            remainingLeft = 0;
-            remainingRight = parent.width - (right as Number) - x;
-            remainingTop = 0;
+            remainingLeft = x;
+            remainingRight = stage.stageWidth-x//parent.width - (right as Number) - x;
+            remainingTop = y;
             trace("MDI:rearrange:height", height)
-            remainingBottom = parent.height - (bottom as Number) - y;
+            remainingBottom = stage.stageHeight-y//parent.height - (bottom as Number) - y;
 
             for each (var d:DocumentHolder in dockedDocumentsArrayCollection) {
                 if (containsElement(d) == false) {
                     addElement(d);
                 }
+				
+				measure();
+				
 
                 var dx:int;
                 var dy:int;
@@ -329,17 +332,21 @@
             return false;
         }
 
-        protected function getDraggedSide(x:Number, y:Number):int {
-            if (isNear(x, remainingLeft, 10)) {
+        protected function getDraggedSide(argX:Number, argY:Number):int {
+            argX += x;
+		    argY += y;
+		   
+			if (isNear(argX, remainingLeft, 10)) {
                 return LEFT;
             }
-            if (isNear(x, remainingRight, 10)) {
+            if (isNear(argX, remainingRight, 10)) {
                 return RIGHT;
             }
-            if (isNear(y, remainingTop, 10)) {
+            if (isNear(argY, remainingTop, 10)) {
                 return TOP;
             }
-            if (isNear(y, remainingBottom, 10)) {
+			trace(argY, remainingBottom)
+            if (isNear(argY, remainingBottom, 10)) {
                 return BOTTOM;
             }
             return NaN;
