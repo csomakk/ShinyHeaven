@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<s:TitleWindow xmlns:fx="http://ns.adobe.com/mxml/2009"
+               xmlns:s="library://ns.adobe.com/flex/spark"
+               xmlns:parsley="http://www.spicefactory.org/parsley"
+               title="Add a New View"
+               close="onClose(event)">
+    <fx:Script><![CDATA[
+        [MessageDispatcher]
+        public var dispatcher:Function;
+
+        protected function onClose(event:Event):void {
+            dispatcher(new AddDocumentPopupClosed(this));
+        }
+    ]]></fx:Script>
+    <fx:Declarations>
+        <parsley:Configure />
+    </fx:Declarations>
+</s:TitleWindow>
