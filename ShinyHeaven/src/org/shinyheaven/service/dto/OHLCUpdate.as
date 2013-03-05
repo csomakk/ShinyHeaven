@@ -28,5 +28,15 @@ package org.shinyheaven.service.dto
         public final function get typicalPrice():Number {
             return (high + low + close) / 3;
         }
+		
+		override public function clone():IHistoricalDataItem{
+			var ret:OHLCUpdate = new OHLCUpdate();
+			ret.low = low;
+			ret.high = high;
+			ret.close = close;
+			ret.volume = volume;
+			ret.open = open;
+			return ret;
+		}
     }
 }
