@@ -14,7 +14,15 @@
             <s:Button id="nextButton" label="⇒" chromeColor="0x9acd32" />
         </s:VGroup>
         <s:VGroup includeIn="variant" paddingTop="8" paddingRight="8" paddingBottom="8" paddingLeft="8" gap="8">
-            <s:ButtonBar id="styleButtonBar" />
+            <s:ButtonBar id="styleButtonBar">
+                <s:dataProvider>
+                    <s:ArrayList>
+                        <fx:Object label="#1" icon="@Embed('/org/shinyheaven/assets/hdd_win.png')" />
+                        <fx:Object label="#2" icon="@Embed('/org/shinyheaven/assets/hdd_apple.png')" />
+                        <fx:Object label="#2" icon="@Embed('/org/shinyheaven/assets/database.png')" />
+                    </s:ArrayList>
+                </s:dataProvider>
+            </s:ButtonBar>
             <s:Button id="finishButton" label="OK" chromeColor="0xff8c00" />
         </s:VGroup>
     </s:TitleWindow>
