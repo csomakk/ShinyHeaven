@@ -17,9 +17,9 @@
             <s:ButtonBar id="styleButtonBar">
                 <s:dataProvider>
                     <s:ArrayList>
-                        <fx:Object label="#1" icon="@Embed('/org/shinyheaven/assets/hdd_win.png')" />
-                        <fx:Object label="#2" icon="@Embed('/org/shinyheaven/assets/hdd_apple.png')" />
-                        <fx:Object label="#2" icon="@Embed('/org/shinyheaven/assets/database.png')" />
+                        <fx:Object label="1" icon="@Embed('/org/shinyheaven/assets/hdd_win.png')" />
+                        <fx:Object label="2" icon="@Embed('/org/shinyheaven/assets/hdd_apple.png')" />
+                        <fx:Object label="3" icon="@Embed('/org/shinyheaven/assets/database.png')" />
                     </s:ArrayList>
                 </s:dataProvider>
             </s:ButtonBar>
