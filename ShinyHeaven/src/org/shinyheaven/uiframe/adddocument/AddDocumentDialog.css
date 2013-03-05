@@ -1,9 +1,0 @@
-@namespace s "library://ns.adobe.com/flex/spark";
-
-.padded {
-    peddingTop: 8;
-    peddingRight: 8;
-    peddingBottom: 8;
-    peddingLeft: 8;
-    gap: 8;
-}
