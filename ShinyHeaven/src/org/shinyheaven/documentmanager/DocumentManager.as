@@ -11,7 +11,8 @@ package org.shinyheaven.documentmanager {
     import mx.managers.PopUpManager;
 
     import org.shinyheaven.uiframe.adddocument.AddDocumentDialog;
-    import org.shinyheaven.uiframe.adddocument.AddDocumentPopupClosed;
+    import org.shinyheaven.uiframe.adddocument.AddDocumentFinishedMsg;
+    import org.shinyheaven.uiframe.adddocument.AddDocumentPopupClosedMsg;
     import org.shinyheaven.uiframe.controlbar.AddDocumentMsg;
 
     public class DocumentManager {
@@ -25,8 +26,14 @@ package org.shinyheaven.documentmanager {
         }
 
         [MessageHandler]
-        public function onAddDocumentPopupClosed(message:AddDocumentPopupClosed):void {
-            PopUpManager.removePopUp(message.popup);
+        public function onAddDocumentPopupClosed(message:AddDocumentPopupClosedMsg):void {
+            PopUpManager.removePopUp(addDocumentDialog);
+            addDocumentDialog.skin.setCurrentState("instrument");
+        }
+
+        [MessageHandler]
+        public function onAddDocumentFinished(message:AddDocumentFinishedMsg):void {
+            ShinyHeaven.logger.info("addDocumentFinished", message.selectedInstrument, message.selectedVariant);
         }
     }
 }

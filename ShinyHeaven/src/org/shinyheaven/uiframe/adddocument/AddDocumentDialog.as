@@ -64,7 +64,7 @@ package org.shinyheaven.uiframe.adddocument {
         }
 
         protected function onCloseWindow(event:Event):void {
-            dispatcher(new AddDocumentPopupClosed(this));
+            dispatcher(new AddDocumentPopupClosedMsg());
         }
 
         private var selectedInstrument:String;
@@ -74,8 +74,12 @@ package org.shinyheaven.uiframe.adddocument {
             skin.setCurrentState("variant");
         }
 
+        private var selectedVariant:int;
+
         protected function onFinishClick(event:MouseEvent):void {
-            trace("hej san", dispatcher);
+            selectedVariant = styleButtonBar.selectedIndex;
+            dispatcher(new AddDocumentFinishedMsg(selectedInstrument, selectedVariant));
+            dispatcher(new AddDocumentPopupClosedMsg());
         }
     }
 }
