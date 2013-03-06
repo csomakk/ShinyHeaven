@@ -6,11 +6,11 @@
  */
 package org.shinyheaven.documentmanager {
     import flash.display.DisplayObject;
-    import flash.events.Event;
 
     import mx.binding.utils.BindingUtils;
     import mx.core.FlexGlobals;
     import mx.core.UIComponent;
+    import mx.events.FlexEvent;
     import mx.managers.PopUpManager;
 
     import org.shinyheaven.datavisualization.charting.LineChart;
@@ -52,8 +52,8 @@ package org.shinyheaven.documentmanager {
                 view.setStyle("skinClass", DefaultLineChartSkin);
             }
             var dataProvider:IChartDataProvider = instrumentManager.addNewInstrument(message.selectedInstrument).chartDataProvider;
-            view.addEventListener(Event.ADDED_TO_STAGE, function(event:Event):void {
-                BindingUtils.bindProperty(view, "dataProvider", dataProvider, "data");
+            view.addEventListener(FlexEvent.CREATION_COMPLETE, function(event:FlexEvent):void {
+                BindingUtils.bindProperty(view, "dataProvider", dataProvider, "data"); // TODO solve more beautifully and remove this workaround
             });
             var mdi:MDI = FlexGlobals.topLevelApplication.mdi; // TODO solve more beautifully
             mdi.addDocument(view);
