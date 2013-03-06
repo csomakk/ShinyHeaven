@@ -1,10 +1,10 @@
 package org.shinyheaven.datavisualization.charting.calculators
 {
-	import flash.geom.Point;
-	
-	import org.shinyheaven.service.dto.IHistoricalDataItem;
+    import flash.geom.Point;
 
-	public class DataToCoordinates
+    import org.shinyheaven.service.dto.IHistoricalDataItem;
+
+    public class DataToCoordinates
 	{
 		public static function sampleDataAndGetPoints(width:Number, height:Number, data:Array, minVal:Number, maxVal:Number):Array
 		{
@@ -17,14 +17,14 @@ package org.shinyheaven.datavisualization.charting.calculators
 			
 			/*
 			If xOffset is smaller than 1px than we don't visualize all
-			the data becouse we cannot draw more than one point to a single pixel.
+			the data because we cannot draw more than one point to a single pixel.
 			*/
 			if (xOffset < 1)
 			{
-				// if xOffset is 0.5 we draw evry secont point etc.
+				// if xOffset is 0.5 we draw every second point etc.
 				increment = Math.floor(increment / xOffset);
 			}
-			
+
 			for (var i:int = 0; i < data.length; i+=increment) 
 			{
 				if (i+increment > data.length) break;
