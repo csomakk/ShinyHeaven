@@ -6,6 +6,7 @@
  */
 package org.shinyheaven.documentmanager {
     import flash.display.DisplayObject;
+    import flash.events.Event;
 
     import mx.binding.utils.BindingUtils;
     import mx.core.FlexGlobals;
@@ -51,7 +52,9 @@ package org.shinyheaven.documentmanager {
                 view.setStyle("skinClass", DefaultLineChartSkin);
             }
             var dataProvider:IChartDataProvider = instrumentManager.addNewInstrument(message.selectedInstrument).chartDataProvider;
-            BindingUtils.bindProperty(view, "dataProvider", dataProvider, "data");
+            view.addEventListener(Event.ADDED_TO_STAGE, function(event:Event):void {
+                BindingUtils.bindProperty(view, "dataProvider", dataProvider, "data");
+            });
             var mdi:MDI = FlexGlobals.topLevelApplication.mdi; // TODO solve more beautifully
             mdi.addDocument(view);
         }
