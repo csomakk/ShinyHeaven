@@ -21,7 +21,6 @@ package org.shinyheaven.datavisualization.charting.drawers
 		
 		[Inspectable]
 		public var isFill:Boolean = false;
-		
 
 		[Inspectable(category="Styles")]
 		public function get fillAlpha():Number

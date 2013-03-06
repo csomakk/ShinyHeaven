@@ -9,7 +9,6 @@ package org.shinyheaven.datavisualization.charting.calculators
 				
 		private function calculate(instrData:Array):DataRange
 		{
-			//TODO Rename this class to DataRangeCalculator and put it into calculators package
 			var range:DataRange = new DataRange();
 			
 			for each (var vo:IHistoricalDataItem in instrData) 

@@ -2,13 +2,15 @@ package org.shinyheaven.datavisualization.charting
 {
 	import mx.collections.ArrayCollection;
 	import mx.events.CollectionEvent;
+	import mx.events.FlexEvent;
+	import mx.events.ResizeEvent;
 	
 	import spark.components.supportClasses.SkinnableComponent;
 	
 	import org.shinyheaven.datavisualization.charting.calculators.DataRangeCalculator;
 	import org.shinyheaven.datavisualization.charting.calculators.DataToCoordinates;
 	import org.shinyheaven.datavisualization.charting.calculators.indicators.MovingAverageCalculator;
-	import org.shinyheaven.datavisualization.charting.drawers.LineDrawer;
+	import org.shinyheaven.datavisualization.charting.drawers.SparkLineDrawer;
 	import org.shinyheaven.datavisualization.charting.events.UserControlEvent;
 	import org.shinyheaven.datavisualization.charting.vo.DataRange;
 	
@@ -16,9 +18,9 @@ package org.shinyheaven.datavisualization.charting
 	{
 		
 		[SkinPart(required="true")]
-		public var valueDrawer:LineDrawer;
+		public var valueDrawer:SparkLineDrawer;
 		[SkinPart(required="true")]
-		public var averageDrawer:LineDrawer;
+		public var averageDrawer:SparkLineDrawer;
 		[SkinPart(required="true")]
 		public var controls:LineChartUIControls;
 				
@@ -28,14 +30,24 @@ package org.shinyheaven.datavisualization.charting
 		private var averageCoordinates:Array = [];
 		
 		private var initAmountOfDataEnabled:Boolean = true;
-		private var initAmountOfData:int;
+		private var amountOfData:int;
 		
 		private var rangeForRendering:DataRange;
+		
+		private var readyToDraw:Boolean = false;
 		
 		public function LineChart()
 		{
 			super();
+			addEventListener(FlexEvent.CREATION_COMPLETE, addBehavior);
 		}
+		
+		protected function addBehavior(event:FlexEvent):void
+		{
+			readyToDraw = true;
+			addEventListener(ResizeEvent.RESIZE, handleChartResized);
+		}
+		
 		
 		[Bindable]
 		public function get dataProvider():ArrayCollection
@@ -48,27 +60,33 @@ package org.shinyheaven.datavisualization.charting
 			_dataProvider = value;
 			_dataProvider.addEventListener(CollectionEvent.COLLECTION_CHANGE, handleDataChanged);
 
-			invalidateProperties();
+			dataOrSizeChanged();
+		}
+		
+		protected function handleChartResized(event:ResizeEvent):void
+		{
+			callLater(dataOrSizeChanged);
+		}
+		
+		protected function handleDataChanged(event:CollectionEvent):void
+		{
+			dataOrSizeChanged();
 		}
 		
 		private function getInitAmountOFData():int
 		{
 			var result:int;
-			if (initAmountOfData < 1 || !initAmountOfDataEnabled)
+			if (amountOfData < 1 || !initAmountOfDataEnabled)
 			{
 				result = _dataProvider.length;
 			}
 			else
 			{
-				result = initAmountOfData;
+				result = amountOfData;
 			}
 			return result;
 		}
 		
-		protected function handleDataChanged(event:CollectionEvent):void
-		{
-			invalidateProperties();
-		}
 		
 		private function getDrawingCoordinates(data:Array):Array
 		{
@@ -83,23 +101,16 @@ package org.shinyheaven.datavisualization.charting
 			return result;
 		}
 		
-		override protected function commitProperties():void
+		protected function dataOrSizeChanged():void
 		{
-			super.commitProperties();
+			if (!readyToDraw) return;
 			
-			initAmountOfData = getInitAmountOFData();
+			amountOfData = getInitAmountOFData();
 			
 			rangeForRendering = new DataRangeCalculator().getDataRange(
-				getDataToVisualize(_dataProvider.toArray(), initAmountOfData)
+				getDataToVisualize(_dataProvider.toArray(), amountOfData)
 				);
 			
-			updateMainVolumeDrawer();
-			updateMovingAverageDrawer();
-		}
-		
-		override protected function updateDisplayList(unscaledWidth:Number, unscaledHeight:Number):void
-		{
-			super.updateDisplayList(unscaledWidth, unscaledHeight);
 			updateMainVolumeDrawer();
 			updateMovingAverageDrawer();
 		}
@@ -107,7 +118,7 @@ package org.shinyheaven.datavisualization.charting
 		private function updateMainVolumeDrawer():void
 		{
 			valueCoordinates = getDrawingCoordinates(
-				getDataToVisualize(_dataProvider.toArray(), initAmountOfData)
+				getDataToVisualize(_dataProvider.toArray(), amountOfData)
 			);
 			valueDrawer.data = valueCoordinates;
 		}
@@ -118,7 +129,7 @@ package org.shinyheaven.datavisualization.charting
 			{
 				averageCoordinates = getDrawingCoordinates(
 					MovingAverageCalculator.calculate(
-						getDataToVisualize(_dataProvider.toArray(), initAmountOfData), 
+						getDataToVisualize(_dataProvider.toArray(), amountOfData), 
 						controls.avrgWindow));
 				averageDrawer.data = averageCoordinates;
 				averageDrawer.visible = true;
@@ -142,6 +153,7 @@ package org.shinyheaven.datavisualization.charting
 		override protected function partAdded(partName:String, instance:Object):void
 		{
 			super.partAdded(partName, instance);
+			
 			switch(instance)
 			{
 				case controls:
