@@ -4,7 +4,7 @@
 		 xmlns:service="org.shinyheaven.service.*" 
 		 xmlns:news="org.shinyheaven.news.*"
          xmlns:adddocument="org.shinyheaven.uiframe.adddocument.*"
-         xmlns:documentmanager="org.shinyheaven.documentmanager.*">
+         xmlns:documentmanager="org.shinyheaven.documentmanager.*" xmlns:uiframe="org.shinyheaven.uiframe.*">
 	<fx:Declarations>
 		<service:CommunicationModule/>
 		<news:NewsDataProvider />
@@ -13,6 +13,8 @@
 		<service:AvailableInstrumentsDataProvider />
 		<adddocument:AddDocumentDialog />
 		<service:InstrumentManager />
+		<uiframe:MDIController />
+		
 	</fx:Declarations>
 	<fx:Script><![CDATA[
         import org.shinyheaven.uiframe.controlbar.AddDocumentButton;

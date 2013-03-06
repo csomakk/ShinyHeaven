@@ -1,29 +1,28 @@
 package org.shinyheaven.service {
-	import flash.events.SecurityErrorEvent;
-	import flash.events.TimerEvent;
-	import flash.system.Security;
-	import flash.utils.Timer;
-	import flash.utils.getQualifiedClassName;
-	import flash.utils.getTimer;
-	
-	import mx.collections.ArrayList;
-	import mx.collections.IList;
-	import mx.controls.Alert;
-	import mx.messaging.ChannelSet;
-	import mx.messaging.channels.AMFChannel;
-	import mx.rpc.AbstractOperation;
-	import mx.rpc.events.FaultEvent;
-	import mx.rpc.events.ResultEvent;
-	import mx.rpc.remoting.RemoteObject;
-	import mx.utils.StringUtil;
-	
-	import org.shinyheaven.news.NewsDataProvider;
-	import org.shinyheaven.news.NewsItem;
-	import org.shinyheaven.service.dto.HistoricalDataItem;
-	import org.shinyheaven.service.dto.IChartDataProvider;
-	import org.shinyheaven.service.dto.OHLCUpdate;
-	
-	public class CommunicationModule {
+    import flash.events.SecurityErrorEvent;
+    import flash.events.TimerEvent;
+    import flash.system.Security;
+    import flash.utils.Timer;
+    import flash.utils.getQualifiedClassName;
+    import flash.utils.getTimer;
+
+    import mx.collections.ArrayList;
+    import mx.collections.IList;
+    import mx.controls.Alert;
+    import mx.messaging.ChannelSet;
+    import mx.messaging.channels.AMFChannel;
+    import mx.rpc.AbstractOperation;
+    import mx.rpc.events.FaultEvent;
+    import mx.rpc.events.ResultEvent;
+    import mx.rpc.remoting.RemoteObject;
+    import mx.utils.StringUtil;
+
+    import org.shinyheaven.news.NewsDataProvider;
+    import org.shinyheaven.news.NewsItem;
+    import org.shinyheaven.service.dto.HistoricalDataItem;
+    import org.shinyheaven.service.dto.OHLCUpdate;
+
+    public class CommunicationModule {
 		
 		private static const LOGIN_SERVICE_NAME:String = "login";
 		private static const LOOKUP_SERVICE_NAME:String = "lookup";
@@ -144,7 +143,7 @@ package org.shinyheaven.service {
 			}
 			if(!tick)
 				throw new Error('updateResultHandler received no "Tick" in ResultEvent.');
-			ShinyHeaven.logger.info("Tick mock received:", tick);
+			ShinyHeaven.logger.debug("Tick mock received: {0}", tick);
 			instrument.chartDataProvider.data.addItem(tick);
 		}
 		
@@ -208,7 +207,7 @@ package org.shinyheaven.service {
 		
 		protected function lookupResultHandler(event:ResultEvent):void {
 			
-			trace(StringUtil.substitute("Got {0} of {1}s", event.result.length, flash.utils.getQualifiedClassName(event.result[0])));
+			trace(StringUtil.substitute("Got {0} of {1}s", event.result.length, getQualifiedClassName(event.result[0])));
 			instrumentManager.getInstrument(Constants.HARDCODED_INSTRUMENT).chartDataProvider.data.addAll(event.result as IList);
 			
 			startAutomaticUpdating();

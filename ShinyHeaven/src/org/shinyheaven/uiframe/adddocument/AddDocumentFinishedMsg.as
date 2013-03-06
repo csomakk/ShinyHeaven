@@ -7,9 +7,9 @@
 package org.shinyheaven.uiframe.adddocument {
     public class AddDocumentFinishedMsg {
         public var selectedInstrument:String;
-        public var selectedVariant:int;
+        public var selectedVariant:Class;
 
-        public function AddDocumentFinishedMsg(selectedInstrument:String, selectedVariant:int) {
+        public function AddDocumentFinishedMsg(selectedInstrument:String, selectedVariant:Class) {
             this.selectedInstrument = selectedInstrument;
             this.selectedVariant = selectedVariant;
         }
