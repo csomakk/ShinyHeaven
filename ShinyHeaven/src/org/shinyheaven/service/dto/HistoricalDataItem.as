@@ -1,4 +1,7 @@
 package org.shinyheaven.service.dto {
+    import flash.utils.getQualifiedClassName;
+
+    import mx.utils.StringUtil;
 
     /**
      * Tick like object that is used to display
@@ -24,6 +27,9 @@ package org.shinyheaven.service.dto {
 			return new HistoricalDataItem(_value, timestamp);
 		}
 
+        public function toString():String {
+            return StringUtil.substitute("{0}: {1} @ {2}", getQualifiedClassName(this), value, timestamp);
+        }
     }
 
 }
