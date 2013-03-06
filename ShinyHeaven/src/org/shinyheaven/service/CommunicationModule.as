@@ -104,7 +104,6 @@ package org.shinyheaven.service {
 				availableInstruments.removeAll();
 				availableInstruments.addItem(Constants.HARDCODED_INSTRUMENT);
 				availableInstruments.addItem("EURUSD");
-				availableInstruments.addItem("XAUUSD");
 				availableInstruments.addItem("GBPUSD");
 				availableInstruments.addItem("JPYUSD");
 				availableInstruments.addItem("CHFUSD");
@@ -166,9 +165,6 @@ package org.shinyheaven.service {
 		}
 		
 		public function lookupRequest(instrumentId:String):void {
-			
-			//TODO: translate comment below
-			//instrumentManager.addNewInstrument(Constants.HARDCODED_INSTRUMENT); ez elvileg már nem kell az instrumentmanager miatt
 			
 			var ro:RequestObject = new RequestObject(client_id, instrumentId, Constants.START_DATE, Constants.END_DATE);
 			lookupOperation.send(ro);
