@@ -34,10 +34,10 @@
                     </s:ArrayList>
                 </s:dataProvider>
             </s:ButtonBar>
-            <s:HGroup>
-                <s:Button id="backButton" label="⇐" click="onBackClick(event)"/>
-                <s:Button id="finishButton" label="OK" chromeColor="0xff8c00" />
-            </s:HGroup>
+            <s:Group width="100%">
+                <s:Button id="backButton" label="⇐" click="onBackClick(event)" left="0"/>
+                <s:Button id="finishButton" label="OK" chromeColor="0xff8c00" right="0" />
+            </s:Group>
         </s:VGroup>
     </s:TitleWindow>
     <fx:Script><![CDATA[
