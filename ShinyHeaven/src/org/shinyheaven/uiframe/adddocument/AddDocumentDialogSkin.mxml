@@ -4,6 +4,14 @@
     <fx:Metadata>
         [HostComponent("org.shinyheaven.uiframe.adddocument.AddDocumentDialog")]
     </fx:Metadata>
+    <fx:Declarations>
+        <s:NumberValidator id="comboBoxValidator"
+                           source="{comboBox}"
+                           property="selectedIndex"
+                           minValue="0"
+                           trigger="{nextButton}"
+                           triggerEvent="click" />
+    </fx:Declarations>
     <s:states>
         <s:State name="instrument" />
         <s:State name="variant" />
@@ -14,7 +22,7 @@
             <s:Button id="nextButton" label="⇒" chromeColor="0x9acd32" />
         </s:VGroup>
         <s:VGroup includeIn="variant" paddingTop="8" paddingRight="8" paddingBottom="8" paddingLeft="8" gap="8">
-            <s:ButtonBar id="styleButtonBar">
+            <s:ButtonBar id="styleButtonBar" selectedIndex="0">
                 <s:dataProvider>
                     <s:ArrayList>
                         <fx:Object label="Custom chart" variant="{LineChart}"
@@ -26,7 +34,10 @@
                     </s:ArrayList>
                 </s:dataProvider>
             </s:ButtonBar>
-            <s:Button id="finishButton" label="OK" chromeColor="0xff8c00" />
+            <s:HGroup>
+                <s:Button id="backButton" label="⇐" click="onBackClick(event)"/>
+                <s:Button id="finishButton" label="OK" chromeColor="0xff8c00" />
+            </s:HGroup>
         </s:VGroup>
     </s:TitleWindow>
     <fx:Script><![CDATA[
@@ -34,5 +45,9 @@
         import org.shinyheaven.datavisualization.charting.LineChart;
 
         import spark.components.List;
+
+        protected function onBackClick(event:MouseEvent):void {
+            setCurrentState("instrument");
+        }
         ]]></fx:Script>
 </s:Skin>

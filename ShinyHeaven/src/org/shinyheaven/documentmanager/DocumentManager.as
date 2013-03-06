@@ -6,13 +6,13 @@
  */
 package org.shinyheaven.documentmanager {
     import flash.display.DisplayObject;
-    
+
     import mx.binding.utils.BindingUtils;
     import mx.core.FlexGlobals;
     import mx.core.UIComponent;
     import mx.events.FlexEvent;
     import mx.managers.PopUpManager;
-    
+
     import org.shinyheaven.datavisualization.charting.LineChart;
     import org.shinyheaven.datavisualization.charting.skins.DefaultLineChartSkin;
     import org.shinyheaven.service.InstrumentManager;
@@ -21,6 +21,7 @@ package org.shinyheaven.documentmanager {
     import org.shinyheaven.uiframe.adddocument.AddDocumentDialog;
     import org.shinyheaven.uiframe.adddocument.AddDocumentFinishedMsg;
     import org.shinyheaven.uiframe.adddocument.AddDocumentPopupClosedMsg;
+    import org.shinyheaven.uiframe.adddocument.CenterAddDocumentDialogMsg;
     import org.shinyheaven.uiframe.controlbar.AddDocumentMsg;
 
     public class DocumentManager {
@@ -39,6 +40,11 @@ package org.shinyheaven.documentmanager {
         public function onAddDocumentPopupClosed(message:AddDocumentPopupClosedMsg):void {
             PopUpManager.removePopUp(addDocumentDialog);
             addDocumentDialog.skin.setCurrentState("instrument");
+        }
+
+        [MessageHandler]
+        public function onCenterAddDocumentDialog(message:CenterAddDocumentDialogMsg):void {
+            PopUpManager.centerPopUp(addDocumentDialog);
         }
 
         [Inject]
