@@ -21,7 +21,7 @@
                                    icon="@Embed('/org/shinyheaven/assets/hdd_win.png')" />
                         <fx:Object label="Flex chart" variant="{FlexLineChart}"
                                    icon="@Embed('/org/shinyheaven/assets/hdd_apple.png')" />
-                        <fx:Object label="[dummy Button]" variant="{Button}"
+                        <fx:Object label="[List]" variant="{List}"
                                    icon="@Embed('/org/shinyheaven/assets/database.png')" />
                     </s:ArrayList>
                 </s:dataProvider>
@@ -32,5 +32,7 @@
     <fx:Script><![CDATA[
         import org.shinyheaven.datavisualization.charting.FlexLineChart;
         import org.shinyheaven.datavisualization.charting.LineChart;
+
+        import spark.components.List;
         ]]></fx:Script>
 </s:Skin>
