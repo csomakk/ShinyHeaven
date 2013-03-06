@@ -8,7 +8,8 @@ package org.shinyheaven.datavisualization.charting.calculators
 	{
 		public static function sampleDataAndGetPoints(width:Number, height:Number, data:Array, minVal:Number, maxVal:Number):Array
 		{
-			if (data == null) return [];
+			// input validation
+			if (!data || data.length < 2 || width < 1 || height < 1) return [];
 			
 			var result:Array = [];
 			

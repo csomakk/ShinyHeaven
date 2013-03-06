@@ -31,14 +31,6 @@ package org.shinyheaven.datavisualization.charting.drawers
 			_data = value;
 			draw(width, height);
 		}
-
-		override public function setLayoutBoundsSize(width:Number, height:Number, postLayoutTransform:Boolean=true):void 
-		{
-			super.setLayoutBoundsSize(width, height, postLayoutTransform);
-			trace("SparkLineDrawer.setLayoutBoundsSize(width, height, postLayoutTransform)");
-			
-			draw(width, height);
-		}
 		
 		private function draw(width:Number, height:Number):void
 		{
