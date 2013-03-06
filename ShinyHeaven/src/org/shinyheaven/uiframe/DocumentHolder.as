@@ -40,7 +40,6 @@ package org.shinyheaven.uiframe
 		
 		protected function onCreationComplete(event:FlexEvent):void
 		{
-			contentGroup.clipAndEnableScrolling = true;
 			removeEventListener(FlexEvent.CREATION_COMPLETE, onCreationComplete);
 		}
 		
