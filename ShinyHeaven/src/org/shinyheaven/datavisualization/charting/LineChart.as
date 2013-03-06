@@ -44,7 +44,6 @@ package org.shinyheaven.datavisualization.charting
 		
 		protected function addBehavior(event:FlexEvent):void
 		{
-			
 			readyToDraw = true;
 			addEventListener(ResizeEvent.RESIZE, handleChartResized);
 		}
@@ -66,9 +65,7 @@ package org.shinyheaven.datavisualization.charting
 		
 		protected function handleChartResized(event:ResizeEvent):void
 		{
-			trace("LineChart.handleChartResized(event)");
-			
-			dataOrSizeChanged();
+			callLater(dataOrSizeChanged);
 		}
 		
 		protected function handleDataChanged(event:CollectionEvent):void
