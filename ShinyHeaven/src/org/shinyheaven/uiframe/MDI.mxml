@@ -2,6 +2,7 @@
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009"
 		 xmlns:s="library://ns.adobe.com/flex/spark"
 		 left="0" right="0"
+		 clipAndEnableScrolling="true"
 		 xmlns:parsley="http://www.spicefactory.org/parsley">
 	<fx:Declarations>
 		<parsley:Configure />
@@ -186,11 +187,10 @@
                 return;
             }
 
-            remainingLeft = x;
-            remainingRight = stage.stageWidth-x//parent.width - (right as Number) - x;
-            remainingTop = y;
-            trace("MDI:rearrange:height", height)
-            remainingBottom = stage.stageHeight-y//parent.height - (bottom as Number) - y;
+            remainingLeft = 0;
+            remainingRight = width;
+            remainingTop = 0;
+            remainingBottom = height;
 
             for each (var d:DocumentHolder in dockedDocumentsArrayCollection) {
                 if (containsElement(d) == false) {
@@ -199,7 +199,6 @@
 				
 				measure();
 				
-
                 var dx:int;
                 var dy:int;
 
@@ -333,8 +332,6 @@
         }
 
         protected function getDraggedSide(argX:Number, argY:Number):int {
-            argX += x;
-		    argY += y;
 		   
 			if (isNear(argX, remainingLeft, 10)) {
                 return LEFT;

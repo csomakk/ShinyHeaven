@@ -91,7 +91,7 @@
     <s:controlBarContent>
         <uiframe-controlbar:AddDocumentButton />
     </s:controlBarContent>
-    <uiframe:MDI id="mdi" positions="left 20%, 1x bottom 20%" width="500" height="500" >
+    <uiframe:MDI id="mdi" left="0" right="0" top="0" bottom="0" positions="left 20%, 1x bottom 20%">
 		<news:NewsDisplay id="newsDisplay" />
         <charting:FlexLineChart id="flexChart" width="100%" height="100%" />
         <charting:LineChart id="lineChart"
