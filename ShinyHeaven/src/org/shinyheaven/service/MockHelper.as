@@ -18,7 +18,10 @@ package org.shinyheaven.service
 				prevStockDelta = (Math.random() - 0.5) * prevStockPrice / 100
 			}
 			
-			prevStockDelta = prevStockDelta * ((Math.random() * 4) - 2) + (Math.random() - 0.5) * prevStockPrice * 0.001;
+			prevStockDelta = prevStockDelta * ((Math.random() * 4) - 2) + (Math.random() - 0.5) + prevStockPrice * 0.001 * (Math.random() - 0.5);
+			if(prevStockPrice + prevStockDelta < 1) {
+				prevStockDelta = 0;
+			}
 			prevStockPrice = prevStockPrice + prevStockDelta;
 			return prevStockPrice;
 		}
