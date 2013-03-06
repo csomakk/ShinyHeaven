@@ -21,7 +21,7 @@
         [Inject]
         public var commModule:CommunicationModule;
 		[Inject]
-		public var instance:MDI;
+		public var instance:MDIController;
 
         private var remainingDocumentsArrayCollection:ArrayCollection = new ArrayCollection();
         private var dockedDocumentsArrayCollection:ArrayCollection = new ArrayCollection();
@@ -65,7 +65,7 @@
             marker = new DragMarker();
             arrangeUnDocked();
 			
-			instance = this;
+			instance.mdi = this;
 			
         }
 			

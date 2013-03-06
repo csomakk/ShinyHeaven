@@ -6,18 +6,18 @@
  */
 package org.shinyheaven.documentmanager {
     import flash.display.DisplayObject;
-
+    
     import mx.binding.utils.BindingUtils;
     import mx.core.FlexGlobals;
     import mx.core.UIComponent;
     import mx.events.FlexEvent;
     import mx.managers.PopUpManager;
-
+    
     import org.shinyheaven.datavisualization.charting.LineChart;
     import org.shinyheaven.datavisualization.charting.skins.DefaultLineChartSkin;
     import org.shinyheaven.service.InstrumentManager;
     import org.shinyheaven.service.dto.IChartDataProvider;
-    import org.shinyheaven.uiframe.MDI;
+    import org.shinyheaven.uiframe.MDIController;
     import org.shinyheaven.uiframe.adddocument.AddDocumentDialog;
     import org.shinyheaven.uiframe.adddocument.AddDocumentFinishedMsg;
     import org.shinyheaven.uiframe.adddocument.AddDocumentPopupClosedMsg;
@@ -26,6 +26,8 @@ package org.shinyheaven.documentmanager {
     public class DocumentManager {
 		[Inject]
 		public var addDocumentDialog:AddDocumentDialog;
+		[Inject]
+		public var mdi:MDIController;
 		
 		[MessageHandler]
         public function onAddDocument(message:AddDocumentMsg):void {
@@ -55,7 +57,6 @@ package org.shinyheaven.documentmanager {
             view.addEventListener(FlexEvent.CREATION_COMPLETE, function(event:FlexEvent):void {
                 BindingUtils.bindProperty(view, "dataProvider", dataProvider, "data"); // TODO solve more beautifully and remove this workaround
             });
-            var mdi:MDI = FlexGlobals.topLevelApplication.mdi; // TODO solve more beautifully
             mdi.addDocument(view);
         }
     }

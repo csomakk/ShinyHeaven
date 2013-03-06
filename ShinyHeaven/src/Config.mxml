@@ -13,7 +13,8 @@
 		<service:AvailableInstrumentsDataProvider />
 		<adddocument:AddDocumentDialog />
 		<service:InstrumentManager />
-		<uiframe:MDI />
+		<uiframe:MDIController />
+		
 	</fx:Declarations>
 	<fx:Script><![CDATA[
         import org.shinyheaven.uiframe.controlbar.AddDocumentButton;
