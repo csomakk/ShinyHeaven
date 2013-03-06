@@ -8,7 +8,7 @@ package org.shinyheaven.datavisualization.charting
 	import org.shinyheaven.datavisualization.charting.calculators.DataRangeCalculator;
 	import org.shinyheaven.datavisualization.charting.calculators.DataToCoordinates;
 	import org.shinyheaven.datavisualization.charting.calculators.indicators.MovingAverageCalculator;
-	import org.shinyheaven.datavisualization.charting.drawers.LineDrawer;
+	import org.shinyheaven.datavisualization.charting.drawers.SparkLineDrawer;
 	import org.shinyheaven.datavisualization.charting.events.UserControlEvent;
 	import org.shinyheaven.datavisualization.charting.vo.DataRange;
 	
@@ -16,9 +16,9 @@ package org.shinyheaven.datavisualization.charting
 	{
 		
 		[SkinPart(required="true")]
-		public var valueDrawer:LineDrawer;
+		public var valueDrawer:SparkLineDrawer;
 		[SkinPart(required="true")]
-		public var averageDrawer:LineDrawer;
+		public var averageDrawer:SparkLineDrawer;
 		[SkinPart(required="true")]
 		public var controls:LineChartUIControls;
 				
@@ -93,13 +93,6 @@ package org.shinyheaven.datavisualization.charting
 				getDataToVisualize(_dataProvider.toArray(), initAmountOfData)
 				);
 			
-			updateMainVolumeDrawer();
-			updateMovingAverageDrawer();
-		}
-		
-		override protected function updateDisplayList(unscaledWidth:Number, unscaledHeight:Number):void
-		{
-			super.updateDisplayList(unscaledWidth, unscaledHeight);
 			updateMainVolumeDrawer();
 			updateMovingAverageDrawer();
 		}

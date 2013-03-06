@@ -11,12 +11,12 @@
 	
 	<skins:BackgroundDrawer width="100%" height="100%" />
 	
-	<drawers:LineDrawer id="averageDrawer"
-					  width="100%" height="100%" lineColor="#F53682"
-					  left="0.5" right="0.5" bottom="0.5" top="0.5" />
-	<drawers:LineDrawer id="valueDrawer" isFill="true"
-					  width="100%" height="100%" lineColor="#454545"
-					  fillAlpha=".1" fillColor="#144D70"
+	<drawers:SparkLineDrawer id="averageDrawer"
+							 lineColor="#F53682"
+							 left="0.5" right="0.5" bottom="0.5" top="0.5" />
+	
+	<drawers:SparkLineDrawer id="valueDrawer"
+					  lineColor="#454545" fillAlpha=".1" fillColor="#144D70"
 					  left="0.5" right="0.5" bottom="0.5" top="0.5" />
 	
 	<charting:LineChartUIControls id="controls" width="100%" top="0" left="0" />
