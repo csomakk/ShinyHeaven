@@ -2,10 +2,11 @@ package org.shinyheaven.uiframe
 {
     import flash.events.MouseEvent;
     import flash.geom.Point;
-
+    
     import mx.controls.Button;
     import mx.core.IVisualElement;
-
+    import mx.events.FlexEvent;
+    
     import spark.components.Panel;
 
     public class DocumentHolder extends Panel
@@ -34,6 +35,13 @@ package org.shinyheaven.uiframe
 			closeBtn.addEventListener(MouseEvent.CLICK, onCloseClick);
 			addElement(closeBtn);
 			resizer.addEventListener(MouseEvent.MOUSE_DOWN, resizerOnMouseDown);
+			addEventListener(FlexEvent.CREATION_COMPLETE, onCreationComplete);
+		}
+		
+		protected function onCreationComplete(event:FlexEvent):void
+		{
+			contentGroup.clipAndEnableScrolling = true;
+			removeEventListener(FlexEvent.CREATION_COMPLETE, onCreationComplete);
 		}
 		
 		protected function resizerOnMouseDown(event:MouseEvent):void
@@ -89,12 +97,21 @@ package org.shinyheaven.uiframe
 		public function set dockedDirection(value:int):void
 		{
 			_dockedDirection = value;
+			
+			if(element == null) {
+				return; //is dummy
+			}
+			
 			addElement(resizer);
 			
 			resizer.right = NaN;
 			resizer.left = NaN;
 			resizer.top = NaN;
 			resizer.bottom = NaN;
+			element.right = 0;
+			element.left = 0;
+			element.top = 0;
+			element.bottom = 0;
 			
 			switch(value)
 			{
@@ -104,6 +121,7 @@ package org.shinyheaven.uiframe
 					resizer.width = 5;
 					resizer.top = 0;
 					resizer.bottom = 0;
+					element.right = 5;
 					break;
 				}
 				case MDI.RIGHT:
@@ -112,6 +130,7 @@ package org.shinyheaven.uiframe
 					resizer.width = 5;
 					resizer.top = 0;
 					resizer.bottom = 0;
+					element.left = 5;
 					break;
 				}
 				case MDI.TOP:
@@ -120,6 +139,7 @@ package org.shinyheaven.uiframe
 					resizer.left = 0;
 					resizer.bottom = 0;
 					resizer.height = 5;
+					element.bottom = 5;
 					break;
 				}
 				case MDI.BOTTOM:
@@ -128,6 +148,7 @@ package org.shinyheaven.uiframe
 					resizer.left = 0;
 					resizer.top = 0;
 					resizer.height = 5;
+					element.top = 5;
 					break;
 				}
 					
