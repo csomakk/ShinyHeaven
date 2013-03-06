@@ -74,10 +74,10 @@ package org.shinyheaven.uiframe.adddocument {
             skin.setCurrentState("variant");
         }
 
-        private var selectedVariant:int;
+        private var selectedVariant:Class;
 
         protected function onFinishClick(event:MouseEvent):void {
-            selectedVariant = styleButtonBar.selectedIndex;
+            selectedVariant = styleButtonBar.selectedItem.variant;
             dispatcher(new AddDocumentFinishedMsg(selectedInstrument, selectedVariant));
             dispatcher(new AddDocumentPopupClosedMsg());
         }

@@ -17,13 +17,20 @@
             <s:ButtonBar id="styleButtonBar">
                 <s:dataProvider>
                     <s:ArrayList>
-                        <fx:Object label="0" icon="@Embed('/org/shinyheaven/assets/hdd_win.png')" />
-                        <fx:Object label="1" icon="@Embed('/org/shinyheaven/assets/hdd_apple.png')" />
-                        <fx:Object label="2" icon="@Embed('/org/shinyheaven/assets/database.png')" />
+                        <fx:Object label="Custom chart" variant="{LineChart}"
+                                   icon="@Embed('/org/shinyheaven/assets/hdd_win.png')" />
+                        <fx:Object label="Flex chart" variant="{FlexLineChart}"
+                                   icon="@Embed('/org/shinyheaven/assets/hdd_apple.png')" />
+                        <fx:Object label="[dummy Button]" variant="{Button}"
+                                   icon="@Embed('/org/shinyheaven/assets/database.png')" />
                     </s:ArrayList>
                 </s:dataProvider>
             </s:ButtonBar>
             <s:Button id="finishButton" label="OK" chromeColor="0xff8c00" />
         </s:VGroup>
     </s:TitleWindow>
+    <fx:Script><![CDATA[
+        import org.shinyheaven.datavisualization.charting.FlexLineChart;
+        import org.shinyheaven.datavisualization.charting.LineChart;
+        ]]></fx:Script>
 </s:Skin>
