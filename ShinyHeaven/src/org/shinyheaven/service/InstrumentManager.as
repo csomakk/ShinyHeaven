@@ -22,6 +22,8 @@ package org.shinyheaven.service
 			}
 		}
 		
+		
+		/**returns existing instrument if its already added*/
 		public function addNewInstrument(id:String):Instrument{
 			var inst:Instrument = new Instrument();
 			addInstrument(id, inst);
