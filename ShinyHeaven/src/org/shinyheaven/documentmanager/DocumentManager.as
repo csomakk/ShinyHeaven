@@ -10,7 +10,6 @@ package org.shinyheaven.documentmanager {
     import mx.binding.utils.BindingUtils;
     import mx.core.FlexGlobals;
     import mx.core.UIComponent;
-    import mx.events.FlexEvent;
     import mx.managers.PopUpManager;
 
     import org.shinyheaven.datavisualization.charting.LineChart;
@@ -60,7 +59,7 @@ package org.shinyheaven.documentmanager {
                 view.setStyle("skinClass", DefaultLineChartSkin);
             }
             var dataProvider:IChartDataProvider = instrumentManager.addNewInstrument(message.selectedInstrument).chartDataProvider;
-            BindingUtils.bindProperty(view, "dataProvider", dataProvider, "data"); // TODO solve more beautifully and remove this workaround
+            BindingUtils.bindProperty(view, "dataProvider", dataProvider, "data");
             mdi.addDocument(view);
         }
     }
