@@ -356,7 +356,7 @@
             if (isNear(argY, remainingTop, 10)) {
                 return TOP;
             }
-			trace(argY, remainingBottom)
+
             if (isNear(argY, remainingBottom, 10)) {
                 return BOTTOM;
             }
