@@ -20,6 +20,8 @@
 
         [Inject]
         public var commModule:CommunicationModule;
+		[Inject]
+		public var instance:MDI;
 
         private var remainingDocumentsArrayCollection:ArrayCollection = new ArrayCollection();
         private var dockedDocumentsArrayCollection:ArrayCollection = new ArrayCollection();
@@ -54,10 +56,22 @@
 
         [Init]
         public function setUpMDI():void {
-            stage.addEventListener(ResizeEvent.RESIZE, MDI_resizeHandler);
+			if(stage == null) {
+				addEventListener(Event.ADDED_TO_STAGE, setResizeHandler);
+			} else {
+				setResizeHandler();	
+			}
+          
             marker = new DragMarker();
             arrangeUnDocked();
+			
+			instance = this;
+			
         }
+			
+		private function setResizeHandler(e:Event = null):void {
+			stage.addEventListener(ResizeEvent.RESIZE, MDI_resizeHandler);
+		}
 
         private function get remainingWidth():Number {
             return remainingRight - remainingLeft;
