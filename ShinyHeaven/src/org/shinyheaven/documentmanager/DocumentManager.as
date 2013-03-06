@@ -47,7 +47,7 @@ package org.shinyheaven.documentmanager {
             var view:UIComponent = new message.selectedVariant();
             view.percentWidth = 100;
             view.percentHeight = 100;
-            if (message.selectedVariant is LineChart) { // TODO this doesn't work, use instanceof?
+            if (message.selectedVariant == LineChart) {
                 view.setStyle("skinClass", DefaultLineChartSkin);
             }
             var dataProvider:IChartDataProvider = instrumentManager.addNewInstrument(message.selectedInstrument).chartDataProvider;
