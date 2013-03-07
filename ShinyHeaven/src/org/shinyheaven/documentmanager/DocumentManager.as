@@ -28,11 +28,13 @@ package org.shinyheaven.documentmanager {
 		public var addDocumentDialog:AddDocumentDialog;
 		[Inject]
 		public var mdi:MDIController;
-		
+        [MessageDispatcher]
+        public var dispatcher:Function;
+
 		[MessageHandler]
         public function onAddDocument(message:AddDocumentMsg):void {
             PopUpManager.addPopUp(addDocumentDialog, FlexGlobals.topLevelApplication as DisplayObject, true);
-            PopUpManager.centerPopUp(addDocumentDialog);
+            onCenterAddDocumentDialog(null);
         }
 
         [MessageHandler]
