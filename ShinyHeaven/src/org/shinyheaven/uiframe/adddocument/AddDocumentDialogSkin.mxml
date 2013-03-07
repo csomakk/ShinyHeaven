@@ -38,10 +38,12 @@
                     <s:dataProvider><adddocument:ViewTypes /></s:dataProvider>
                 </s:ButtonBar>
             </s:FormItem>
-            <s:Group width="100%">
-                <s:FormItem><s:Button id="backButton" label="⇐" click="onBackClick(event)" left="0" /></s:FormItem>
-                <s:FormItem><s:Button id="finishButton" label="OK" chromeColor="0xff8c00" right="0" /></s:FormItem>
-            </s:Group>
+            <s:FormItem>
+                <s:Group width="100%">
+                    <s:Button id="backButton" label="⇐" click="onBackClick(event)" left="0" />
+                    <s:Button id="finishButton" label="OK" chromeColor="0xff8c00" right="0" />
+                </s:Group>
+            </s:FormItem>
         </s:Form>
     </s:TitleWindow>
     <fx:Script><![CDATA[
