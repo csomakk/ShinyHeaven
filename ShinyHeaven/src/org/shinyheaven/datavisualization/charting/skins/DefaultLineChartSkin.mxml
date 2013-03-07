@@ -3,13 +3,39 @@
 		xmlns:s="library://ns.adobe.com/flex/spark" 
 		xmlns:mx="library://ns.adobe.com/flex/mx" 
 		xmlns:parts="org.shinyheaven.datavisualization.charting.skins.parts.*" 
-		xmlns:charting="org.shinyheaven.datavisualization.charting.*" xmlns:skins="org.shinyheaven.datavisualization.charting.skins.*" xmlns:drawers="org.shinyheaven.datavisualization.charting.drawers.*">
-	<!-- host component -->
+		xmlns:charting="org.shinyheaven.datavisualization.charting.*"
+		xmlns:drawers="org.shinyheaven.datavisualization.charting.drawers.*">
+		
 	<fx:Metadata>
 		[HostComponent("org.shinyheaven.datavisualization.charting.LineChart")]
 	</fx:Metadata>
+
+	<s:mask>
+		<s:Group id="drawMask" top="0" right="0" bottom="0" left="0">
+			<s:Rect width="100%" height="100%">
+				<s:fill>
+					<s:SolidColor />
+				</s:fill>
+			</s:Rect>
+		</s:Group>
+	</s:mask>
 	
-	<skins:BackgroundDrawer width="100%" height="100%" />
+	<!-- BACKGRUND DRAWING START -->
+	<!-- TODO Refactor this to a container skin -->
+	<s:Rect top="0" bottom="0" left="0" right="0">
+		<s:stroke>
+			<s:SolidColorStroke color="0xBBBBBB" joints="{JointStyle.MITER}" />
+		</s:stroke>
+		<s:fill>
+			<s:LinearGradient rotation="90">
+				<s:entries>
+					<s:GradientEntry color="0xCCCCCC" />
+					<s:GradientEntry color="0xEEEEEE" />
+				</s:entries>
+			</s:LinearGradient>
+		</s:fill>	
+	</s:Rect>
+	<!-- BACKGRUND DRAWING END -->
 	
 	<drawers:SparkLineDrawer id="averageDrawer"
 							 lineColor="#F53682"
@@ -20,5 +46,6 @@
 					  left="0.5" right="0.5" bottom="0.5" top="0.5" />
 	
 	<charting:LineChartUIControls id="controls" width="100%" top="0" left="0" />
+	
 	
 </s:Skin>
