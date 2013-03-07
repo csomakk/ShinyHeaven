@@ -5,12 +5,11 @@
                icon="@Embed('/org/shinyheaven/assets/hdd_win.png')" />
     <fx:Object label="Flex chart" variant="{FlexLineChart}"
                icon="@Embed('/org/shinyheaven/assets/hdd_apple.png')" />
-    <fx:Object label="[List]" variant="{List}"
+    <fx:Object label="DataGrid" variant="{InstrumentGrid}"
                icon="@Embed('/org/shinyheaven/assets/database.png')" />
     <fx:Script><![CDATA[
         import org.shinyheaven.datavisualization.charting.FlexLineChart;
         import org.shinyheaven.datavisualization.charting.LineChart;
-
-        import spark.components.List;
+        import org.shinyheaven.datavisualization.datagrid.InstrumentGrid;
         ]]></fx:Script>
 </mx:ArrayList>

@@ -59,7 +59,9 @@ package org.shinyheaven.documentmanager {
                 view.setStyle("skinClass", DefaultLineChartSkin);
             }
             var dataProvider:IChartDataProvider = instrumentManager.addNewInstrument(message.selectedInstrument).chartDataProvider;
-            BindingUtils.bindProperty(view, "dataProvider", dataProvider, "data");
+            if (view.hasOwnProperty("dataProvider")) {
+                BindingUtils.bindProperty(view, "dataProvider", dataProvider, "data");
+            }
             mdi.addDocument(view);
         }
     }
