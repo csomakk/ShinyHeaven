@@ -6,15 +6,14 @@
  */
 package org.shinyheaven.documentmanager {
     import flash.display.DisplayObject;
-    
+
     import mx.binding.utils.BindingUtils;
     import mx.core.FlexGlobals;
     import mx.core.UIComponent;
     import mx.managers.PopUpManager;
-    
+
     import org.shinyheaven.datavisualization.charting.LineChart;
     import org.shinyheaven.datavisualization.charting.skins.DefaultLineChartSkin;
-    import org.shinyheaven.service.IInstrumentWatcher;
     import org.shinyheaven.service.InstrumentManager;
     import org.shinyheaven.service.dto.IChartDataProvider;
     import org.shinyheaven.uiframe.MDIController;
