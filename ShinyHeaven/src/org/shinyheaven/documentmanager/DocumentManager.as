@@ -1,19 +1,14 @@
-/**
- * Created with IntelliJ IDEA.
- * User: Peter_Varga
- * Date: 3/4/13
- * Time: 2:01 PM
- */
 package org.shinyheaven.documentmanager {
     import flash.display.DisplayObject;
-
+    
     import mx.binding.utils.BindingUtils;
     import mx.core.FlexGlobals;
     import mx.core.UIComponent;
     import mx.managers.PopUpManager;
-
+    
     import org.shinyheaven.datavisualization.charting.LineChart;
     import org.shinyheaven.datavisualization.charting.skins.DefaultLineChartSkin;
+    import org.shinyheaven.service.IInstrumentWatcher;
     import org.shinyheaven.service.InstrumentManager;
     import org.shinyheaven.service.dto.IChartDataProvider;
     import org.shinyheaven.uiframe.MDIController;
@@ -58,10 +53,7 @@ package org.shinyheaven.documentmanager {
             if (message.selectedVariant == LineChart) {
                 view.setStyle("skinClass", DefaultLineChartSkin);
             }
-            var dataProvider:IChartDataProvider = instrumentManager.addNewInstrument(message.selectedInstrument).chartDataProvider;
-            if (view.hasOwnProperty("dataProvider")) {
-                BindingUtils.bindProperty(view, "dataProvider", dataProvider, "data");
-            }
+			(view as IInstrumentWatcher).subscribeToInstrument(message.selectedInstrument);
             mdi.addDocument(view);
         }
     }
