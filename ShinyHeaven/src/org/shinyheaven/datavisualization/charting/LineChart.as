@@ -5,7 +5,6 @@ package org.shinyheaven.datavisualization.charting
 	import mx.binding.utils.BindingUtils;
 	import mx.collections.ArrayCollection;
 	import mx.core.FlexGlobals;
-	import mx.events.CloseEvent;
 	import mx.events.CollectionEvent;
 	import mx.events.FlexEvent;
 	import mx.events.ResizeEvent;
@@ -18,7 +17,6 @@ package org.shinyheaven.datavisualization.charting
 	import org.shinyheaven.datavisualization.charting.vo.DataRange;
 	import org.shinyheaven.service.IInstrumentWatcher;
 	import org.shinyheaven.service.Instrument;
-	import org.shinyheaven.service.InstrumentManager;
 	
 	import spark.components.supportClasses.SkinnableComponent;
 	
