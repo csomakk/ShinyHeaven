@@ -23,7 +23,7 @@
         import mx.logging.Log;
         import mx.logging.LogEventLevel;
         import mx.logging.targets.TraceTarget;
-
+        
         import org.shinyheaven.news.INewsDataProvider;
         import org.shinyheaven.service.CommunicationModule;
         import org.shinyheaven.service.Constants;
@@ -36,9 +36,9 @@
 
         [Inject]
         public var commModule:CommunicationModule;
-
-        [Inject]
-        public var instrumentManager:InstrumentManager;
+			
+		[Inject]
+		public var instrumentManager:InstrumentManager;
 
         [Inject]
         [Bindable]
@@ -55,14 +55,10 @@
         }
 
         public function addBindings():void {
-            var inst1:Instrument = instrumentManager.addNewInstrument(Constants.HARDCODED_INSTRUMENT);
-            var inst2:Instrument = instrumentManager.addNewInstrument("AUDUSD");
-            var dp1:IChartDataProvider = inst1.chartDataProvider;
-            var dp2:IChartDataProvider = inst2.chartDataProvider;
-            BindingUtils.bindProperty(lineChart, 'dataProvider', dp1, 'data');
-            BindingUtils.bindProperty(lineChart2, 'dataProvider', dp2, 'data');
-            BindingUtils.bindProperty(flexChart, 'dataProvider', dp2, 'data');
-            BindingUtils.bindProperty(newsDisplay, 'dataProvider', newsData, 'data');
+			
+			lineChart.subscribeToInstrument(Constants.HARDCODED_INSTRUMENT);
+			lineChart2.subscribeToInstrument("AUDUSD");
+			flexChart.subscribeToInstrument("AUDUSD");
         }
 
         public function configureLogger():void {

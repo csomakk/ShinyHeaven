@@ -1,11 +1,14 @@
 package org.shinyheaven.datavisualization.charting
 {
+	import flash.events.Event;
+	
+	import mx.binding.utils.BindingUtils;
 	import mx.collections.ArrayCollection;
+	import mx.core.FlexGlobals;
+	import mx.events.CloseEvent;
 	import mx.events.CollectionEvent;
 	import mx.events.FlexEvent;
 	import mx.events.ResizeEvent;
-	
-	import spark.components.supportClasses.SkinnableComponent;
 	
 	import org.shinyheaven.datavisualization.charting.calculators.DataRangeCalculator;
 	import org.shinyheaven.datavisualization.charting.calculators.DataToCoordinates;
@@ -13,8 +16,13 @@ package org.shinyheaven.datavisualization.charting
 	import org.shinyheaven.datavisualization.charting.drawers.SparkLineDrawer;
 	import org.shinyheaven.datavisualization.charting.events.UserControlEvent;
 	import org.shinyheaven.datavisualization.charting.vo.DataRange;
+	import org.shinyheaven.service.IInstrumentWatcher;
+	import org.shinyheaven.service.Instrument;
+	import org.shinyheaven.service.InstrumentManager;
 	
-	public class LineChart extends SkinnableComponent
+	import spark.components.supportClasses.SkinnableComponent;
+	
+	public class LineChart extends SkinnableComponent implements IInstrumentWatcher
 	{
 		
 		[SkinPart(required="true")]
@@ -36,25 +44,45 @@ package org.shinyheaven.datavisualization.charting
 		
 		private var readyToDraw:Boolean = false;
 		
+		private var subscribed:String;
+		
 		public function LineChart()
 		{
 			super();
 			addEventListener(FlexEvent.CREATION_COMPLETE, addBehavior);
 		}
 		
-		protected function addBehavior(event:FlexEvent):void
-		{
+		protected function addBehavior(event:FlexEvent):void {
 			readyToDraw = true;
 			addEventListener(ResizeEvent.RESIZE, handleChartResized);
 		}
 		
+		public function subscribeToInstrument(id:String):void {
+			if(subscribed != null) {
+				unsubscribeFromInstrument();
+			}
+			subscribed = id;
+			var inst:Instrument = FlexGlobals.topLevelApplication.instrumentManager.addNewInstrument(id, this)
+			BindingUtils.bindProperty(this, "dataProvider", inst.chartDataProvider, "data");
+			
+			addEventListener(Event.REMOVED_FROM_STAGE, onRemovedFromStage);
+		}
+		
+		protected function onRemovedFromStage(event:Event):void {
+			unsubscribeFromInstrument();
+			removeEventListener(Event.REMOVED_FROM_STAGE, onRemovedFromStage);
+		}
+		
+		public function unsubscribeFromInstrument():void {
+			FlexGlobals.topLevelApplication.instrumentManager.unsubscribe(subscribed, this);
+		}
 		
 		[Bindable]
 		public function get dataProvider():ArrayCollection
 		{
 			return _dataProvider;
 		}
-		public function set dataProvider(value:ArrayCollection):void
+		private function set dataProvider(value:ArrayCollection):void
 		{
 			_dataProvider.removeEventListener(CollectionEvent.COLLECTION_CHANGE, handleDataChanged);
 			_dataProvider = value;
