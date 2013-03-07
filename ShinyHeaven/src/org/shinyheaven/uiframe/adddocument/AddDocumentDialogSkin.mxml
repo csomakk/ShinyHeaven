@@ -12,6 +12,12 @@
                            minValue="0"
                            trigger="{nextButton}"
                            triggerEvent="click" />
+        <s:NumberValidator id="styleButtonBarValidator"
+                           source="{styleButtonBar}"
+                           property="selectedIndex"
+                           minValue="0"
+                           trigger="{finishButton}"
+                           triggerEvent="click" />
     </fx:Declarations>
     <s:states>
         <s:State name="instrument" />
@@ -23,7 +29,7 @@
             <s:Button id="nextButton" label="⇒" chromeColor="0x9acd32" />
         </s:VGroup>
         <s:VGroup includeIn="variant" paddingTop="8" paddingRight="8" paddingBottom="8" paddingLeft="8" gap="8">
-            <s:ButtonBar id="styleButtonBar" selectedIndex="0">
+            <s:ButtonBar id="styleButtonBar">
                 <s:dataProvider><adddocument:ViewTypes /></s:dataProvider>
             </s:ButtonBar>
             <s:Group width="100%">
