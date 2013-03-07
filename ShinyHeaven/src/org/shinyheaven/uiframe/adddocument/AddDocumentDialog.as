@@ -71,7 +71,6 @@ package org.shinyheaven.uiframe.adddocument {
         private var selectedInstrument:String;
 
         protected function onInstrumentValid(event:ValidationResultEvent):void {
-            ShinyHeaven.logger.info("selectedIndex={0}", comboBox.selectedIndex);
             selectedInstrument = comboBox.selectedItem as String;
             skin.setCurrentState("variant");
             dispatcher(new CenterAddDocumentDialogMsg());

@@ -7,13 +7,9 @@
                icon="@Embed('/org/shinyheaven/assets/graphics.png')" />
     <fx:Object label="DataGrid" variant="{InstrumentGrid}"
                icon="@Embed('/org/shinyheaven/assets/wizard.png')" />
-    <fx:Object label="dummy" variant="{Button}"
-               icon="@Embed('/org/shinyheaven/assets/java.png')" />
     <fx:Script><![CDATA[
         import org.shinyheaven.datavisualization.charting.FlexLineChart;
         import org.shinyheaven.datavisualization.charting.LineChart;
         import org.shinyheaven.datavisualization.datagrid.InstrumentGrid;
-
-        import spark.components.Button;
         ]]></fx:Script>
 </mx:ArrayList>

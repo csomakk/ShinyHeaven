@@ -37,6 +37,6 @@ package org.shinyheaven.datavisualization.datagrid {
             }
         }
 
-        include "../../service/InstrumentSubscriberMixin.as"
+        include "../../service/InstrumentSubscriberMixin.as";
     }
 }
