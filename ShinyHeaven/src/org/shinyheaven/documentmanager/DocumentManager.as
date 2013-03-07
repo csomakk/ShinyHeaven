@@ -6,21 +6,20 @@
  */
 package org.shinyheaven.documentmanager {
     import flash.display.DisplayObject;
-    
-    import mx.binding.utils.BindingUtils;
+
     import mx.core.FlexGlobals;
     import mx.core.UIComponent;
-    import mx.events.FlexEvent;
     import mx.managers.PopUpManager;
-    
+
     import org.shinyheaven.datavisualization.charting.LineChart;
     import org.shinyheaven.datavisualization.charting.skins.DefaultLineChartSkin;
+    import org.shinyheaven.service.IInstrumentWatcher;
     import org.shinyheaven.service.InstrumentManager;
-    import org.shinyheaven.service.dto.IChartDataProvider;
     import org.shinyheaven.uiframe.MDIController;
     import org.shinyheaven.uiframe.adddocument.AddDocumentDialog;
     import org.shinyheaven.uiframe.adddocument.AddDocumentFinishedMsg;
     import org.shinyheaven.uiframe.adddocument.AddDocumentPopupClosedMsg;
+    import org.shinyheaven.uiframe.adddocument.CenterAddDocumentDialogMsg;
     import org.shinyheaven.uiframe.controlbar.AddDocumentMsg;
 
     public class DocumentManager {
@@ -28,17 +27,24 @@ package org.shinyheaven.documentmanager {
 		public var addDocumentDialog:AddDocumentDialog;
 		[Inject]
 		public var mdi:MDIController;
-		
+        [MessageDispatcher]
+        public var dispatcher:Function;
+
 		[MessageHandler]
         public function onAddDocument(message:AddDocumentMsg):void {
             PopUpManager.addPopUp(addDocumentDialog, FlexGlobals.topLevelApplication as DisplayObject, true);
-            PopUpManager.centerPopUp(addDocumentDialog);
+            onCenterAddDocumentDialog(null);
         }
 
         [MessageHandler]
         public function onAddDocumentPopupClosed(message:AddDocumentPopupClosedMsg):void {
             PopUpManager.removePopUp(addDocumentDialog);
             addDocumentDialog.skin.setCurrentState("instrument");
+        }
+
+        [MessageHandler]
+        public function onCenterAddDocumentDialog(message:CenterAddDocumentDialogMsg):void {
+            PopUpManager.centerPopUp(addDocumentDialog);
         }
 
         [Inject]
@@ -53,8 +59,7 @@ package org.shinyheaven.documentmanager {
             if (message.selectedVariant == LineChart) {
                 view.setStyle("skinClass", DefaultLineChartSkin);
             }
-            var dataProvider:IChartDataProvider = instrumentManager.addNewInstrument(message.selectedInstrument).chartDataProvider;
-            BindingUtils.bindProperty(view, "dataProvider", dataProvider, "data"); // TODO solve more beautifully and remove this workaround
+			(view as IInstrumentWatcher).subscribeToInstrument(message.selectedInstrument);
             mdi.addDocument(view);
         }
     }

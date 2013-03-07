@@ -1,5 +1,9 @@
 package org.shinyheaven.service.dto
 {
+    import avmplus.getQualifiedClassName;
+
+    import mx.utils.StringUtil;
+
     [RemoteClass(alias='org.postabank.data.Tick')]
     public class OHLCUpdate extends AbstractHistoricalDataItem implements IHistoricalDataItem
     {
@@ -15,7 +19,7 @@ package org.shinyheaven.service.dto
         public var volume : Number;
 
         public function toString():String {
-            return "Tick Object: " + timestamp + open + " " + low + " " + high + " " + close + " " + volume;
+            return StringUtil.substitute("{0}: O={1} H={2} L={3} C={4} Vol={5} @ {6}", getQualifiedClassName(this), open, high, low, close, volume, timestamp);
         }
 
         /**

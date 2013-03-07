@@ -1,38 +1,54 @@
 <?xml version="1.0"?>
 <s:Skin xmlns:fx="http://ns.adobe.com/mxml/2009"
-        xmlns:s="library://ns.adobe.com/flex/spark">
+        xmlns:s="library://ns.adobe.com/flex/spark"
+        xmlns:adddocument="org.shinyheaven.uiframe.adddocument.*">
     <fx:Metadata>
         [HostComponent("org.shinyheaven.uiframe.adddocument.AddDocumentDialog")]
     </fx:Metadata>
+    <fx:Declarations>
+        <s:NumberValidator id="comboBoxValidator"
+                           source="{comboBox}"
+                           property="selectedIndex"
+                           minValue="0"
+                           trigger="{nextButton}"
+                           triggerEvent="click" />
+        <s:NumberValidator id="styleButtonBarValidator"
+                           source="{styleButtonBar}"
+                           property="selectedIndex"
+                           minValue="0"
+                           trigger="{finishButton}"
+                           triggerEvent="click" />
+    </fx:Declarations>
     <s:states>
         <s:State name="instrument" />
         <s:State name="variant" />
     </s:states>
     <s:TitleWindow id="popupWindow" title="Add View">
-        <s:VGroup includeIn="instrument" paddingTop="8" paddingRight="8" paddingBottom="8" paddingLeft="8" gap="8">
-            <s:ComboBox id="comboBox" prompt="Instrument" />
-            <s:Button id="nextButton" label="⇒" chromeColor="0x9acd32" />
-        </s:VGroup>
-        <s:VGroup includeIn="variant" paddingTop="8" paddingRight="8" paddingBottom="8" paddingLeft="8" gap="8">
-            <s:ButtonBar id="styleButtonBar">
-                <s:dataProvider>
-                    <s:ArrayList>
-                        <fx:Object label="Custom chart" variant="{LineChart}"
-                                   icon="@Embed('/org/shinyheaven/assets/hdd_win.png')" />
-                        <fx:Object label="Flex chart" variant="{FlexLineChart}"
-                                   icon="@Embed('/org/shinyheaven/assets/hdd_apple.png')" />
-                        <fx:Object label="[List]" variant="{List}"
-                                   icon="@Embed('/org/shinyheaven/assets/database.png')" />
-                    </s:ArrayList>
-                </s:dataProvider>
-            </s:ButtonBar>
-            <s:Button id="finishButton" label="OK" chromeColor="0xff8c00" />
-        </s:VGroup>
+        <s:Form includeIn="instrument">
+            <s:FormItem>
+                <s:ComboBox id="comboBox" prompt="Instrument" />
+            </s:FormItem>
+            <s:FormItem>
+                <s:Button id="nextButton" label="⇒" chromeColor="0x9acd32" />
+            </s:FormItem>
+        </s:Form>
+        <s:Form includeIn="variant">
+            <s:FormItem>
+                <s:ButtonBar id="styleButtonBar">
+                    <s:dataProvider><adddocument:ViewTypes /></s:dataProvider>
+                </s:ButtonBar>
+            </s:FormItem>
+            <s:FormItem>
+                <s:Group width="100%">
+                    <s:Button id="backButton" label="⇐" click="onBackClick(event)" left="0" />
+                    <s:Button id="finishButton" label="OK" chromeColor="0xff8c00" right="0" />
+                </s:Group>
+            </s:FormItem>
+        </s:Form>
     </s:TitleWindow>
     <fx:Script><![CDATA[
-        import org.shinyheaven.datavisualization.charting.FlexLineChart;
-        import org.shinyheaven.datavisualization.charting.LineChart;
-
-        import spark.components.List;
+        protected function onBackClick(event:MouseEvent):void {
+            setCurrentState("instrument");
+        }
         ]]></fx:Script>
 </s:Skin>
