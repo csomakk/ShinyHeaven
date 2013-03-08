@@ -14,7 +14,7 @@
 		<adddocument:AddDocumentDialog />
 		<service:InstrumentManager />
 		<uiframe:MDIController />
-		
+		<service:SubscriptionManager />
 	</fx:Declarations>
 	<fx:Script><![CDATA[
         import org.shinyheaven.uiframe.controlbar.AddDocumentButton;

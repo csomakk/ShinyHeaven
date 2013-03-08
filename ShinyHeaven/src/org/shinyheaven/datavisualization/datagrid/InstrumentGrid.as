@@ -7,12 +7,10 @@
 package org.shinyheaven.datavisualization.datagrid {
     import mx.collections.IList;
 
-    import org.shinyheaven.service.IInstrumentWatcher;
-
     import spark.components.DataGrid;
     import spark.components.supportClasses.SkinnableComponent;
 
-    public class InstrumentGrid extends SkinnableComponent implements IInstrumentWatcher {
+    public class InstrumentGrid extends SkinnableComponent {
         [SkinPart(required=true)]
         public var dataGrid:DataGrid;
 
@@ -36,7 +34,5 @@ package org.shinyheaven.datavisualization.datagrid {
                 }
             }
         }
-
-        include "../../service/InstrumentSubscriberMixin.as";
     }
 }

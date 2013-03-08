@@ -6,15 +6,15 @@
  */
 package org.shinyheaven.documentmanager {
     import flash.display.DisplayObject;
-
+    
     import mx.core.FlexGlobals;
     import mx.core.UIComponent;
     import mx.managers.PopUpManager;
-
+    
     import org.shinyheaven.datavisualization.charting.LineChart;
     import org.shinyheaven.datavisualization.charting.skins.DefaultLineChartSkin;
-    import org.shinyheaven.service.IInstrumentWatcher;
     import org.shinyheaven.service.InstrumentManager;
+    import org.shinyheaven.service.SubscriptionManager;
     import org.shinyheaven.uiframe.MDIController;
     import org.shinyheaven.uiframe.adddocument.AddDocumentDialog;
     import org.shinyheaven.uiframe.adddocument.AddDocumentFinishedMsg;
@@ -23,10 +23,14 @@ package org.shinyheaven.documentmanager {
     import org.shinyheaven.uiframe.controlbar.AddDocumentMsg;
 
     public class DocumentManager {
+		
 		[Inject]
 		public var addDocumentDialog:AddDocumentDialog;
 		[Inject]
 		public var mdi:MDIController;
+		[Inject]
+		public var subscriptionManager:SubscriptionManager;
+		
         [MessageDispatcher]
         public var dispatcher:Function;
 
@@ -47,9 +51,6 @@ package org.shinyheaven.documentmanager {
             PopUpManager.centerPopUp(addDocumentDialog);
         }
 
-        [Inject]
-        public var instrumentManager:InstrumentManager;
-
         [MessageHandler]
         public function onAddDocumentFinished(message:AddDocumentFinishedMsg):void {
             ShinyHeaven.logger.info("addDocumentFinished instrument={0} viewVariant={1}", message.selectedInstrument, message.selectedVariant);
@@ -59,7 +60,7 @@ package org.shinyheaven.documentmanager {
             if (message.selectedVariant == LineChart) {
                 view.setStyle("skinClass", DefaultLineChartSkin);
             }
-			(view as IInstrumentWatcher).subscribeToInstrument(message.selectedInstrument);
+			subscriptionManager.addSubscription(message.selectedInstrument, view, "dataProvider");
             mdi.addDocument(view);
         }
     }

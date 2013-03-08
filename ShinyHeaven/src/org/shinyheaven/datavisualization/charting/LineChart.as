@@ -1,10 +1,6 @@
 package org.shinyheaven.datavisualization.charting
 {
-	import flash.events.Event;
-	
-	import mx.binding.utils.BindingUtils;
 	import mx.collections.ArrayCollection;
-	import mx.core.FlexGlobals;
 	import mx.events.CollectionEvent;
 	import mx.events.FlexEvent;
 	import mx.events.ResizeEvent;
@@ -15,12 +11,10 @@ package org.shinyheaven.datavisualization.charting
 	import org.shinyheaven.datavisualization.charting.drawers.SparkLineDrawer;
 	import org.shinyheaven.datavisualization.charting.events.UserControlEvent;
 	import org.shinyheaven.datavisualization.charting.vo.DataRange;
-	import org.shinyheaven.service.IInstrumentWatcher;
-	import org.shinyheaven.service.Instrument;
 	
 	import spark.components.supportClasses.SkinnableComponent;
 	
-	public class LineChart extends SkinnableComponent implements IInstrumentWatcher
+	public class LineChart extends SkinnableComponent
 	{
 		
 		[SkinPart(required="true")]
@@ -54,27 +48,7 @@ package org.shinyheaven.datavisualization.charting
 			readyToDraw = true;
 			addEventListener(ResizeEvent.RESIZE, handleChartResized);
 		}
-		
-		public function subscribeToInstrument(id:String):void {
-			if(subscribed != null) {
-				unsubscribeFromInstrument();
-			}
-			subscribed = id;
-			var inst:Instrument = FlexGlobals.topLevelApplication.instrumentManager.addNewInstrument(id, this)
-			BindingUtils.bindProperty(this, "dataProvider", inst.chartDataProvider, "data");
-			
-			addEventListener(Event.REMOVED_FROM_STAGE, onRemovedFromStage);
-		}
-		
-		protected function onRemovedFromStage(event:Event):void {
-			unsubscribeFromInstrument();
-			removeEventListener(Event.REMOVED_FROM_STAGE, onRemovedFromStage);
-		}
-		
-		public function unsubscribeFromInstrument():void {
-			FlexGlobals.topLevelApplication.instrumentManager.unsubscribe(subscribed, this);
-		}
-		
+				
 		[Bindable]
 		public function get dataProvider():ArrayCollection
 		{

@@ -4,7 +4,7 @@
 			  xmlns:mx="library://ns.adobe.com/flex/mx"
 			  xmlns:parsley="http://www.spicefactory.org/parsley" 
 			  xmlns:vo="org.shinyheaven.datavisualization.charting.vo.*"
-			  implements="org.shinyheaven.service.IInstrumentWatcher">
+			   >
 	
 	<fx:Declarations>
 		<parsley:Configure />
@@ -23,30 +23,7 @@
 			import org.shinyheaven.service.Instrument;
 			
 			[Bindable]
-			public var logic:DataRangeCalculator = new DataRangeCalculator();
-			
-			private var subscribed:String;
-			
-			public function subscribeToInstrument(id:String):void {
-				if(subscribed != null) {
-					unsubscribeFromInstrument();
-				}
-				subscribed = id;
-				var inst:Instrument = FlexGlobals.topLevelApplication.instrumentManager.addNewInstrument(id, this)
-				BindingUtils.bindProperty(this, "dataProvider", inst.chartDataProvider, "data");
-				
-				addEventListener(Event.REMOVED_FROM_STAGE, onRemovedFromStage);
-			}
-			
-			protected function onRemovedFromStage(event:Event):void {
-				unsubscribeFromInstrument();
-				removeEventListener(Event.REMOVED_FROM_STAGE, onRemovedFromStage);
-			}
-			
-			public function unsubscribeFromInstrument():void {
-				FlexGlobals.topLevelApplication.instrumentManager.unsubscribe(subscribed, this);
-			}
-			
+			public var logic:DataRangeCalculator = new DataRangeCalculator();		
 			
 			override public function set dataProvider(value:Object):void
 			{

@@ -17,64 +17,70 @@
     </fx:Declarations>
     <fx:Script>
         <![CDATA[
-        import mx.events.FlexEvent;
-        import mx.logging.ILogger;
-        import mx.logging.Log;
-        import mx.logging.LogEventLevel;
-        import mx.logging.targets.TraceTarget;
+			import mx.events.FlexEvent;
+			import mx.logging.ILogger;
+			import mx.logging.Log;
+			import mx.logging.LogEventLevel;
+			import mx.logging.targets.TraceTarget;
+			
+			import org.shinyheaven.news.INewsDataProvider;
+			import org.shinyheaven.service.CommunicationModule;
+			import org.shinyheaven.service.Constants;
+			import org.shinyheaven.service.InstrumentManager;
+			import org.shinyheaven.service.SubscriptionManager;
+			import org.shinyheaven.service.dto.OHLCUpdate;
 
-        import org.shinyheaven.news.INewsDataProvider;
-        import org.shinyheaven.service.CommunicationModule;
-        import org.shinyheaven.service.InstrumentManager;
-        import org.shinyheaven.service.dto.OHLCUpdate;
-
-        public static var logger:ILogger = Log.getLogger("com.shinyheaven.logger");
-
-        [Inject]
-        public var commModule:CommunicationModule;
-
-        [Inject]
-        public var instrumentManager:InstrumentManager;
-
-        [Inject]
-        [Bindable]
-        public var newsData:INewsDataProvider;
-
-        /**
-         * This is for making Flash recognise the [RemoteClass] metadata on these classes.
-         */
-        private var dummies:Array = [OHLCUpdate];
-
-        [Init]
-        public function onInit():void {
-            addBindings();
-        }
-
-        public function addBindings():void {
-
-            flexChart.subscribeToInstrument("AUDUSD");
-        }
-
-        public function configureLogger():void {
-            var logTarget:TraceTarget = new TraceTarget();
-
-            logTarget.filters = ["com.shinyheaven.*"];
-
-            //log
-
-            logTarget.level = LogEventLevel.INFO;
-
-            logTarget.includeDate = true;
-            logTarget.includeTime = true;
-            logTarget.includeCategory = false;
-            logTarget.includeLevel = true;
-
-            Log.addTarget(logTarget);
-        }
-
-        protected function application1_initializeHandler(event:FlexEvent):void {
-            configureLogger();
-        }
+	        public static var logger:ILogger = Log.getLogger("com.shinyheaven.logger");
+	
+	        [Inject]
+	        public var commModule:CommunicationModule;
+	
+			[Inject]
+			public var subscriptionManager:SubscriptionManager;
+				
+	        [Inject]
+	        public var instrumentManager:InstrumentManager;
+	
+	        [Inject]
+	        [Bindable]
+	        public var newsData:INewsDataProvider;
+	
+	        /**
+	         * This is for making Flash recognise the [RemoteClass] metadata on these classes.
+	         */
+	        private var dummies:Array = [OHLCUpdate];
+	
+	        [Init]
+	        public function onInit():void {
+	            addBindings();
+	        }
+	
+	        public function addBindings():void {
+				subscriptionManager.addSubscription(Constants.HARDCODED_INSTRUMENT, lineChart, "dataProvider");
+				subscriptionManager.addSubscription("AUDUSD", lineChart2, "dataProvider");
+				subscriptionManager.addSubscription("AUDUSD", flexChart, "dataProvider");
+	        }
+	
+	        public function configureLogger():void {
+	            var logTarget:TraceTarget = new TraceTarget();
+	
+	            logTarget.filters = ["com.shinyheaven.*"];
+	
+	            //log
+	
+	            logTarget.level = LogEventLevel.INFO;
+	
+	            logTarget.includeDate = true;
+	            logTarget.includeTime = true;
+	            logTarget.includeCategory = false;
+	            logTarget.includeLevel = true;
+	
+	            Log.addTarget(logTarget);
+	        }
+	
+	        protected function application1_initializeHandler(event:FlexEvent):void {
+	            configureLogger();
+	        }
         ]]>
     </fx:Script>
     <s:controlBarContent>
@@ -83,5 +89,11 @@
     <uiframe:MDI id="mdi" left="0" right="0" top="0" bottom="0" positions="left 20%, 1x bottom 20%">
 		<news:NewsDisplay id="newsDisplay" />
         <charting:FlexLineChart id="flexChart" width="100%" height="100%" />
+		<charting:LineChart id="lineChart"
+							width="100%" height="100%"
+							skinClass="org.shinyheaven.datavisualization.charting.skins.DefaultLineChartSkin"/>
+		<charting:LineChart id="lineChart2"
+							width="100%" height="100%"
+							skinClass="org.shinyheaven.datavisualization.charting.skins.DefaultLineChartSkin"/>
     </uiframe:MDI>
 </s:Application>

@@ -1,6 +1,8 @@
 package org.shinyheaven.service
 {
 	import flash.utils.Dictionary;
+	
+	import mx.core.FlexGlobals;
 
 	public class InstrumentManager
 	{
@@ -16,6 +18,7 @@ package org.shinyheaven.service
 		
 		public function addInstrument(id:String, instrument:Instrument):void {
 			if(instrumentDictionary[id] == null) {
+				ShinyHeaven.logger.info("InstrumentManager: addInstrument id:{0}", id)
 				instrumentDictionary[id] = instrument;
 				comm.lookupRequest(id);
 			}
@@ -23,6 +26,7 @@ package org.shinyheaven.service
 		
 		public function unsubscribe(id:String, callee:Object):void {
 			var inst:Instrument = instrumentDictionary[id];
+			ShinyHeaven.logger.info("InstrumentManager: unsubscribe id:{0}", id)
 			if(inst != null) {
 				inst.removeSubscriber(callee);
 				if(inst.hasSubscribers() == false) {
@@ -32,11 +36,12 @@ package org.shinyheaven.service
 		}
 		
 		private function removeInstrument(id:String):void {
+			ShinyHeaven.logger.info("InstrumentManager: removeInstrument id:{0}", id)
 			delete instrumentDictionary[id]; 
 		}		
 		
 		/**returns existing instrument if its already added*/
-		public function addNewInstrument(id:String, callee:Object):Instrument{
+		public function addNewInstrument(id:String, callee:Object):Instrument {
 			var inst:Instrument = new Instrument();
 			addInstrument(id, inst);
 			inst = getInstrument(id);
