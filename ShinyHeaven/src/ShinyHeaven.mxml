@@ -6,7 +6,7 @@
                xmlns:charting="org.shinyheaven.datavisualization.charting.*" 
 			   xmlns:news="org.shinyheaven.news.*"
                xmlns:uiframe-controlbar="org.shinyheaven.uiframe.controlbar.*"
-			   preinitialize="application1_initializeHandler(event)"
+			   preinitialize="application1_initializeHandler(event)" xmlns:mdi="org.shinyheaven.uiframe.mdi.*"
 			   >
     <fx:Declarations>
         <parsley:ContextBuilder>
@@ -26,8 +26,8 @@
 			import org.shinyheaven.news.INewsDataProvider;
 			import org.shinyheaven.service.CommunicationModule;
 			import org.shinyheaven.service.Constants;
-			import org.shinyheaven.service.InstrumentManager;
-			import org.shinyheaven.service.SubscriptionManager;
+			import org.shinyheaven.instrumenthandling.InstrumentManager;
+			import org.shinyheaven.instrumenthandling.SubscriptionManager;
 			import org.shinyheaven.service.dto.OHLCUpdate;
 
 	        public static var logger:ILogger = Log.getLogger("com.shinyheaven.logger");
@@ -86,7 +86,7 @@
     <s:controlBarContent>
         <uiframe-controlbar:AddDocumentButton />
     </s:controlBarContent>
-    <uiframe:MDI id="mdi" left="0" right="0" top="0" bottom="0" positions="left 20%, 1x bottom 20%">
+    <mdi:MDI id="mdi" left="0" right="0" top="0" bottom="0" positions="left 20%, 1x bottom 20%">
 		<news:NewsDisplay id="newsDisplay" />
         <charting:FlexLineChart id="flexChart" width="100%" height="100%" />
 		<charting:LineChart id="lineChart"
@@ -95,5 +95,5 @@
 		<charting:LineChart id="lineChart2"
 							width="100%" height="100%"
 							skinClass="org.shinyheaven.datavisualization.charting.skins.DefaultLineChartSkin"/>
-    </uiframe:MDI>
+    </mdi:MDI>
 </s:Application>

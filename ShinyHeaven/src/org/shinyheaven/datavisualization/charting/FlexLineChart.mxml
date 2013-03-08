@@ -20,7 +20,7 @@
 			import mx.events.CollectionEvent;
 			
 			import org.shinyheaven.datavisualization.charting.calculators.DataRangeCalculator;
-			import org.shinyheaven.service.Instrument;
+			import org.shinyheaven.instrumenthandling.Instrument;
 			
 			[Bindable]
 			public var logic:DataRangeCalculator = new DataRangeCalculator();		

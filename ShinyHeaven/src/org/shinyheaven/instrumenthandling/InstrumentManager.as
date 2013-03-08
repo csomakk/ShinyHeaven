@@ -1,8 +1,9 @@
-package org.shinyheaven.service
+package org.shinyheaven.instrumenthandling
 {
 	import flash.utils.Dictionary;
 	
 	import mx.core.FlexGlobals;
+	import org.shinyheaven.service.CommunicationModule;
 
 	public class InstrumentManager
 	{

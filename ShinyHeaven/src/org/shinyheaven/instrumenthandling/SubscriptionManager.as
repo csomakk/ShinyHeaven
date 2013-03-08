@@ -1,4 +1,4 @@
-package org.shinyheaven.service
+package org.shinyheaven.instrumenthandling
 {
 	import flash.display.DisplayObject;
 	import flash.events.Event;

@@ -1,4 +1,4 @@
-package org.shinyheaven.uiframe
+package org.shinyheaven.uiframe.mdi
 {
     import flash.events.MouseEvent;
     import flash.geom.Point;
