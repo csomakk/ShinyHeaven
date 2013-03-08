@@ -13,7 +13,6 @@ package org.shinyheaven.documentmanager {
     
     import org.shinyheaven.datavisualization.charting.LineChart;
     import org.shinyheaven.datavisualization.charting.skins.DefaultLineChartSkin;
-    import org.shinyheaven.service.InstrumentManager;
     import org.shinyheaven.service.SubscriptionManager;
     import org.shinyheaven.uiframe.MDIController;
     import org.shinyheaven.uiframe.adddocument.AddDocumentDialog;
