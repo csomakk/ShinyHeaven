@@ -4,7 +4,7 @@
  * Date: 2/28/13
  * Time: 3:15 PM
  */
-package org.shinyheaven.uiframe {
+package org.shinyheaven.uiframe.mdi {
     import org.flexunit.asserts.assertFalse;
     import org.flexunit.asserts.assertTrue;
 
