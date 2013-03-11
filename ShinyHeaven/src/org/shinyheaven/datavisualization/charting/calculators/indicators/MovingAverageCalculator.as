@@ -1,10 +1,7 @@
 package org.shinyheaven.datavisualization.charting.calculators.indicators {
 
-    import mx.utils.ObjectUtil;
-    
     import org.shinyheaven.datavisualization.charting.vo.MovingAverageDataItem;
     import org.shinyheaven.service.dto.IHistoricalDataItem;
-    import org.shinyheaven.service.dto.OHLCUpdate;
 
     public class MovingAverageCalculator {
 
