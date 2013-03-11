@@ -7,9 +7,12 @@
                icon="@Embed('/org/shinyheaven/assets/graphics.png')" />
     <fx:Object label="DataGrid" variant="{InstrumentGrid}"
                icon="@Embed('/org/shinyheaven/assets/wizard.png')" />
+    <fx:Object label="Candlestick" variant="{FlexCandlestickChart}"
+               icon="@Embed('/org/shinyheaven/assets/maintenance.png')" />
     <fx:Script><![CDATA[
         import org.shinyheaven.datavisualization.charting.FlexLineChart;
         import org.shinyheaven.datavisualization.charting.LineChart;
+        import org.shinyheaven.datavisualization.charting.candlestick.FlexCandlestickChart;
         import org.shinyheaven.datavisualization.datagrid.InstrumentGrid;
         ]]></fx:Script>
 </mx:ArrayList>

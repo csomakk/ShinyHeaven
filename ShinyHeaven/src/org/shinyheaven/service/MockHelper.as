@@ -1,14 +1,11 @@
 package org.shinyheaven.service
 {
-	import org.shinyheaven.news.NewsItem;
+    import org.shinyheaven.news.NewsItem;
+    import org.shinyheaven.service.dto.OHLCUpdate;
 
-	public class MockHelper
+    public class MockHelper
 	{
-		public function MockHelper()
-		{
-			
-		}
-		
+
 		private var prevStockPrice:Number;
 		private var prevStockDelta:Number;
 		
@@ -25,6 +22,17 @@ package org.shinyheaven.service
 			prevStockPrice = prevStockPrice + prevStockDelta;
 			return prevStockPrice;
 		}
+
+        public function getNextOHLC():OHLCUpdate {
+            var a:Number = getNextStockPrice();
+            var result = new OHLCUpdate();
+            result.open = a;
+            result.high = a + Math.random()*4;
+            result.low = a - Math.random()*4;
+            result.close = a + (Math.random()*1.5 - 0.75);
+            result.volume = Math.random() * 400;
+            return result;
+        }
 		
 		public function getPreviousStockPrice():Number {
 			return prevStockPrice;
