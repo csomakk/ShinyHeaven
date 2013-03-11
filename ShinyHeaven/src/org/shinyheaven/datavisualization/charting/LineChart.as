@@ -90,7 +90,7 @@ package org.shinyheaven.datavisualization.charting
 		
 		private function getDrawingCoordinates(data:Array):Array
 		{
-			var result:Array;
+			var result:Array = [];
 			if (valueDrawer && rangeForRendering)
 			{
 				result = DataToCoordinates.sampleDataAndGetPoints(
