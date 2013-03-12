@@ -13,7 +13,7 @@ package org.shinyheaven.datavisualization.charting.calculators
 			
 			var result:Array = [];
 			
-			var xOffset:Number = width / (data.length-1);
+			var xOffset:Number = width / (data.length);
 			var increment:int = 1;
 			
 			/*
