@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testrun name="" >
 <testsuite  name="Default Test Suite" project="ShinyHeavenUnitTests">
-<testsuite name="InstrumentTest" type="testcaseclass"/>
-<testsuite name="NewsItemTest" type="testcaseclass"/>
+<testsuite name="org.shinyheaven.datavisualization.charting.calculators.indicators:MovingAverageCalculatorTest" type="testsuiteclass"/>
+<testsuite name="org.shinyheaven.uiframe.mdi:MDIPositionTest" type="testsuiteclass"/>
+<testsuite name="org.shinyheaven.uiframe.mdi:MDIAlignParentTest" type="testsuiteclass"/>
+<testsuite name="NewsItemTest" type="testsuiteclass"/>
+<testsuite name="InstrumentTest" type="testsuiteclass"/>
 </testsuite>
-<portNumber value="8765" />
 </testrun>
