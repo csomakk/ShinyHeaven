@@ -1,3 +1,2 @@
-bin-debug
 *.iml
-.idea
+html-template*/
