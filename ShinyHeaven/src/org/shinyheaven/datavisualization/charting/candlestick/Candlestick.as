@@ -5,8 +5,13 @@
  * Time: 5:20 PM
  */
 package org.shinyheaven.datavisualization.charting.candlestick {
-    public class Candlestick implements ICandlestick {
+    public class Candlestick {
         public function Candlestick() {
         }
+
+        private var _open:Number;
+        private var _high:Number;
+        private var _low:Number;
+        private var _close:Number;
     }
 }
