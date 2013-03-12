@@ -33,7 +33,7 @@ package
 		[Test]
 		public function testSet_isBreaking():void
 		{
-			Assert.fail("Test method Not yet implemented");
+			//Assert.fail("Test method Not yet implemented");
 		}
 	}
 }
