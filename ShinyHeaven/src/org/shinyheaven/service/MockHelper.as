@@ -25,7 +25,7 @@ package org.shinyheaven.service
 
         public function getNextOHLC():OHLCUpdate {
             var a:Number = getNextStockPrice();
-            var result = new OHLCUpdate();
+            var result:OHLCUpdate = new OHLCUpdate();
             result.open = a;
             result.high = a + Math.random()*4;
             result.low = a - Math.random()*4;

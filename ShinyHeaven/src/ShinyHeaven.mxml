@@ -52,10 +52,12 @@
 	
 	        [Init]
 	        public function onInit():void {
+				logger.info("ShinyHeaven.onInit: Parsley inited");
 	            addBindings();
 	        }
 	
 	        public function addBindings():void {
+				logger.info("ShinyHeaven.addBindings");
 				subscriptionManager.addSubscription(Constants.HARDCODED_INSTRUMENT, lineChart, "dataProvider");
 				subscriptionManager.addSubscription("AUDUSD", lineChart2, "dataProvider");
 				subscriptionManager.addSubscription("AUDUSD", flexChart, "dataProvider");
@@ -66,8 +68,6 @@
 	
 	            logTarget.filters = ["com.shinyheaven.*"];
 	
-	            //log
-	
 	            logTarget.level = LogEventLevel.INFO;
 	
 	            logTarget.includeDate = true;
@@ -76,6 +76,7 @@
 	            logTarget.includeLevel = true;
 	
 	            Log.addTarget(logTarget);
+				logger.info("ShinyHeaven.configureLogger: Logging started");
 	        }
 	
 	        protected function application1_initializeHandler(event:FlexEvent):void {
