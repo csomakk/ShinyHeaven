@@ -36,6 +36,8 @@
         private var _numberOfRows:int;
         private var rowLength:int;
 
+		private var maxDepth:int = 0;
+			
         /////////////
         // the remaining values represent the place left for undocked components.
         ///////////
@@ -307,9 +309,11 @@
         protected function MDI_resizeHandler(event:Event):void {
 			arrangeUnDocked();
         }
+			
+		
 
         protected function bringToFront(a:IVisualElement):void {
-            setElementIndex(a, numElements - 1);
+			a.depth = maxDepth++; //setElementIndex is not good, because it fires remove event.
         }
 
         protected function documentMouseDown(event:MouseEvent):void {
