@@ -10,9 +10,9 @@
     <fx:Object label="Candlestick" variant="{FlexCandlestickChart}"
                icon="@Embed('/org/shinyheaven/assets/maintenance.png')" />
     <fx:Script><![CDATA[
+        import org.shinyheaven.datavisualization.charting.FlexCandlestickChart;
         import org.shinyheaven.datavisualization.charting.FlexLineChart;
         import org.shinyheaven.datavisualization.charting.LineChart;
-        import org.shinyheaven.datavisualization.charting.candlestick.FlexCandlestickChart;
         import org.shinyheaven.datavisualization.datagrid.InstrumentGrid;
         ]]></fx:Script>
 </mx:ArrayList>
