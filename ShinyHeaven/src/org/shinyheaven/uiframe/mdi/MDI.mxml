@@ -56,6 +56,7 @@
 
         [Init]
         public function setUpMDI():void {
+			ShinyHeaven.logger.info("MDI.setUpMDI");
 			if(stage == null) {
 				addEventListener(Event.ADDED_TO_STAGE, setResizeHandler);
 			} else {
@@ -119,6 +120,7 @@
         private var elementPosition:int = 0;
 
         public function addDocument(element:IVisualElement):DocumentHolder {
+			ShinyHeaven.logger.info("MDI.addDocument");
             var d:DocumentHolder = new DocumentHolder();
             d.element = element;
             remainingDocumentsArrayCollection.addItem(d);
@@ -135,11 +137,13 @@
         }
 			
 		public function addCloseListener(element:IVisualElement, callback:Function):void {
+			ShinyHeaven.logger.info("MDI.addCloseListener");
 			var d:DocumentHolder = dict[element];
 			d.closeCallbackFunctions.push(callback);
 		}
 
         public function removeDocument(element:IVisualElement):void {
+			ShinyHeaven.logger.info("MDI.removeDocument");
             var d:DocumentHolder = dict[element];
 
             if (remainingDocumentsArrayCollection.contains(d)) {
@@ -160,6 +164,7 @@
 
         /** adds if needed, and docks or undocks element @param direction example: MDI.LEFT */
         public function dockDocument(element:IVisualElement, direction:int = 1):DocumentHolder {
+			ShinyHeaven.logger.info("MDI.dockDocument: direction={0}", direction);
             var d:DocumentHolder = dict[element];
             if (d == null) {
                 d = addDocument(element);
@@ -196,6 +201,7 @@
         }
 
         private function rearrange():void {
+			ShinyHeaven.logger.info("MDI.rearrange");
             if (stage == null) {
                 addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
                 return;
@@ -294,6 +300,7 @@
         }
 
         public function arrangeUnDocked():void {
+			ShinyHeaven.logger.info("MDI.arrangeUnDocked");
             numberOfRows = remainingDocumentsArrayCollection.length / remainingWidth * remainingBottom;
         }
 
@@ -356,10 +363,10 @@
             if (isNear(argY, remainingTop, 10)) {
                 return TOP;
             }
-
             if (isNear(argY, remainingBottom, 10)) {
                 return BOTTOM;
             }
+			
             return NaN;
         }
 

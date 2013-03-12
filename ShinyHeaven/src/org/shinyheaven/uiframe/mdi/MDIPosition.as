@@ -42,6 +42,7 @@ package org.shinyheaven.uiframe.mdi {
 
                 for (var i:uint = 0; i < repeatCount; i++) {
                     result.push(new MDIPosition(expression));
+					ShinyHeaven.logger.info("MDIPosition.parseList: {0}", expression);
                 }
             }
             return result;
