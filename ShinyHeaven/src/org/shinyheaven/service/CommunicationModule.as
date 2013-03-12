@@ -142,10 +142,13 @@ package org.shinyheaven.service {
 				date.time = new Date(2010,05,05,10,10).time + getTimer() + 1000;  				
 				tick.timestamp = date;
 			} else {
+				ShinyHeaven.logger.error("CommunicationModule:updateResultHandlerMock: mocked function call when mock is off");
 				throw new Error("mocked function call when mock is off")
 			}
-			if(!tick)
+			if(!tick){
+				ShinyHeaven.logger.error("CommunicationModule:updateResultHandlerMock: updateResultHandler received no 'Tick' in ResultEvent.");
 				throw new Error('updateResultHandler received no "Tick" in ResultEvent.');
+			}
 			ShinyHeaven.logger.debug("Tick mock received: {0}", tick);
 			instrument.chartDataProvider.data.addItem(tick);
 		}
@@ -153,8 +156,10 @@ package org.shinyheaven.service {
 		private function updateResultHandler(event:ResultEvent):void {
 			var tick:OHLCUpdate = event.result as OHLCUpdate;
 			
-			if(!tick)
+			if(!tick) {
+				ShinyHeaven.logger.error("CommunicationModule:updateResultHandler: updateResultHandler received no 'Tick' in ResultEvent."); 
 				throw new Error('updateResultHandler received no "Tick" in ResultEvent.');
+			}
 			ShinyHeaven.logger.info("Tick received:", tick);
 			instrumentManager.getInstrument(Constants.HARDCODED_INSTRUMENT).chartDataProvider.data.addItem(tick);
 		}
@@ -214,8 +219,7 @@ package org.shinyheaven.service {
 		}
 		
 		protected function lookupResultHandler(event:ResultEvent):void {
-			
-			trace(StringUtil.substitute("Got {0} of {1}s", event.result.length, getQualifiedClassName(event.result[0])));
+			ShinyHeaven.logger.info("Got {0} of {1}s", event.result.length, getQualifiedClassName(event.result[0]));
 			instrumentManager.getInstrument(Constants.HARDCODED_INSTRUMENT).chartDataProvider.data.addAll(event.result as IList);
 			
 			startAutomaticUpdating();
@@ -245,8 +249,8 @@ package org.shinyheaven.service {
 		
 		private function onRemoteServiceFault(event:FaultEvent):void {
 			var errorMsg:String = "Service error: " + event.fault.faultCode;
-			ShinyHeaven.logger.error("CommunicationModule:onRemoteServiceFault: {0}, {1}", event.fault.faultDetail, errorMsg);
 			if(MOCKED_MODE == false){
+				ShinyHeaven.logger.error("CommunicationModule:onRemoteServiceFault: {0}, {1}", event.fault.faultDetail, errorMsg);
 				Alert.show(event.fault.faultDetail, errorMsg);
 			}
 		}
