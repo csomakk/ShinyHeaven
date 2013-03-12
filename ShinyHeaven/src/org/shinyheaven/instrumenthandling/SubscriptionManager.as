@@ -14,6 +14,8 @@ package org.shinyheaven.instrumenthandling
 		
 		private var subscriptionsDictionary:Dictionary = new Dictionary();
 		
+		public static var ignoreRemovalFromStage:Boolean = false;
+		
 		public function SubscriptionManager()
 		{
 		}
@@ -46,7 +48,9 @@ package org.shinyheaven.instrumenthandling
 		
 		protected function onRemovedFromStage(event:Event):void
 		{
-			removeAllSubscriptions(event.currentTarget)
+			if( ignoreRemovalFromStage == false ){
+				removeAllSubscriptions(event.currentTarget)
+			}
 		}		
 		
 		public function removeSubscription(instrumentId:String, object:Object):void {

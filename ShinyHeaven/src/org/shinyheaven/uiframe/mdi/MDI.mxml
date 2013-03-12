@@ -9,14 +9,15 @@
 	</fx:Declarations>
 	<fx:Script>
 		<![CDATA[
-        import com.flashdynamix.motion.TweensyZero;
-        
-        import mx.collections.ArrayCollection;
-        import mx.core.IVisualElement;
-        import mx.core.UIComponent;
-        import mx.events.ResizeEvent;
-        
-        import org.shinyheaven.service.CommunicationModule;
+			import com.flashdynamix.motion.TweensyZero;
+			
+			import mx.collections.ArrayCollection;
+			import mx.core.IVisualElement;
+			import mx.core.UIComponent;
+			import mx.events.ResizeEvent;
+			
+			import org.shinyheaven.instrumenthandling.SubscriptionManager;
+			import org.shinyheaven.service.CommunicationModule;
 
         [Inject]
         public var commModule:CommunicationModule;
@@ -35,8 +36,6 @@
         private var indexBeforeDrag:int;
         private var _numberOfRows:int;
         private var rowLength:int;
-
-		private var maxDepth:int = 0;
 			
         /////////////
         // the remaining values represent the place left for undocked components.
@@ -312,10 +311,12 @@
 			
 		
 
-        protected function bringToFront(a:IVisualElement):void {
-			a.depth = maxDepth++; //setElementIndex is not good, because it fires remove event.
+        protected function bringToFront(a:DocumentHolder):void {
+			SubscriptionManager.ignoreRemovalFromStage = true;
+			setElementIndex(a, numElements - 1); //this fires remove event (because it adds and removes it), that is why we surround it.
+			SubscriptionManager.ignoreRemovalFromStage = false;
         }
-
+		
         protected function documentMouseDown(event:MouseEvent):void {
             if (draggedDocument) {
                 return; //if the drag ended outside browser, etc..
@@ -431,6 +432,7 @@
             if (draggedDocument == null) {
                 return;
             }
+			
             draggedDocument.stopDrag();
             draggedDocument.removeEventListener(MouseEvent.MOUSE_MOVE, draggedDocumentMove);
             removeEventListener(MouseEvent.MOUSE_MOVE, draggedDocumentMouseUp);
@@ -483,6 +485,8 @@
         }
 			
 			
-        ]]>
+			
+			
+		]]>
 	</fx:Script>
 </s:Group>
