@@ -5,7 +5,7 @@ package org.shinyheaven.service {
     import flash.utils.Timer;
     import flash.utils.getQualifiedClassName;
     import flash.utils.getTimer;
-
+    
     import mx.collections.ArrayList;
     import mx.collections.IList;
     import mx.controls.Alert;
@@ -16,7 +16,7 @@ package org.shinyheaven.service {
     import mx.rpc.events.ResultEvent;
     import mx.rpc.remoting.RemoteObject;
     import mx.utils.StringUtil;
-
+    
     import org.shinyheaven.instrumenthandling.Instrument;
     import org.shinyheaven.instrumenthandling.InstrumentManager;
     import org.shinyheaven.news.NewsDataProvider;
@@ -58,6 +58,7 @@ package org.shinyheaven.service {
 		
 		[Init]
 		public function initializeService():void {
+			ShinyHeaven.logger.info("CommunicationModule:initializeSercice");
 			Security.allowDomain(Constants.PYTHONSERVER_URI);
 			var channel:AMFChannel = new AMFChannel(AMF_CHANNEL_NAME, Constants.PYTHONSERVER_URI);
 			var channels:ChannelSet = new ChannelSet();
@@ -100,6 +101,7 @@ package org.shinyheaven.service {
 		
 		protected function getAvailableInstrumentResult(event:ResultEvent):void
 		{
+			ShinyHeaven.logger.info("CommunicationModule:getAvailableInstrumentResult");
 			if(MOCKED_MODE) {
 				availableInstruments.removeAll();
 				availableInstruments.addItem(Constants.HARDCODED_INSTRUMENT);
@@ -174,6 +176,7 @@ package org.shinyheaven.service {
 		}
 		
 		protected function loginResultHandler(event:ResultEvent):void {
+			ShinyHeaven.logger.info("CommunicationModule:loginResultHandler");
 			loginOperation.removeEventListener(ResultEvent.RESULT, loginResultHandler);
 			if(MOCKED_MODE){
 				client_id = 12234;
@@ -219,6 +222,7 @@ package org.shinyheaven.service {
 		}
 		
 		private function startAutomaticUpdating():void {
+			ShinyHeaven.logger.info("CommunicationModule:startAutomaticUpdating");
 			updateTimer = new Timer(Constants.UPDATE_FREQUENCY,0);
 			updateTimer.addEventListener(TimerEvent.TIMER, onAutomaticUpdate);
 			updateTimer.start();
@@ -241,6 +245,7 @@ package org.shinyheaven.service {
 		
 		private function onRemoteServiceFault(event:FaultEvent):void {
 			var errorMsg:String = "Service error: " + event.fault.faultCode;
+			ShinyHeaven.logger.error("CommunicationModule:onRemoteServiceFault: {0}, {1}", event.fault.faultDetail, errorMsg);
 			if(MOCKED_MODE == false){
 				Alert.show(event.fault.faultDetail, errorMsg);
 			}
@@ -248,6 +253,7 @@ package org.shinyheaven.service {
 		
 		private function onRemoteServiceSecurityError(event:SecurityErrorEvent):void {
 			var errorMsg:String = "Service security error";
+			ShinyHeaven.logger.error("CommunicationModule:onRemoteServiceFault: {0}, {1}", event.text, errorMsg);
 			Alert.show(event.text, errorMsg);
 		}
 	}
