@@ -6,7 +6,6 @@
         <mx:DateTimeAxis />
     </mx:horizontalAxis>
     <mx:series>
-        <mx:CandlestickSeries openField="open" highField="high" lowField="low" closeField="close"
-                              displayName="??" xField="timestamp"/>
+        <mx:CandlestickSeries openField="open" highField="high" lowField="low" closeField="close" xField="timestamp"/>
     </mx:series>
 </mx:CandlestickChart>
