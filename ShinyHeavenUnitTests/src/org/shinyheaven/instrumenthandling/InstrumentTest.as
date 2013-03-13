@@ -1,8 +1,8 @@
-package 
+package org.shinyheaven.instrumenthandling 
 {
 	import flexunit.framework.Assert;
 	
-	public class NewsItemTest
+	public class InstrumentTest
 	{		
 		[Before]
 		public function setUp():void
@@ -25,15 +25,9 @@ package
 		}
 		
 		[Test]
-		public function testGet_isBreaking():void
+		public function testHasSubscribers():void
 		{
-			//Assert.fail("Test method Not yet implemented");
-		}
-		
-		[Test]
-		public function testSet_isBreaking():void
-		{
-			//Assert.fail("Test method Not yet implemented");
+			Assert.assertTrue(true);
 		}
 	}
 }
