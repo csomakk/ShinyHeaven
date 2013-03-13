@@ -17,11 +17,6 @@ package org.shinyheaven.datavisualization.charting.calculators
 				range.maxVal = Math.max(range.maxVal, vo.value);
 			}
 			
-			var emptyArea:Number = (range.maxVal - range.minVal) * .2;
-			
-			range.minVal -= emptyArea;
-			range.maxVal += emptyArea;
-			
 			range.firstDate.setTime(instrData[0].timestamp);
 			range.lastDate.setTime(instrData[instrData.length-1].timestamp);
 			

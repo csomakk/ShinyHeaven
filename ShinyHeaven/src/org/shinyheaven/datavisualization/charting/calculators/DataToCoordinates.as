@@ -6,10 +6,16 @@ package org.shinyheaven.datavisualization.charting.calculators
 
     public class DataToCoordinates
 	{
+		private static var marginRatio:Number = .2;
+		
 		public static function sampleDataAndGetPoints(width:Number, height:Number, data:Array, minVal:Number, maxVal:Number):Array
 		{
 			// input validation
 			if (!data || data.length < 2 || width < 1 || height < 1) return [];
+			
+			var drawingMargin:Number = (maxVal - minVal) * marginRatio;
+			minVal -= drawingMargin;
+			maxVal += drawingMargin;
 			
 			var result:Array = [];
 			
