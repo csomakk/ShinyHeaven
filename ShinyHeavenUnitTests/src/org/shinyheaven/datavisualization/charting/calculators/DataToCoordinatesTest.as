@@ -38,7 +38,12 @@ package org.shinyheaven.datavisualization.charting.calculators
 			maxVal = getHighestValue(data);
 			width = 1000;
 			height = 500;
-			
+		}
+		
+		[After]
+		public function tearDown():void
+		{
+			data = null;
 		}
 		
 		private function getLowestValue(data:Array):Number

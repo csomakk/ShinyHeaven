@@ -21,6 +21,8 @@ package org.shinyheaven.datavisualization.charting.calculators
 		[After]
 		public function tearDown():void
 		{
+			badData = null;
+			data = null;
 		}
 		
 		private function genData():Array
