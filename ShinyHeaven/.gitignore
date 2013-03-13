@@ -1,2 +1,3 @@
 *.iml
 html-template*/
+.settings/
