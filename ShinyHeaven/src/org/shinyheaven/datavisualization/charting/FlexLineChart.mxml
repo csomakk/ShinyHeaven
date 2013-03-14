@@ -2,7 +2,9 @@
 <mx:LineChart xmlns:fx="http://ns.adobe.com/mxml/2009" 
 			  xmlns:s="library://ns.adobe.com/flex/spark" 
 			  xmlns:mx="library://ns.adobe.com/flex/mx"
-			  xmlns:parsley="http://www.spicefactory.org/parsley" xmlns:vo="org.shinyheaven.datavisualization.charting.vo.*">
+			  xmlns:parsley="http://www.spicefactory.org/parsley" 
+			  xmlns:vo="org.shinyheaven.datavisualization.charting.vo.*"
+			   >
 	
 	<fx:Declarations>
 		<parsley:Configure />
@@ -12,12 +14,16 @@
 	
 	<fx:Script>
 		<![CDATA[
-			import org.shinyheaven.datavisualization.charting.calculators.DataRangeCalculator;
+			import mx.binding.utils.BindingUtils;
 			import mx.collections.ArrayCollection;
+			import mx.core.FlexGlobals;
 			import mx.events.CollectionEvent;
 			
+			import org.shinyheaven.datavisualization.charting.calculators.DataRangeCalculator;
+			import org.shinyheaven.instrumenthandling.Instrument;
+			
 			[Bindable]
-			public var logic:DataRangeCalculator = new DataRangeCalculator();
+			public var logic:DataRangeCalculator = new DataRangeCalculator();		
 			
 			override public function set dataProvider(value:Object):void
 			{

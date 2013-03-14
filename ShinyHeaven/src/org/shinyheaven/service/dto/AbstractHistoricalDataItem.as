@@ -1,9 +1,6 @@
 package org.shinyheaven.service.dto {
     public class AbstractHistoricalDataItem implements IHistoricalDataItem {
 
-        public function AbstractHistoricalDataItem() {
-        }
-
         public function get value():Number {
             throw new Error('Abstract method.');
         }

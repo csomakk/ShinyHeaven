@@ -2,12 +2,11 @@
 <s:Application xmlns:fx="http://ns.adobe.com/mxml/2009"
                xmlns:s="library://ns.adobe.com/flex/spark"
                xmlns:parsley="http://www.spicefactory.org/parsley"
-               xmlns:uiframe="org.shinyheaven.uiframe.*"
-               xmlns:charting="org.shinyheaven.datavisualization.charting.*" 
-			   xmlns:news="org.shinyheaven.news.*"
+               xmlns:charting="org.shinyheaven.datavisualization.charting.*"
+               xmlns:news="org.shinyheaven.news.*"
                xmlns:uiframe-controlbar="org.shinyheaven.uiframe.controlbar.*"
-			   preinitialize="application1_initializeHandler(event)"
-			   >
+               preinitialize="application1_initializeHandler(event)" xmlns:mdi="org.shinyheaven.uiframe.mdi.*"
+        >
     <fx:Declarations>
         <parsley:ContextBuilder>
             <parsley:ViewSettings autowireComponents="true" />
@@ -15,27 +14,29 @@
         </parsley:ContextBuilder>
         <parsley:Configure />
     </fx:Declarations>
+    <fx:Style source="shiny-basics.css" />
     <fx:Script>
         <![CDATA[
-        import mx.binding.utils.BindingUtils;
         import mx.events.FlexEvent;
         import mx.logging.ILogger;
         import mx.logging.Log;
         import mx.logging.LogEventLevel;
         import mx.logging.targets.TraceTarget;
 
+        import org.shinyheaven.instrumenthandling.InstrumentManager;
+        import org.shinyheaven.instrumenthandling.SubscriptionManager;
         import org.shinyheaven.news.INewsDataProvider;
         import org.shinyheaven.service.CommunicationModule;
         import org.shinyheaven.service.Constants;
-        import org.shinyheaven.service.Instrument;
-        import org.shinyheaven.service.InstrumentManager;
-        import org.shinyheaven.service.dto.IChartDataProvider;
         import org.shinyheaven.service.dto.OHLCUpdate;
 
         public static var logger:ILogger = Log.getLogger("com.shinyheaven.logger");
 
         [Inject]
         public var commModule:CommunicationModule;
+
+        [Inject]
+        public var subscriptionManager:SubscriptionManager;
 
         [Inject]
         public var instrumentManager:InstrumentManager;
@@ -51,26 +52,21 @@
 
         [Init]
         public function onInit():void {
+            logger.info("ShinyHeaven.onInit: Parsley inited");
             addBindings();
         }
 
         public function addBindings():void {
-            var inst1:Instrument = instrumentManager.addNewInstrument(Constants.HARDCODED_INSTRUMENT);
-            var inst2:Instrument = instrumentManager.addNewInstrument("AUDUSD");
-            var dp1:IChartDataProvider = inst1.chartDataProvider;
-            var dp2:IChartDataProvider = inst2.chartDataProvider;
-            BindingUtils.bindProperty(lineChart, 'dataProvider', dp1, 'data');
-            BindingUtils.bindProperty(lineChart2, 'dataProvider', dp2, 'data');
-            BindingUtils.bindProperty(flexChart, 'dataProvider', dp2, 'data');
-            BindingUtils.bindProperty(newsDisplay, 'dataProvider', newsData, 'data');
+            logger.info("ShinyHeaven.addBindings");
+            subscriptionManager.addSubscription(Constants.HARDCODED_INSTRUMENT, lineChart, "dataProvider");
+            subscriptionManager.addSubscription("AUDUSD", lineChart2, "dataProvider");
+            subscriptionManager.addSubscription("AUDUSD", flexChart, "dataProvider");
         }
 
         public function configureLogger():void {
             var logTarget:TraceTarget = new TraceTarget();
 
             logTarget.filters = ["com.shinyheaven.*"];
-
-            //log
 
             logTarget.level = LogEventLevel.INFO;
 
@@ -80,6 +76,7 @@
             logTarget.includeLevel = true;
 
             Log.addTarget(logTarget);
+            logger.info("ShinyHeaven.configureLogger: Logging started");
         }
 
         protected function application1_initializeHandler(event:FlexEvent):void {
@@ -90,14 +87,14 @@
     <s:controlBarContent>
         <uiframe-controlbar:AddDocumentButton />
     </s:controlBarContent>
-    <uiframe:MDI id="mdi" left="0" right="0" top="0" bottom="0" positions="left 20%, 1x bottom 20%">
+    <mdi:MDI id="mdi" left="0" right="0" top="0" bottom="0" positions="left 20%, 1x bottom 20%">
 		<news:NewsDisplay id="newsDisplay" />
         <charting:FlexLineChart id="flexChart" width="100%" height="100%" />
-        <charting:LineChart id="lineChart"
-                                     width="100%" height="100%"
-                                     skinClass="org.shinyheaven.datavisualization.charting.skins.DefaultLineChartSkin"/>
+		<charting:LineChart id="lineChart"
+							width="100%" height="100%"
+							skinClass="org.shinyheaven.datavisualization.charting.skins.DefaultLineChartSkin"/>
 		<charting:LineChart id="lineChart2"
 							width="100%" height="100%"
 							skinClass="org.shinyheaven.datavisualization.charting.skins.DefaultLineChartSkin"/>
-    </uiframe:MDI>
+    </mdi:MDI>
 </s:Application>

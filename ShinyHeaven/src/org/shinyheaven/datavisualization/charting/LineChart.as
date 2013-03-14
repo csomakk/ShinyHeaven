@@ -5,14 +5,14 @@ package org.shinyheaven.datavisualization.charting
 	import mx.events.FlexEvent;
 	import mx.events.ResizeEvent;
 	
-	import spark.components.supportClasses.SkinnableComponent;
-	
 	import org.shinyheaven.datavisualization.charting.calculators.DataRangeCalculator;
 	import org.shinyheaven.datavisualization.charting.calculators.DataToCoordinates;
 	import org.shinyheaven.datavisualization.charting.calculators.indicators.MovingAverageCalculator;
 	import org.shinyheaven.datavisualization.charting.drawers.SparkLineDrawer;
 	import org.shinyheaven.datavisualization.charting.events.UserControlEvent;
 	import org.shinyheaven.datavisualization.charting.vo.DataRange;
+	
+	import spark.components.supportClasses.SkinnableComponent;
 	
 	public class LineChart extends SkinnableComponent
 	{
@@ -36,25 +36,25 @@ package org.shinyheaven.datavisualization.charting
 		
 		private var readyToDraw:Boolean = false;
 		
+		private var subscribed:String;
+		
 		public function LineChart()
 		{
 			super();
 			addEventListener(FlexEvent.CREATION_COMPLETE, addBehavior);
 		}
 		
-		protected function addBehavior(event:FlexEvent):void
-		{
+		protected function addBehavior(event:FlexEvent):void {
 			readyToDraw = true;
 			addEventListener(ResizeEvent.RESIZE, handleChartResized);
 		}
-		
-		
+				
 		[Bindable]
 		public function get dataProvider():ArrayCollection
 		{
 			return _dataProvider;
 		}
-		public function set dataProvider(value:ArrayCollection):void
+		private function set dataProvider(value:ArrayCollection):void
 		{
 			_dataProvider.removeEventListener(CollectionEvent.COLLECTION_CHANGE, handleDataChanged);
 			_dataProvider = value;
@@ -90,7 +90,7 @@ package org.shinyheaven.datavisualization.charting
 		
 		private function getDrawingCoordinates(data:Array):Array
 		{
-			var result:Array;
+			var result:Array = [];
 			if (valueDrawer && rangeForRendering)
 			{
 				result = DataToCoordinates.sampleDataAndGetPoints(

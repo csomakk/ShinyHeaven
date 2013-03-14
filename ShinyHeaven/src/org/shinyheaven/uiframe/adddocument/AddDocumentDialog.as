@@ -6,13 +6,11 @@
  */
 package org.shinyheaven.uiframe.adddocument {
     import flash.events.Event;
-    import flash.events.MouseEvent;
 
     import mx.events.ValidationResultEvent;
 
     import org.shinyheaven.service.AvailableInstrumentsDataProvider;
 
-    import spark.components.Button;
     import spark.components.ButtonBar;
     import spark.components.ComboBox;
     import spark.components.TitleWindow;
@@ -31,7 +29,7 @@ package org.shinyheaven.uiframe.adddocument {
         [SkinPart(required=true)]
         public var styleButtonBar:ButtonBar;
         [SkinPart(required=true)]
-        public var finishButton:Button;
+        public var styleButtonBarValidator:NumberValidator;
 
 		[Inject]
 		public var arrayOfInstruments:AvailableInstrumentsDataProvider;
@@ -59,8 +57,8 @@ package org.shinyheaven.uiframe.adddocument {
 					comboBox.dataProvider = arrayOfInstruments;
 					break;
 				}
-                case finishButton: {
-                    finishButton.addEventListener(MouseEvent.CLICK, onFinishClick);
+                case styleButtonBarValidator: {
+                    styleButtonBarValidator.addEventListener(ValidationResultEvent.VALID, onVariantValid);
                     break;
                 }
             }
@@ -73,7 +71,6 @@ package org.shinyheaven.uiframe.adddocument {
         private var selectedInstrument:String;
 
         protected function onInstrumentValid(event:ValidationResultEvent):void {
-            ShinyHeaven.logger.info("selectedIndex={0}", comboBox.selectedIndex);
             selectedInstrument = comboBox.selectedItem as String;
             skin.setCurrentState("variant");
             dispatcher(new CenterAddDocumentDialogMsg());
@@ -81,7 +78,7 @@ package org.shinyheaven.uiframe.adddocument {
 
         private var selectedVariant:Class;
 
-        protected function onFinishClick(event:MouseEvent):void {
+        protected function onVariantValid(event:ValidationResultEvent):void {
             selectedVariant = styleButtonBar.selectedItem.variant;
             dispatcher(new AddDocumentFinishedMsg(selectedInstrument, selectedVariant));
             dispatcher(new AddDocumentPopupClosedMsg());

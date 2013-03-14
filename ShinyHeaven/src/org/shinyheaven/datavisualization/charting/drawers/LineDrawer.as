@@ -14,6 +14,7 @@ package org.shinyheaven.datavisualization.charting.drawers
 	[Style(name="lineColor", type="uint", format="Color", inherit="yes")]
 	[Style(name="lineForm", type="String", format="String", enumeration="strait, curve", inherit="yes")]
 	
+	[Deprecated(message="Please use SparkLineDrawer instead of LineDrawer.")]
 	public class LineDrawer extends UIComponent
 	{
 		private var g:Graphics;

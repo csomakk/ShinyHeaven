@@ -5,7 +5,7 @@ package org.shinyheaven.service {
     import flash.utils.Timer;
     import flash.utils.getQualifiedClassName;
     import flash.utils.getTimer;
-
+    
     import mx.collections.ArrayList;
     import mx.collections.IList;
     import mx.controls.Alert;
@@ -16,10 +16,11 @@ package org.shinyheaven.service {
     import mx.rpc.events.ResultEvent;
     import mx.rpc.remoting.RemoteObject;
     import mx.utils.StringUtil;
-
+    
+    import org.shinyheaven.instrumenthandling.Instrument;
+    import org.shinyheaven.instrumenthandling.InstrumentManager;
     import org.shinyheaven.news.NewsDataProvider;
     import org.shinyheaven.news.NewsItem;
-    import org.shinyheaven.service.dto.HistoricalDataItem;
     import org.shinyheaven.service.dto.OHLCUpdate;
 
     public class CommunicationModule {
@@ -57,6 +58,7 @@ package org.shinyheaven.service {
 		
 		[Init]
 		public function initializeService():void {
+			ShinyHeaven.logger.info("CommunicationModule:initializeSercice");
 			Security.allowDomain(Constants.PYTHONSERVER_URI);
 			var channel:AMFChannel = new AMFChannel(AMF_CHANNEL_NAME, Constants.PYTHONSERVER_URI);
 			var channels:ChannelSet = new ChannelSet();
@@ -99,6 +101,7 @@ package org.shinyheaven.service {
 		
 		protected function getAvailableInstrumentResult(event:ResultEvent):void
 		{
+			ShinyHeaven.logger.info("CommunicationModule:getAvailableInstrumentResult");
 			if(MOCKED_MODE) {
 				availableInstruments.removeAll();
 				availableInstruments.addItem(Constants.HARDCODED_INSTRUMENT);
@@ -139,10 +142,13 @@ package org.shinyheaven.service {
 				date.time = new Date(2010,05,05,10,10).time + getTimer() + 1000;  				
 				tick.timestamp = date;
 			} else {
+				ShinyHeaven.logger.error("CommunicationModule:updateResultHandlerMock: mocked function call when mock is off");
 				throw new Error("mocked function call when mock is off")
 			}
-			if(!tick)
+			if(!tick){
+				ShinyHeaven.logger.error("CommunicationModule:updateResultHandlerMock: updateResultHandler received no 'Tick' in ResultEvent.");
 				throw new Error('updateResultHandler received no "Tick" in ResultEvent.');
+			}
 			ShinyHeaven.logger.debug("Tick mock received: {0}", tick);
 			instrument.chartDataProvider.data.addItem(tick);
 		}
@@ -150,8 +156,10 @@ package org.shinyheaven.service {
 		private function updateResultHandler(event:ResultEvent):void {
 			var tick:OHLCUpdate = event.result as OHLCUpdate;
 			
-			if(!tick)
+			if(!tick) {
+				ShinyHeaven.logger.error("CommunicationModule:updateResultHandler: updateResultHandler received no 'Tick' in ResultEvent."); 
 				throw new Error('updateResultHandler received no "Tick" in ResultEvent.');
+			}
 			ShinyHeaven.logger.info("Tick received:", tick);
 			instrumentManager.getInstrument(Constants.HARDCODED_INSTRUMENT).chartDataProvider.data.addItem(tick);
 		}
@@ -173,6 +181,7 @@ package org.shinyheaven.service {
 		}
 		
 		protected function loginResultHandler(event:ResultEvent):void {
+			ShinyHeaven.logger.info("CommunicationModule:loginResultHandler");
 			loginOperation.removeEventListener(ResultEvent.RESULT, loginResultHandler);
 			if(MOCKED_MODE){
 				client_id = 12234;
@@ -194,7 +203,11 @@ package org.shinyheaven.service {
 					var time: Number = new Date(2010,05,05,10,1).time + getTimer() + i
 					var date: Date = new Date()
 					date.time = time;
-					a.addItem(new HistoricalDataItem(instrument.mockHelper.getNextStockPrice() , date ));
+                    /**
+                     * Here we were mocking a {@link HistoricalDataItem}, but the {@link FlexCandlestickChart} needs
+                     * full OHLC data.
+                     */
+					a.addItem(instrument.mockHelper.getNextOHLC());
 				}
 				
 				instrument.chartDataProvider.data.addAll(a);
@@ -206,14 +219,14 @@ package org.shinyheaven.service {
 		}
 		
 		protected function lookupResultHandler(event:ResultEvent):void {
-			
-			trace(StringUtil.substitute("Got {0} of {1}s", event.result.length, getQualifiedClassName(event.result[0])));
+			ShinyHeaven.logger.info("Got {0} of {1}s", event.result.length, getQualifiedClassName(event.result[0]));
 			instrumentManager.getInstrument(Constants.HARDCODED_INSTRUMENT).chartDataProvider.data.addAll(event.result as IList);
 			
 			startAutomaticUpdating();
 		}
 		
 		private function startAutomaticUpdating():void {
+			ShinyHeaven.logger.info("CommunicationModule:startAutomaticUpdating");
 			updateTimer = new Timer(Constants.UPDATE_FREQUENCY,0);
 			updateTimer.addEventListener(TimerEvent.TIMER, onAutomaticUpdate);
 			updateTimer.start();
@@ -237,12 +250,14 @@ package org.shinyheaven.service {
 		private function onRemoteServiceFault(event:FaultEvent):void {
 			var errorMsg:String = "Service error: " + event.fault.faultCode;
 			if(MOCKED_MODE == false){
+				ShinyHeaven.logger.error("CommunicationModule:onRemoteServiceFault: {0}, {1}", event.fault.faultDetail, errorMsg);
 				Alert.show(event.fault.faultDetail, errorMsg);
 			}
 		}
 		
 		private function onRemoteServiceSecurityError(event:SecurityErrorEvent):void {
 			var errorMsg:String = "Service security error";
+			ShinyHeaven.logger.error("CommunicationModule:onRemoteServiceFault: {0}, {1}", event.text, errorMsg);
 			Alert.show(event.text, errorMsg);
 		}
 	}
