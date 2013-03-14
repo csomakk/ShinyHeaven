@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Objects xmlns="http://www.spicefactory.org/parsley"
-		 xmlns:fx="http://ns.adobe.com/mxml/2009"
-		 xmlns:service="org.shinyheaven.service.*" 
-		 xmlns:news="org.shinyheaven.news.*"
+         xmlns:fx="http://ns.adobe.com/mxml/2009"
+         xmlns:service="org.shinyheaven.service.*"
+         xmlns:news="org.shinyheaven.news.*"
          xmlns:adddocument="org.shinyheaven.uiframe.adddocument.*"
-         xmlns:documentmanager="org.shinyheaven.documentmanager.*" xmlns:uiframe="org.shinyheaven.uiframe.*" xmlns:mdi="org.shinyheaven.uiframe.mdi.*" xmlns:instrumenthandling="org.shinyheaven.instrumenthandling.*">
-	<fx:Declarations>
+         xmlns:documentmanager="org.shinyheaven.documentmanager.*"
+         xmlns:mdi="org.shinyheaven.uiframe.mdi.*"
+         xmlns:instrumenthandling="org.shinyheaven.instrumenthandling.*">
+    <fx:Declarations>
 		<service:CommunicationModule/>
 		<news:NewsDataProvider />
 		<View type="{AddDocumentButton}" />
