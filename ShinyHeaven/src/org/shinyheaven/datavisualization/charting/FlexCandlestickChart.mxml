@@ -5,6 +5,10 @@
     <mx:horizontalAxis>
         <mx:DateTimeAxis />
     </mx:horizontalAxis>
+    <mx:verticalAxis>
+        <mx:LinearAxis baseAtZero="false"
+                       autoAdjust="true" />
+    </mx:verticalAxis>
     <mx:series>
         <mx:CandlestickSeries openField="open" highField="high" lowField="low" closeField="close" xField="timestamp"/>
     </mx:series>

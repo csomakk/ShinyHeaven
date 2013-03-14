@@ -5,24 +5,23 @@
  * Time: 2:01 PM
  */
 package org.shinyheaven.documentmanager {
-    import flash.display.DisplayObject;
-    
-    import mx.core.FlexGlobals;
-    import mx.core.UIComponent;
-    import mx.managers.PopUpManager;
-    
-    import org.shinyheaven.datavisualization.charting.LineChart;
-    import org.shinyheaven.datavisualization.charting.skins.DefaultLineChartSkin;
-    import org.shinyheaven.instrumenthandling.SubscriptionManager;
-    import org.shinyheaven.uiframe.mdi.MDIController;
-    import org.shinyheaven.uiframe.adddocument.AddDocumentDialog;
-    import org.shinyheaven.uiframe.adddocument.AddDocumentFinishedMsg;
-    import org.shinyheaven.uiframe.adddocument.AddDocumentPopupClosedMsg;
-    import org.shinyheaven.uiframe.adddocument.CenterAddDocumentDialogMsg;
-    import org.shinyheaven.uiframe.controlbar.AddDocumentMsg;
+import flash.display.DisplayObject;
 
-    public class DocumentManager {
-		
+import mx.core.FlexGlobals;
+import mx.core.UIComponent;
+import mx.managers.PopUpManager;
+
+import org.shinyheaven.datavisualization.charting.LineChart;
+import org.shinyheaven.datavisualization.charting.skins.DefaultLineChartSkin;
+import org.shinyheaven.instrumenthandling.SubscriptionManager;
+import org.shinyheaven.uiframe.adddocument.AddDocumentDialog;
+import org.shinyheaven.uiframe.adddocument.AddDocumentFinishedMsg;
+import org.shinyheaven.uiframe.adddocument.AddDocumentPopupClosedMsg;
+import org.shinyheaven.uiframe.adddocument.CenterAddDocumentDialogMsg;
+import org.shinyheaven.uiframe.controlbar.AddDocumentMsg;
+import org.shinyheaven.uiframe.mdi.MDIController;
+
+public class DocumentManager {
 		[Inject]
 		public var addDocumentDialog:AddDocumentDialog;
 		[Inject]
