@@ -19,8 +19,8 @@
 		<![CDATA[
 			import mx.events.FlexEvent;
 			
-			private static const STATE_OPENED:String = "opened";
-			private static const STATE_CLOSED:String = "closed";
+			public static const STATE_OPENED:String = "opened";
+			public static const STATE_CLOSED:String = "closed";
 			
 			private var closeTimer:Timer = new Timer(300, 1);
 			
