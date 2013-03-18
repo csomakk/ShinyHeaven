@@ -17,85 +17,82 @@
 	<fx:Style source="shiny-basics.css" />
 	<fx:Script>
 		<![CDATA[
-			import mx.events.FlexEvent;
-			import mx.logging.ILogger;
-			import mx.logging.Log;
-			import mx.logging.LogEventLevel;
-			import mx.logging.targets.TraceTarget;
-			
-			import org.shinyheaven.instrumenthandling.InstrumentManager;
-			import org.shinyheaven.instrumenthandling.SubscriptionManager;
-			import org.shinyheaven.news.INewsDataProvider;
-			import org.shinyheaven.service.CommunicationModule;
-			import org.shinyheaven.service.Constants;
-			import org.shinyheaven.service.dto.OHLCUpdate;
-			
-			public static var logger:ILogger = Log.getLogger("com.shinyheaven.logger");
-			
-			[Inject]
-			public var commModule:CommunicationModule;
-			
-			[Inject]
-			public var subscriptionManager:SubscriptionManager;
-			
-			[Inject]
-			public var instrumentManager:InstrumentManager;
-			
-			[Inject]
-			[Bindable]
-			public var newsData:INewsDataProvider;
-			
-			/**
-			 * This is for making Flash recognise the [RemoteClass] metadata on these classes.
-			 */
-			private var dummies:Array = [OHLCUpdate];
-			
-			[Init]
-			public function onInit():void {
-				logger.info("ShinyHeaven.onInit: Parsley inited");
-				addBindings();
-			}
-			
-			public function addBindings():void {
-				logger.info("ShinyHeaven.addBindings");
-				subscriptionManager.addSubscription(Constants.HARDCODED_INSTRUMENT, lineChart, "dataProvider");
-				subscriptionManager.addSubscription("GBPUSD", lineChart2, "dataProvider");
-				subscriptionManager.addSubscription(Constants.HARDCODED_INSTRUMENT, flexChart, "dataProvider");
-				newsDisplay.dataProvider = newsData.data;
-			}
-			
-			public function configureLogger():void {
-				var logTarget:TraceTarget = new TraceTarget();
-				
-				logTarget.filters = ["com.shinyheaven.*"];
-				
-				logTarget.level = LogEventLevel.INFO;
-				
-				logTarget.includeDate = true;
-				logTarget.includeTime = true;
-				logTarget.includeCategory = false;
-				logTarget.includeLevel = true;
-				
-				Log.addTarget(logTarget);
-				logger.info("ShinyHeaven.configureLogger: Logging started");
-			}
-			
-			protected function application1_initializeHandler(event:FlexEvent):void {
-				configureLogger();
-			}
-		]]>
+        import mx.events.FlexEvent;
+        import mx.logging.ILogger;
+        import mx.logging.Log;
+        import mx.logging.LogEventLevel;
+        import mx.logging.targets.TraceTarget;
+
+        import org.shinyheaven.instrumenthandling.InstrumentManager;
+        import org.shinyheaven.instrumenthandling.SubscriptionManager;
+        import org.shinyheaven.news.INewsDataProvider;
+        import org.shinyheaven.service.CommunicationModule;
+        import org.shinyheaven.service.Constants;
+        import org.shinyheaven.service.dto.OHLCUpdate;
+
+        public static var logger:ILogger = Log.getLogger("com.shinyheaven.logger");
+
+        [Inject]
+        public var commModule:CommunicationModule;
+
+        [Inject]
+        public var subscriptionManager:SubscriptionManager;
+
+        [Inject]
+        public var instrumentManager:InstrumentManager;
+
+        [Inject]
+        [Bindable]
+        public var newsData:INewsDataProvider;
+
+        /**
+         * This is for making Flash recognise the [RemoteClass] metadata on these classes.
+         */
+        private var dummies:Array = [OHLCUpdate];
+
+        [Init]
+        public function onInit():void {
+            logger.info("ShinyHeaven.onInit: Parsley inited");
+            addBindings();
+        }
+
+        public function addBindings():void {
+            logger.info("ShinyHeaven.addBindings");
+            subscriptionManager.addSubscription(Constants.HARDCODED_INSTRUMENT, lineChart, "dataProvider");
+            subscriptionManager.addSubscription(Constants.HARDCODED_INSTRUMENT, candles1, "dataProvider");
+            newsDisplay.dataProvider = newsData.data;
+        }
+
+        public function configureLogger():void {
+            var logTarget:TraceTarget = new TraceTarget();
+
+            logTarget.filters = ["com.shinyheaven.*"];
+
+            logTarget.level = LogEventLevel.INFO;
+
+            logTarget.includeDate = true;
+            logTarget.includeTime = true;
+            logTarget.includeCategory = false;
+            logTarget.includeLevel = true;
+
+            Log.addTarget(logTarget);
+            logger.info("ShinyHeaven.configureLogger: Logging started");
+        }
+
+        protected function application1_initializeHandler(event:FlexEvent):void {
+            configureLogger();
+        }
+        ]]>
 	</fx:Script>
 	<s:controlBarContent>
 		<uiframe-controlbar:AddDocumentButton />
 	</s:controlBarContent>
-	<mdi:MDI id="mdi" left="0" right="0" top="0" bottom="0" positions="left 20%, 1x bottom 20%">
+	<mdi:MDI id="mdi" left="0" right="0" top="0" bottom="0" positions="left 20%, rest: undocked">
 		<news:NewsDisplay id="newsDisplay"  />
-		<charting:FlexLineChart id="flexChart" width="100%" height="100%" />
 		<charting:LineChart id="lineChart"
 							width="100%" height="100%"
 							skinClass="org.shinyheaven.datavisualization.charting.skins.DefaultLineChartSkin"/>
-		<charting:LineChart id="lineChart2"
-							width="100%" height="100%"
-							skinClass="org.shinyheaven.datavisualization.charting.skins.DefaultLineChartSkin"/>
+        <charting:FlexCandlestickChart id="candles1"
+                                       width="100%" height="100%" />
 	</mdi:MDI>
 </s:Application>

@@ -1,8 +1,7 @@
 <?xml version="1.0"?>
 <mx:CandlestickChart xmlns:fx="http://ns.adobe.com/mxml/2009"
                      xmlns:mx="library://ns.adobe.com/flex/mx"
-                     showDataTips="true"
-                     columnWidthRatio="0.8">
+                     showDataTips="true" columnWidthRatio="1" maxColumnWidth="6">
     <mx:fill><mx:BitmapFill source="@Embed('/org/shinyheaven/assets/cardboard_v1_035.jpg')" /></mx:fill>
     <mx:horizontalAxis>
         <mx:DateTimeAxis />
@@ -16,4 +15,10 @@
             <mx:declineFill><mx:BitmapFill source="@Embed('/org/shinyheaven/assets/rustyyellow_014.jpg')" /></mx:declineFill>
         </mx:CandlestickSeries>
     </mx:series>
+    <fx:Script><![CDATA[
+        override public function set dataProvider(value:Object):void {
+            super.dataProvider = value;
+            // TODO Set filter.
+        }
+    ]]></fx:Script>
 </mx:CandlestickChart>
