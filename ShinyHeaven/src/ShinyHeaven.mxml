@@ -59,8 +59,9 @@
 			public function addBindings():void {
 				logger.info("ShinyHeaven.addBindings");
 				subscriptionManager.addSubscription(Constants.HARDCODED_INSTRUMENT, lineChart, "dataProvider");
-				subscriptionManager.addSubscription(Constants.HARDCODED_INSTRUMENT, lineChart2, "dataProvider");
+				subscriptionManager.addSubscription("AUDUSD", lineChart2, "dataProvider");
 				subscriptionManager.addSubscription(Constants.HARDCODED_INSTRUMENT, flexChart, "dataProvider");
+				newsDisplay.dataProvider = newsData.data;
 			}
 			
 			public function configureLogger():void {
@@ -88,7 +89,7 @@
 		<uiframe-controlbar:AddDocumentButton />
 	</s:controlBarContent>
 	<mdi:MDI id="mdi" left="0" right="0" top="0" bottom="0" positions="left 20%, 1x bottom 20%">
-		<news:NewsDisplay id="newsDisplay" />
+		<news:NewsDisplay id="newsDisplay"  />
 		<charting:FlexLineChart id="flexChart" width="100%" height="100%" />
 		<charting:LineChart id="lineChart"
 							width="100%" height="100%"
