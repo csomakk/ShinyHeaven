@@ -83,7 +83,7 @@
     <s:controlBarContent>
         <uiframe-controlbar:AddDocumentButton />
     </s:controlBarContent>
-    <mdi:MDI id="mdi" left="0" right="0" top="0" bottom="0" positions="left 20%">
+    <mdi:MDI id="mdi" left="0" right="0" top="0" bottom="0" positions="left 20%, rest: undocked">
 		<news:NewsDisplay id="newsDisplay" />
         <fill:DashedGridFill width="100%" height="100%" />
     </mdi:MDI>
