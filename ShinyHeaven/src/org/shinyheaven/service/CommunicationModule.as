@@ -6,6 +6,7 @@ package org.shinyheaven.service {
     import flash.utils.getQualifiedClassName;
     import flash.utils.getTimer;
 
+    import mx.collections.ArrayCollection;
     import mx.collections.ArrayList;
     import mx.collections.IList;
     import mx.controls.Alert;
@@ -15,8 +16,7 @@ package org.shinyheaven.service {
     import mx.rpc.events.FaultEvent;
     import mx.rpc.events.ResultEvent;
     import mx.rpc.remoting.RemoteObject;
-    import mx.utils.StringUtil;
-    
+
     import org.shinyheaven.instrumenthandling.Instrument;
     import org.shinyheaven.instrumenthandling.InstrumentManager;
     import org.shinyheaven.news.NewsDataProvider;
