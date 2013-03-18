@@ -1,18 +1,25 @@
 <?xml version="1.0"?>
 <mx:ArrayList xmlns:fx="http://ns.adobe.com/mxml/2009"
               xmlns:mx="library://ns.adobe.com/flex/mx">
+    <fx:Object label="News" variant="{NewsDisplay}"
+               icon="@Embed('/org/shinyheaven/assets/greenapple_i0548.png')" />
     <fx:Object label="Line chart" variant="{LineChart}"
-               icon="@Embed('/org/shinyheaven/assets/stats.png')" />
+               icon="@Embed('/org/shinyheaven/assets/orange_i0552.png')" />
     <fx:Object label="Flex line chart" variant="{FlexLineChart}"
-               icon="@Embed('/org/shinyheaven/assets/graphics.png')" />
+               icon="@Embed('/org/shinyheaven/assets/pear_i0525.png')" />
+    <fx:Object label="List" variant="{List}"
+               icon="@Embed('/org/shinyheaven/assets/pomegrenate_i0544.png')" />
     <fx:Object label="Data grid" variant="{InstrumentGrid}"
-               icon="@Embed('/org/shinyheaven/assets/wizard.png')" />
+               icon="@Embed('/org/shinyheaven/assets/melon_i0547.png')" />
     <fx:Object label="Candlestick" variant="{FlexCandlestickChart}"
-               icon="@Embed('/org/shinyheaven/assets/maintenance.png')" />
+               icon="@Embed('/org/shinyheaven/assets/banana_i0545.png')" />
     <fx:Script><![CDATA[
         import org.shinyheaven.datavisualization.charting.FlexCandlestickChart;
         import org.shinyheaven.datavisualization.charting.FlexLineChart;
         import org.shinyheaven.datavisualization.charting.LineChart;
         import org.shinyheaven.datavisualization.datagrid.InstrumentGrid;
+        import org.shinyheaven.news.NewsDisplay;
+
+        import spark.components.List;
         ]]></fx:Script>
 </mx:ArrayList>
