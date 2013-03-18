@@ -1,13 +1,16 @@
-﻿# Git ignore file
+﻿﻿﻿# Git ignore file
 
-.settings/
-
+# generated
 html-template*/
+bin*/
 out/
-bin-debug/
-bin-release/
 
-*.ipr
-*.iws
+# IDEA
 *.iml
+*.iws
+*.ipr
+.idea/
 
+# Eclipse
+.project
+.settings/

@@ -5,19 +5,19 @@
  * Time: 7:30 PM
  */
 package org.shinyheaven.uiframe.adddocument {
-    import flash.events.Event;
+import flash.events.Event;
 
-    import mx.events.ValidationResultEvent;
+import mx.events.ValidationResultEvent;
 
-    import org.shinyheaven.service.AvailableInstrumentsDataProvider;
+import org.shinyheaven.service.AvailableInstrumentsDataProvider;
 
-    import spark.components.ButtonBar;
-    import spark.components.ComboBox;
-    import spark.components.TitleWindow;
-    import spark.components.supportClasses.SkinnableComponent;
-    import spark.validators.NumberValidator;
+import spark.components.ButtonBar;
+import spark.components.ComboBox;
+import spark.components.TitleWindow;
+import spark.components.supportClasses.SkinnableComponent;
+import spark.validators.NumberValidator;
 
-    [SkinState("instrument")]
+[SkinState("instrument")]
     [SkinState("variant")]
     public class AddDocumentDialog extends SkinnableComponent {
         [SkinPart(required=true)]

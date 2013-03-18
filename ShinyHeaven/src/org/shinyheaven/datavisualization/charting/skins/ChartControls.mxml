@@ -19,8 +19,8 @@
 		<![CDATA[
 			import mx.events.FlexEvent;
 			
-			private static const STATE_OPENED:String = "opened";
-			private static const STATE_CLOSED:String = "closed";
+			public static const STATE_OPENED:String = "opened";
+			public static const STATE_CLOSED:String = "closed";
 			
 			private var closeTimer:Timer = new Timer(300, 1);
 			
@@ -98,9 +98,9 @@
 		</s:layout>
 		<s:FormHeading label="Moving average" />
 		<s:FormItem label="Show moving average">
-			<s:CheckBox id="isMovingAverageCheckBox" />
+			<s:CheckBox id="isMovingAverage" />
 		</s:FormItem>
-		<s:FormItem label="Average window" enabled="{isMovingAverageCheckBox.selected}">
+		<s:FormItem label="Average window" enabled="{isMovingAverage.selected}">
 			<s:HSlider id="movingAvrgWindow" minimum="2" maximum="40" value="20" stepSize="1" />
 		</s:FormItem>
 	</s:Form>

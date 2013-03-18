@@ -29,13 +29,18 @@ package org.shinyheaven.datavisualization.charting.drawers
 		public function set data(value:Array):void
 		{
 			_data = value;
-			draw(width, height);
+			
+			if (
+				_data && _data.length >= 2 &&
+				width > 0 && height > 0
+			)
+			{
+				draw(width, height, data);
+			}
 		}
 		
-		private function draw(width:Number, height:Number):void
+		private function draw(width:Number, height:Number, data:Array):void
 		{
-			if (!_data || _data.length < 2) return;
-			
 			var g:Graphics = graphics;
 			
 			g.clear();
@@ -43,12 +48,12 @@ package org.shinyheaven.datavisualization.charting.drawers
 			
 			if (fillColor) g.beginFill(fillColor, fillAlpha);
 			
-			GraphicsUtilities.drawPolyLine(g, _data, 0, _data.length, "x","y", null, "step");
+			GraphicsUtilities.drawPolyLine(g, data, 0, data.length, "x","y", null, "step");
 			
 			if (fillColor)
 			{
 				g.lineStyle();
-				g.lineTo((_data[_data.length-1] as Point).x, height);
+				g.lineTo((data[data.length-1] as Point).x, height);
 				g.lineTo(0, height);
 				
 				g.endFill();

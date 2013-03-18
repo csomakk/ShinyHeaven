@@ -13,7 +13,7 @@ package org.shinyheaven.datavisualization.charting
 	{
 		
 		[SkinPart(required="true")]
-		public var isMovingAverageCheckBox:CheckBox;
+		public var isMovingAverage:CheckBox;
 		
 		[SkinPart(required="true")]
 		public var movingAvrgWindow:HSlider;
@@ -26,9 +26,9 @@ package org.shinyheaven.datavisualization.charting
 
 		public function get isMovingAvrgEnabled():Boolean
 		{
-			if (isMovingAverageCheckBox)
+			if (isMovingAverage)
 			{
-				return isMovingAverageCheckBox.selected;
+				return isMovingAverage.selected;
 			}
 			else
 			{
@@ -55,9 +55,9 @@ package org.shinyheaven.datavisualization.charting
 			
 			switch(instance)
 			{
-				case isMovingAverageCheckBox:
+				case isMovingAverage:
 				{
-					isMovingAverageCheckBox.addEventListener(Event.CHANGE, dispatchChangeEvent);
+					isMovingAverage.addEventListener(Event.CHANGE, dispatchChangeEvent);
 					break;
 				}
 				case movingAvrgWindow:
@@ -75,9 +75,9 @@ package org.shinyheaven.datavisualization.charting
 			
 			switch(instance)
 			{
-				case isMovingAverageCheckBox:
+				case isMovingAverage:
 				{
-					isMovingAverageCheckBox.removeEventListener(Event.CHANGE, dispatchChangeEvent);
+					isMovingAverage.removeEventListener(Event.CHANGE, dispatchChangeEvent);
 					break;
 				}
 				case movingAvrgWindow:

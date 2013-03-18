@@ -5,9 +5,7 @@
  * Time: 3:15 PM
  */
 package org.shinyheaven.uiframe.mdi {
-    import mx.utils.StringUtil;
-
-    public class MDIAlignParent {
+public class MDIAlignParent {
         private var _top:Boolean;
         private var _bottom:Boolean;
         private var _left:Boolean;
