@@ -1,5 +1,6 @@
 @namespace s "library://ns.adobe.com/flex/spark";
 @namespace mx "library://ns.adobe.com/flex/mx";
+@namespace fill "org.shinyheaven.datavisualization.fill.*";
 
 .add {
     chromeColor: #87ceeb;
@@ -11,4 +12,10 @@
 
 .finish {
     chromeColor: #ff8c00;
+}
+
+fill|DashedGridFill {
+    gridBackground: #ffe4c4;
+    gridColor: #b67c3d;
+    gridDistance: 33.3;
 }
