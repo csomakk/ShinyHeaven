@@ -29,7 +29,7 @@
                 <s:ComboBox id="comboBox" prompt="Instrument" />
             </s:FormItem>
             <s:FormItem>
-                <s:Button id="nextButton" label="⇒" chromeColor="0x9acd32" />
+                <s:Button id="nextButton" styleName="next" label="⇒" />
             </s:FormItem>
         </s:Form>
         <s:Form includeIn="variant">
@@ -40,8 +40,8 @@
             </s:FormItem>
             <s:FormItem>
                 <s:Group width="100%">
-                    <s:Button id="backButton" label="⇐" click="onBackClick(event)" left="0" />
-                    <s:Button id="finishButton" label="OK" chromeColor="0xff8c00" right="0" />
+                    <s:Button id="backButton" label="⇐" styleName="back" click="onBackClick(event)" left="0" />
+                    <s:Button id="finishButton" label="OK" styleName="finish" right="0" />
                 </s:Group>
             </s:FormItem>
         </s:Form>

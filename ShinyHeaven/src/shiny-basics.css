@@ -4,3 +4,11 @@
 .add {
     chromeColor: #87ceeb;
 }
+
+.next {
+    chromeColor: #9acd32;
+}
+
+.finish {
+    chromeColor: #ff8c00;
+}
