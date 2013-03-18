@@ -3,6 +3,7 @@
                      xmlns:mx="library://ns.adobe.com/flex/mx"
                      showDataTips="true"
                      columnWidthRatio="0.8">
+    <mx:fill><mx:BitmapFill source="@Embed('/org/shinyheaven/assets/cardboard_v1_035.jpg')" /></mx:fill>
     <mx:horizontalAxis>
         <mx:DateTimeAxis />
     </mx:horizontalAxis>
@@ -11,6 +12,8 @@
                        autoAdjust="true" />
     </mx:verticalAxis>
     <mx:series>
-        <mx:CandlestickSeries openField="open" highField="high" lowField="low" closeField="close" xField="timestamp" />
+        <mx:CandlestickSeries openField="open" highField="high" lowField="low" closeField="close" xField="timestamp">
+            <mx:declineFill><mx:BitmapFill source="@Embed('/org/shinyheaven/assets/rustyyellow_014.jpg')" /></mx:declineFill>
+        </mx:CandlestickSeries>
     </mx:series>
 </mx:CandlestickChart>

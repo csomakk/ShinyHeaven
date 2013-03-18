@@ -5,7 +5,7 @@ package org.shinyheaven.service {
     import flash.utils.Timer;
     import flash.utils.getQualifiedClassName;
     import flash.utils.getTimer;
-    
+
     import mx.collections.ArrayCollection;
     import mx.collections.ArrayList;
     import mx.collections.IList;
@@ -16,8 +16,7 @@ package org.shinyheaven.service {
     import mx.rpc.events.FaultEvent;
     import mx.rpc.events.ResultEvent;
     import mx.rpc.remoting.RemoteObject;
-    import mx.utils.StringUtil;
-    
+
     import org.shinyheaven.instrumenthandling.Instrument;
     import org.shinyheaven.instrumenthandling.InstrumentManager;
     import org.shinyheaven.news.NewsDataProvider;
@@ -135,8 +134,6 @@ package org.shinyheaven.service {
 			}
 		}
 		
-		
-		
 		private function updateResultHandlerMock(idOfInstrument:String):void {
 			var tick:OHLCUpdate
 			var instrument:Instrument = instrumentManager.getInstrument(idOfInstrument);
@@ -193,7 +190,6 @@ package org.shinyheaven.service {
 			if(MOCKED_MODE){
 				lookupResultHandlerMock(ro.instrument);
 			}
-			
 		}
 				
 		protected function loginResultHandler(event:ResultEvent):void {
@@ -203,7 +199,8 @@ package org.shinyheaven.service {
 				client_id = 12234;
 			} else {
 				client_id = event.result.client_id;
-			}			
+			}
+			
 			getAvailableInstruments();
 		}
 		
