@@ -38,14 +38,11 @@ package org.shinyheaven.datavisualization.fill {
             _invalid = true;
         }
 
-        private static const GRID_STEP:Number = 50.1;
-        private static const GRID_STROKE_WIDTH:Number = 0.75;
-
         override protected function updateDisplayList(unscaledWidth:Number, unscaledHeight:Number):void {
             super.updateDisplayList(unscaledWidth, unscaledHeight);
             if (_invalid) {
                 var bmp:BitmapData = new BitmapData(unscaledWidth, unscaledHeight, true, getStyle("gridBackground"));
-                var fn:Function = function(x:int):Boolean { return x % getStyle("gridDistance") == 0; };
+                var fn:Function = function(x:int, ... _):Boolean { return x % getStyle("gridDistance") == 0; };
                 for (var x:int = 0; x < unscaledWidth; x++) for (var y:int = 0; y < unscaledHeight; y++) {
                     bmp.setPixel(x, y, ([x, y].some(fn))? getStyle("gridColor") : getStyle("gridBackground"));
                 }
