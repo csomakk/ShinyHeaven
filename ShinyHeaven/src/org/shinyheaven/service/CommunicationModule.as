@@ -34,7 +34,7 @@ package org.shinyheaven.service {
 		private static const AMF_CHANNEL_NAME:String = "pyamf-channel";
 		private static const AMF_SERVICE_PREFIX:String = "fx_heaven_service";
 		
-		private static const MOCKED_MODE:Boolean = true;
+		private static const MOCKED_MODE:Boolean = false;
 		
 	
 		[Inject]
