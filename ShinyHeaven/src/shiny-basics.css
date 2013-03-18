@@ -1,3 +1,6 @@
 @namespace s "library://ns.adobe.com/flex/spark";
 @namespace mx "library://ns.adobe.com/flex/mx";
 
+.add {
+    chromeColor: #87ceeb;
+}
