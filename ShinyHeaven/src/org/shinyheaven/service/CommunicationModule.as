@@ -28,7 +28,7 @@ package org.shinyheaven.service {
 		private static const LOGIN_SERVICE_NAME:String = "login";
 		private static const LOOKUP_SERVICE_NAME:String = "lookup";
 		private static const UPDATE_SERVICE_NAME:String = "quotes";
-		private static const GET_AVAILABLE_INSTRUMENTS:String = "getinstruments";
+		private static const GET_AVAILABLE_INSTRUMENTS:String = "listinstruments";
 		private static const GET_NEWS_SERVICE_NAME:String = "news";
 		
 		private static const AMF_CHANNEL_NAME:String = "pyamf-channel";
