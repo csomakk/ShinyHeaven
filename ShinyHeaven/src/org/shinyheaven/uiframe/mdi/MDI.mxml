@@ -302,14 +302,18 @@
 
         public function arrangeUnDocked():void {
 			ShinyHeaven.logger.info("MDI.arrangeUnDocked");
-            numberOfRows = remainingDocumentsArrayCollection.length / remainingWidth * remainingBottom;
+            addEventListener(Event.ENTER_FRAME, recalculateLayout);
         }
+			
+		public function recalculateLayout(e:Event = null):void {
+			ShinyHeaven.logger.info("MDI.recalculateLayout");
+			removeEventListener(Event.ENTER_FRAME, recalculateLayout);
+			numberOfRows = remainingDocumentsArrayCollection.length / remainingWidth * remainingBottom;
+		}
 
         protected function MDI_resizeHandler(event:Event):void {
 			arrangeUnDocked();
         }
-			
-		
 
         protected function bringToFront(a:DocumentHolder):void {
 			SubscriptionManager.ignoreRemovalFromStage = true;

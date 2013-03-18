@@ -57,6 +57,8 @@ package org.shinyheaven.service {
 		
 		private var updateTimer:Timer;
 		
+		private var requestsToPush:Array = new Array();
+		
 		[Init]
 		public function initializeService():void {
 			ShinyHeaven.logger.info("CommunicationModule:initializeSercice");
@@ -114,7 +116,7 @@ package org.shinyheaven.service {
 				for(var i:int = 0; i<event.result.length; i++){
 					availableInstruments.addItem((event.result as ArrayCollection).getItemAt(i));
 				}
-				while(requestsToPush.length>0){
+				while(requestsToPush.length > 0){
 					lookupRequest(requestsToPush.pop());
 				}
 			}
@@ -166,8 +168,11 @@ package org.shinyheaven.service {
 				ShinyHeaven.logger.error("CommunicationModule.updateResultHandler: updateResultHandler received no 'Tick' in ResultEvent."); 
 				throw new Error('updateResultHandler received no "Tick" in ResultEvent.');
 			}
-			ShinyHeaven.logger.info("CommunicationModule.updateResultHandlerTick: received {0}", tick);
-			instrumentManager.getInstrument(Constants.HARDCODED_INSTRUMENT).chartDataProvider.data.addItem(tick);
+			//ShinyHeaven.logger.info("CommunicationModule.updateResultHandlerTick: received {0}", tick);
+			var instrument:Instrument = instrumentManager.getInstrument(Constants.HARDCODED_INSTRUMENT);
+			if(instrument){
+				instrument.chartDataProvider.data.addItem(tick);
+			}
 		}
 		
 		public function getNews():void {
@@ -190,9 +195,7 @@ package org.shinyheaven.service {
 			}
 			
 		}
-		
-		public var requestsToPush:Array = new Array();
-		
+				
 		protected function loginResultHandler(event:ResultEvent):void {
 			ShinyHeaven.logger.info("CommunicationModule:loginResultHandler");
 			loginOperation.removeEventListener(ResultEvent.RESULT, loginResultHandler);

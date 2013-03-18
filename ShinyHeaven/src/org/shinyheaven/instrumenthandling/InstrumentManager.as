@@ -19,7 +19,7 @@ package org.shinyheaven.instrumenthandling
 		
 		public function addInstrument(id:String, instrument:Instrument):void {
 			if(instrumentDictionary[id] == null) {
-				ShinyHeaven.logger.info("InstrumentManager: addInstrument id:{0}", id)
+				ShinyHeaven.logger.info("InstrumentManager: addInstrument id:{0}", id);
 				instrumentDictionary[id] = instrument;
 				comm.lookupRequest(id);
 			}
@@ -27,7 +27,7 @@ package org.shinyheaven.instrumenthandling
 		
 		public function unsubscribe(id:String, callee:Object):void {
 			var inst:Instrument = instrumentDictionary[id];
-			ShinyHeaven.logger.info("InstrumentManager: unsubscribe id:{0}", id)
+			ShinyHeaven.logger.info("InstrumentManager: unsubscribe id:{0}", id);
 			if(inst != null) {
 				inst.removeSubscriber(callee);
 				if(inst.hasSubscribers() == false) {
@@ -37,7 +37,7 @@ package org.shinyheaven.instrumenthandling
 		}
 		
 		private function removeInstrument(id:String):void {
-			ShinyHeaven.logger.info("InstrumentManager: removeInstrument id:{0}", id)
+			ShinyHeaven.logger.info("InstrumentManager: removeInstrument id:{0}", id);
 			delete instrumentDictionary[id]; 
 		}		
 		

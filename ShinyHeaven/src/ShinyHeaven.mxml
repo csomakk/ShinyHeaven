@@ -59,7 +59,7 @@
 			public function addBindings():void {
 				logger.info("ShinyHeaven.addBindings");
 				subscriptionManager.addSubscription(Constants.HARDCODED_INSTRUMENT, lineChart, "dataProvider");
-				subscriptionManager.addSubscription("AUDUSD", lineChart2, "dataProvider");
+				subscriptionManager.addSubscription("GBPUSD", lineChart2, "dataProvider");
 				subscriptionManager.addSubscription(Constants.HARDCODED_INSTRUMENT, flexChart, "dataProvider");
 				newsDisplay.dataProvider = newsData.data;
 			}
