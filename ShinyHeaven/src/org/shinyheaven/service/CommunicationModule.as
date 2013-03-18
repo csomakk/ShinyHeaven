@@ -16,7 +16,6 @@ package org.shinyheaven.service {
     import mx.rpc.events.ResultEvent;
     import mx.rpc.remoting.RemoteObject;
 
-    import org.shinyheaven.datavisualization.charting.candlestick.InstrumentUpdateMsg;
     import org.shinyheaven.instrumenthandling.Instrument;
     import org.shinyheaven.instrumenthandling.InstrumentManager;
     import org.shinyheaven.news.NewsDataProvider;
@@ -127,9 +126,6 @@ package org.shinyheaven.service {
 			}
 		}
 		
-		[MessageDispatcher]
-        public var dispatcher:Function;
-		
 		private function updateResultHandlerMock(idOfInstrument:String):void {
 			var tick:OHLCUpdate
 			var instrument:Instrument = instrumentManager.getInstrument(idOfInstrument);
@@ -152,7 +148,6 @@ package org.shinyheaven.service {
 			}
 			ShinyHeaven.logger.debug("Tick mock received: {0}", tick);
 			instrument.chartDataProvider.data.addItem(tick);
-            dispatcher(new InstrumentUpdateMsg(idOfInstrument, tick));
 		}
 		
 		private function updateResultHandler(event:ResultEvent):void {
@@ -164,7 +159,6 @@ package org.shinyheaven.service {
 			}
 			ShinyHeaven.logger.info("Tick received:", tick);
 			instrumentManager.getInstrument(Constants.HARDCODED_INSTRUMENT).chartDataProvider.data.addItem(tick);
-            dispatcher(new InstrumentUpdateMsg(Constants.HARDCODED_INSTRUMENT, tick));
 		}
 		
 		public function getNews():void {
