@@ -5,9 +5,9 @@
  * Time: 3:13 PM
  */
 package org.shinyheaven.uiframe.mdi {
-import mx.utils.StringUtil;
+    import mx.utils.StringUtil;
 
-public class MDIPosition {
+    public class MDIPosition {
         public var alignParent:MDIAlignParent;
         public var weight:uint = 100;
         public var rest:Boolean = false;
