@@ -5,8 +5,8 @@
 			   xmlns:charting="org.shinyheaven.datavisualization.charting.*"
 			   xmlns:news="org.shinyheaven.news.*"
 			   xmlns:uiframe-controlbar="org.shinyheaven.uiframe.controlbar.*"
-			   preinitialize="application1_initializeHandler(event)" xmlns:mdi="org.shinyheaven.uiframe.mdi.*"
-			   >
+			   preinitialize="application1_initializeHandler(event)"
+               xmlns:mdi="org.shinyheaven.uiframe.mdi.*">
 	<fx:Declarations>
 		<parsley:ContextBuilder>
 			<parsley:ViewSettings autowireComponents="true" />
