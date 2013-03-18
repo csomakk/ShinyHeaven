@@ -19,3 +19,7 @@ fill|DashedGridFill {
     gridColor: #b67c3d;
     gridDistance: 33.3;
 }
+
+s|TitleWindow {
+    cornerRadius: 8;
+}
