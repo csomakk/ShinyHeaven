@@ -35,6 +35,7 @@
         <s:Form includeIn="variant">
             <s:FormItem>
                 <s:ButtonBar id="styleButtonBar">
+                    <s:layout><s:TileLayout verticalGap="0" horizontalGap="0" requestedColumnCount="2" /></s:layout>
                     <s:dataProvider><adddocument:ViewTypes /></s:dataProvider>
                 </s:ButtonBar>
             </s:FormItem>
