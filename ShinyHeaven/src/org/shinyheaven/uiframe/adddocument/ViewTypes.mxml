@@ -11,7 +11,7 @@
                icon="@Embed('/org/shinyheaven/assets/pomegrenate_i0544.png')" />
     <fx:Object label="Data grid" variant="{InstrumentGrid}"
                icon="@Embed('/org/shinyheaven/assets/melon_i0547.png')" />
-    <fx:Object label="Candlestick" variant="{FlexCandlestickChart}"
+    <fx:Object label="Flex candlestick" variant="{FlexCandlestickChart}"
                icon="@Embed('/org/shinyheaven/assets/banana_i0545.png')" />
     <fx:Script><![CDATA[
         import org.shinyheaven.datavisualization.charting.FlexCandlestickChart;
