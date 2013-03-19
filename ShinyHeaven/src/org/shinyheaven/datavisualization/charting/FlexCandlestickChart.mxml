@@ -23,9 +23,20 @@
         <mx:CandlestickSeries openField="open" highField="high" lowField="low" closeField="close" xField="timestamp" />
     </mx:series>
     <fx:Script><![CDATA[
+        import mx.collections.ArrayCollection;
+
+        public static const USE_LAST_X_ELEMENTS:uint = 35;
+
         override public function set dataProvider(value:Object):void {
+            if (value is ArrayCollection) {
+                var valueAsAC:ArrayCollection = value as ArrayCollection;
+                valueAsAC.filterFunction = function (item:Object):Boolean {
+                    const maxIdx:uint = valueAsAC.length - 1;
+                    const idx:int = valueAsAC.getItemIndex(item);
+                    return idx >= (maxIdx - USE_LAST_X_ELEMENTS + 1) && idx <= maxIdx;
+                };
+            }
             super.dataProvider = value;
-            // TODO Set filter.
         }
-    ]]></fx:Script>
+        ]]></fx:Script>
 </mx:CandlestickChart>
