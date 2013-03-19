@@ -233,8 +233,9 @@ package org.shinyheaven.service {
 		protected function lookupResultHandler(event:ResultEvent):void {
 			if(event.result.length == 0) {
 				ShinyHeaven.logger.warn("CommunicationModule.lookupResultHandler: Result length is 0");
-			}
-			ShinyHeaven.logger.info("CommunicationModule.lookupResultHandler: Got {0} of {1}s", event.result.length, getQualifiedClassName(event.result[0]));
+			} else {
+			    ShinyHeaven.logger.info("CommunicationModule.lookupResultHandler: Got {0} of {1}s", event.result.length, getQualifiedClassName(event.result[0]));
+            }
 			instrumentManager.getInstrument(Constants.HARDCODED_INSTRUMENT).chartDataProvider.data.addAll(event.result as IList);
 			
 			startAutomaticUpdating();
