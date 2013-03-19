@@ -3,13 +3,11 @@ package org.shinyheaven.instrumenthandling
 	import mx.collections.ArrayCollection;
 	
 	import org.shinyheaven.service.ChartDataProvider;
-	import org.shinyheaven.service.MockHelper;
 	import org.shinyheaven.service.dto.IChartDataProvider;
 
 	public class Instrument
 	{
 		
-		public var mockHelper:MockHelper = new MockHelper();
 		public var chartDataProvider:IChartDataProvider;
 		private var subscribers:ArrayCollection = new ArrayCollection();
 		

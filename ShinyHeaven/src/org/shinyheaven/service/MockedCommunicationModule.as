@@ -1,6 +1,7 @@
 package org.shinyheaven.service
 {
 	import flash.events.TimerEvent;
+	import flash.utils.Dictionary;
 	import flash.utils.Timer;
 	import flash.utils.getQualifiedClassName;
 	import flash.utils.getTimer;
@@ -27,6 +28,7 @@ package org.shinyheaven.service
 		private var client_id:Number;
 		private var updateTimer:Timer;
 		private var requestsToPush:Array = new Array();
+		private var mockHelpers:Dictionary = new Dictionary();
 		
 		[Init]
 		public function initializeService():void {
@@ -48,7 +50,6 @@ package org.shinyheaven.service
 			availableInstruments.addItem("GBPUSD");
 			availableInstruments.addItem("JPYUSD");
 			availableInstruments.addItem("CHFUSD");
-			
 		}
 		
 		protected function getNewsResultHandler(event:ResultEvent):void
@@ -60,14 +61,21 @@ package org.shinyheaven.service
 			}
 		}
 		
+		public function getMockHelper(i:Instrument):MockHelper {
+			if(mockHelpers[i] == null){
+				mockHelpers[i] = new MockHelper();
+			}
+			return mockHelpers[i];
+		}
+		
 		private function updateResultHandlerMock(idOfInstrument:String):void {
 			var tick:OHLCUpdate
 			var instrument:Instrument = instrumentManager.getInstrument(idOfInstrument);
 			tick = new OHLCUpdate();
-			tick.open = instrument.mockHelper.getPreviousStockPrice();
-			tick.close = instrument.mockHelper.getNextStockPrice();
-			tick.high = instrument.mockHelper.getNextStockPrice()+(Math.random()*0.1-0.05);
-			tick.low =  instrument.mockHelper.getNextStockPrice()+(Math.random()*0.1-0.05);
+			tick.open = getMockHelper(instrument).getPreviousStockPrice();
+			tick.close = getMockHelper(instrument).getNextStockPrice();
+			tick.high = getMockHelper(instrument).getNextStockPrice()+(Math.random()*0.1-0.05);
+			tick.low =  getMockHelper(instrument).getNextStockPrice()+(Math.random()*0.1-0.05);
 			var date:Date = new Date();
 			date.time = new Date(2010,05,05,10,10).time + getTimer() + 1000;  				
 			tick.timestamp = date;
@@ -119,7 +127,7 @@ package org.shinyheaven.service
 		protected function lookupResultHandlerMock(idOfInstrument:String):void {
 			
 			var instrument:Instrument = instrumentManager.getInstrument(idOfInstrument);
-			
+						
 			var a:ArrayList = new ArrayList();
 			for(var i:int = 0; i < 1000; i++){
 				var time: Number = new Date(2010,05,05,10,1).time + getTimer() + i
@@ -129,7 +137,7 @@ package org.shinyheaven.service
 				 * Here we were mocking a {@link HistoricalDataItem}, but the {@link FlexCandlestickChart} needs
 				 * full OHLC data.
 				 */
-				a.addItem(instrument.mockHelper.getNextOHLC());
+				a.addItem(getMockHelper(instrument).getNextOHLC());
 			}
 			
 			instrument.chartDataProvider.data.addAll(a);
@@ -150,7 +158,7 @@ package org.shinyheaven.service
 		
 		private function startAutomaticUpdating():void {
 			ShinyHeaven.logger.info("MockedCommunicationModule.startAutomaticUpdating");
-			updateTimer = new Timer(Constants.UPDATE_FREQUENCY,0);
+			updateTimer = new Timer(Constants.UPDATE_FREQUENCY, 0);
 			updateTimer.addEventListener(TimerEvent.TIMER, onAutomaticUpdate);
 			updateTimer.start();
 		}
