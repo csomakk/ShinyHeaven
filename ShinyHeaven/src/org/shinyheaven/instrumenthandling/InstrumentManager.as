@@ -2,14 +2,13 @@ package org.shinyheaven.instrumenthandling
 {
 	import flash.utils.Dictionary;
 	
-	import mx.core.FlexGlobals;
-	import org.shinyheaven.service.CommunicationModule;
+	import org.shinyheaven.service.ICommunicationModule;
 
 	public class InstrumentManager
 	{
 		
 		[Inject]
-		public var comm:CommunicationModule;
+		public var comm:ICommunicationModule;
 		
 		private var instrumentDictionary:Dictionary = new Dictionary();
 		

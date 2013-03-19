@@ -23,26 +23,26 @@ package org.shinyheaven.instrumenthandling
 		/** *
 		 * @attributes propField: the prop to bind dataprovider.
 		 ** */
-		public function addSubscription(instrumentId:String, object:Object, propField:String, objectCanListenToMore:Boolean = false):void {
+		public function addSubscription(instrumentId:String, subscriber:Object, propField:String, objectCanListenToMore:Boolean = false):void {
 			ShinyHeaven.logger.info("SubscriptionManager: addSubscription id:{0}", instrumentId)
-			var dictObj:ArrayCollection = subscriptionsDictionary[object] as ArrayCollection;
+			var dictObj:ArrayCollection = subscriptionsDictionary[subscriber] as ArrayCollection;
 			
 			if(dictObj == null) {
-				subscriptionsDictionary[object] = new ArrayCollection();
-				dictObj = subscriptionsDictionary[object];
+				subscriptionsDictionary[subscriber] = new ArrayCollection();
+				dictObj = subscriptionsDictionary[subscriber];
 			}
 			
 			if(objectCanListenToMore == false && dictObj.length > 0) {
-				removeSubscription(dictObj.getItemAt(0) as String, object);
+				removeSubscription(dictObj.getItemAt(0) as String, subscriber);
 			}
 
 			dictObj.addItem(instrumentId);
 			
-			var inst:Instrument = instrumentManager.addNewInstrument(instrumentId, object)
-			BindingUtils.bindProperty(object, "dataProvider", inst.chartDataProvider, "data");
+			var inst:Instrument = instrumentManager.addNewInstrument(instrumentId, subscriber)
+			BindingUtils.bindProperty(subscriber, "dataProvider", inst.chartDataProvider, "data");
 			
-			if(object is DisplayObject) {
-				(object as DisplayObject).addEventListener(Event.REMOVED_FROM_STAGE, onRemovedFromStage);
+			if(subscriber is DisplayObject) {
+				(subscriber as DisplayObject).addEventListener(Event.REMOVED_FROM_STAGE, onRemovedFromStage);
 			}
 		}
 		

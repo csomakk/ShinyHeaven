@@ -19,8 +19,6 @@
 			import org.shinyheaven.instrumenthandling.SubscriptionManager;
 			import org.shinyheaven.service.CommunicationModule;
 
-        [Inject]
-        public var commModule:CommunicationModule;
 		[Inject]
 		public var instance:MDIController;
 

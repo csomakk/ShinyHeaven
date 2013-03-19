@@ -2,9 +2,9 @@ package org.shinyheaven.instrumenthandling
 {
 	import mx.collections.ArrayCollection;
 	
-	import org.shinyheaven.service.dto.IChartDataProvider;
 	import org.shinyheaven.service.ChartDataProvider;
 	import org.shinyheaven.service.MockHelper;
+	import org.shinyheaven.service.dto.IChartDataProvider;
 
 	public class Instrument
 	{

@@ -76,10 +76,8 @@ import spark.validators.NumberValidator;
             dispatcher(new CenterAddDocumentDialogMsg());
         }
 
-        private var selectedVariant:Class;
-
         protected function onVariantValid(event:ValidationResultEvent):void {
-            selectedVariant = styleButtonBar.selectedItem.variant;
+            var selectedVariant:Class = styleButtonBar.selectedItem.variant;
             dispatcher(new AddDocumentFinishedMsg(selectedInstrument, selectedVariant));
             dispatcher(new AddDocumentPopupClosedMsg());
         }
